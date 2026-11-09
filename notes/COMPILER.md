@@ -99,8 +99,9 @@ Open points:
   `func_02077224`) differ only in register allocation with the C tried; to retry when
   their units are delinked.
 - Service pack of the game code: probe larger functions (switches, struct copies,
-  inlining) with base ... sp2p4; the first `complete` unit settles it only if it
-  separates them.
+  inlining) with base ... sp2p4. The first `complete` unit (`unit_02040BD8.cpp`,
+  26 functions, a switch and calls to `_s32_div_f`) compiles to the same bytes with
+  every 2.0 from base to sp2p4, so it does not settle it.
 - Reference points, not evidence: dqix-decomp (Dragon Quest IX, 2009) uses 2.0/sp2p2
   for the game and 2.0/sp1p2 for its SDK; DQIV-DECOMP uses 2.0/sp1p6.
 

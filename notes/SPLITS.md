@@ -37,4 +37,6 @@ First clues (2026-11-09, hypotheses):
 
 ## Units
 
-None yet.
+| Unit | Range | Content | Bounds evidence | Status |
+|---|---|---|---|---|
+| `src/main/unit_02040BD8.cpp` | `.text` 0x02040BD8-0x02041090 | brightness fades of the two 2D engines (`include/game/unk_fade.h`), 26 functions | hypothesis: every reference to the object at 0x020DEF68 comes from this range; neighbours use other data. Its `.bss` (0x020DEF68-0x020DEF94) is left out, owner of 0x020DEF94-0x020DEFEC unknown | complete (2026-11-09) |
