@@ -1305,6 +1305,7 @@ libs/nitro/src/math/unit_0200D478.c:
     .text       start:0x0200d478 end:0x0200d630
 
 libs/nitro/src/dgt/unit_0200D630.c:
+    complete
     .text       start:0x0200d630 end:0x0200d8c4
 
 libs/nitro/src/gx/unit_0200D8C4.c:
