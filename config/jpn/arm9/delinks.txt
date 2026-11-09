@@ -2616,7 +2616,9 @@ libs/nns/src/gfd/unit_0203C008.c:
     .text       start:0x0203c008 end:0x0203c044
 
 libs/nns/src/gfd/unit_0203C044.c:
+    complete
     .text       start:0x0203c044 end:0x0203c068
+    .bss        start:0x020dea60 end:0x020dea74
 
 libs/nitro/src/gx/unit_0203C0C8.c:
     complete

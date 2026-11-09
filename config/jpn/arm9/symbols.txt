@@ -7486,7 +7486,7 @@ data_020de990 kind:bss addr:0x020de990
 data_020de9d0 kind:bss addr:0x020de9d0
 data_020dea50 kind:bss addr:0x020dea50
 data_020dea5c kind:bss addr:0x020dea5c
-data_020dea60 kind:bss addr:0x020dea60
+data_020dea60 kind:bss(size=0x14) addr:0x020dea60
 data_020dea74 kind:bss addr:0x020dea74
 data_020dea78 kind:bss addr:0x020dea78
 data_020dea84 kind:bss addr:0x020dea84
