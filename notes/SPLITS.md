@@ -40,3 +40,4 @@ First clues (2026-11-09, hypotheses):
 | Unit | Range | Content | Bounds evidence | Status |
 |---|---|---|---|---|
 | `src/main/unit_02040BD8.cpp` | `.text` 0x02040BD8-0x02041090 | brightness fades of the two 2D engines (`include/game/unk_fade.h`), 26 functions | hypothesis: every reference to the object at 0x020DEF68 comes from this range; neighbours use other data. Its `.bss` (0x020DEF68-0x020DEF94) is left out, owner of 0x020DEF94-0x020DEFEC unknown | complete (2026-11-09) |
+| `src/ov005/unit_021CD658.cpp` | `.text` 0x021CD658-0x021CD7A0, `.data` 0x021CE878-0x021CE88C | wrappers of main-module services, object at 0x021CE990 loaded from `"world.e"` / `"world.ez%c"`, 9 functions | hypothesis: the objects at 0x021CE98C and 0x021CE990 are used only here; neighbours use 0x021CE95C and 0x021CE88C; the two strings are used only here, in order. `.bss` left out | not complete: `func_ov005_021cd6ec` 96.12 % (gap in the comment above it) |

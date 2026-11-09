@@ -101,7 +101,11 @@ Open points:
 - Service pack of the game code: probe larger functions (switches, struct copies,
   inlining) with base ... sp2p4. The first `complete` unit (`unit_02040BD8.cpp`,
   26 functions, a switch and calls to `_s32_div_f`) compiles to the same bytes with
-  every 2.0 from base to sp2p4, so it does not settle it.
+  every 2.0 from base to sp2p4, so it does not settle it. Same for the first
+  overlay unit (`src/ov005/unit_021CD658.cpp`: its eight 100 % functions with base,
+  sp1p5, sp2, sp2p2 and sp2p4). This is also why the trace tools (`mwcc_irdump.py`,
+  `mwcc_blocks.py`, `mwcc_sched.py`), bound to 2.0/sp1p5's binary, still describe the
+  build's code.
 - Reference points, not evidence: dqix-decomp (Dragon Quest IX, 2009) uses 2.0/sp2p2
   for the game and 2.0/sp1p2 for its SDK; DQIV-DECOMP uses 2.0/sp1p6.
 
