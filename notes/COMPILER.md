@@ -116,6 +116,14 @@ Open points:
   built from merged reference sources needed the sources in reverse address order
   (`tools/lib_unit_gen.py` tries that order first).
 
+- wibo (CI) and Windows can differ: `GX_SetBankForSubBG`
+  (`libs/nitro/src/gx/unit_020038A8.c`) is 168 bytes like the original with every
+  local 2.0 compiler on Windows, and 160 bytes with 2.0/sp2p2 under wibo 1.2.0 in CI:
+  the switch tree of the inlined `GX_VRAMCNT_SetSubBG_` (cases 0, 4, 0x80, 0x180)
+  pivots on 4 instead of 0x80. The cause is not known (hypothesis: a library
+  routine, such as a sort, that wibo implements differently). A unit is only
+  `complete` when CI builds it too.
+
 ## Linker
 
 - `-proc arm946e -interworking -dead -nostdlib -m Entry` (from ts2-castaway).

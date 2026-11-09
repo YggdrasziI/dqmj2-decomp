@@ -45,6 +45,13 @@ HEADER = ("/* {lib}; built from {refs} (CC0) per-function sources of the functio
           " * found byte-identical (tools/lib_unit_gen.py). File bounds are a hypothesis. */\n"
           "#pragma force_active on\n\n")
 R_ARM_V4BX = 40
+# Units that match with mwccarm on Windows but not under wibo (CI): never marked
+# complete, so that the CI build links the original bytes
+NOT_COMPLETE = {
+    # 2.0/sp2p2 under wibo orders the switch tree of GX_VRAMCNT_SetSubBG_ around
+    # case 4 instead of 0x80 (8 bytes shorter); Windows builds the original's
+    "libs/nitro/src/gx/unit_020038A8.c",
+}
 
 
 # --- ELF ---------------------------------------------------------------------
@@ -478,7 +485,8 @@ def mark_complete(version):
         blocks = text.replace("\r\n", "\n").split("\n\n")
         for i, block in enumerate(blocks[1:], 1):
             lines = block.split("\n")
-            if lines[0].rstrip(":") in full and "    complete" not in lines:
+            path = lines[0].rstrip(":")
+            if path in full and path not in NOT_COMPLETE and "    complete" not in lines:
                 lines.insert(1, "    complete")
                 blocks[i] = "\n".join(lines)
                 count += 1

@@ -545,6 +545,10 @@ static inline void GxSetBankForSubBG (GXVRamSubBG sub_bg)
 	GX_VRAMCNT_SetLCDC_(gGXState.vramCnt.lcdc);
 }
 
+/* 100 % with mwccarm 2.0/sp2p2 on Windows; under wibo (CI) the same compiler orders
+ * the switch tree of GX_VRAMCNT_SetSubBG_ around case 4 instead of 0x80 and the
+ * function is 8 bytes shorter (94.40 %). The unit stays not complete until a source
+ * form builds the same under both. */
 void GX_SetBankForSubBG (GXVRamSubBG sub_bg)
 {
 	GxSetBankForSubBG(sub_bg);

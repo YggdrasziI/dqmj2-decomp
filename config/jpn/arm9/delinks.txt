@@ -151,7 +151,6 @@ libs/nitro/src/gx/unit_02003888.c:
     .text       start:0x02003888 end:0x020038a8
 
 libs/nitro/src/gx/unit_020038A8.c:
-    complete
     .text       start:0x020038a8 end:0x02003950
 
 libs/nitro/src/gx/unit_02003950.c:

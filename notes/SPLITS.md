@@ -96,8 +96,9 @@ original (bytes with relocated words masked, relocation types, symbols and adden
 before it is written. A unit whose merged sources do not build or match is split
 into one unit per reference file (each built alone in the sweep), which is why most
 library units hold one to three functions: a finer cut than the real files, still a
-hypothesis. 590 library units (586 main, 4 ITCM; 778 functions, 92676 bytes) are
-`complete`; 69 have no source yet (the merge fails: conflicting declarations
+hypothesis. 589 library units (585 main, 4 ITCM; 777 functions, 92508 bytes) are
+`complete`. `libs/nitro/src/gx/unit_020038A8.c` matches on Windows but not under
+wibo in CI (`notes/COMPILER.md`), so it stays not `complete`. 69 have no source yet (the merge fails: conflicting declarations
 between reference files, twewy files needing twewy's own headers, addends that
 point inside another symbol, bytes that differ once merged). Units without a source
 stay delinked from the original.
