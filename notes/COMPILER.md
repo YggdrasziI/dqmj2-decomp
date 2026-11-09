@@ -12,14 +12,16 @@ evidence; the rest is a hypothesis and is labelled so.
 | Ubiquitous CPS / SSL | `[SDK+UBIQUITOUS:CPS]`, `[SDK+UBIQUITOUS:SSL]` | strings at 0x02000BA4, 0x02000BE4 |
 | NITRO WiFi | `[SDK+NINTENDO:WiFi2.1.30003.0709200229]` | string at 0x02000BBC |
 | DWC (Nintendo Wi-Fi Connection) | `[SDK+NINTENDO:DWC3.1.30006.20090131.2222_DWC_3_1_PLUS6]` | string at 0x02000BFC |
-| NitroSystem | present (hypothesis from `.nsbmd` / `.nsbtx` game files); version unknown | game file names |
+| NitroSystem | present (FND, G3D, G2D, SND, GFD at 0x0202A1D8-0x0203C130); version unknown | `compiler_sweep.py` hits, khdays `libs/nns` (`notes/SPLITS.md`) |
 | MSL | present: 18 MSL C functions found by the sweep (`strcpy`, `strtol`, `abs`, `_ll_mul`, ...) at 0x0201AD84-0x020266D8 | `compiler_sweep.py`, khdays `libs/msl` |
 | C++ runtime | not looked for yet | — |
 
 ## Code generation (dsd analysis)
 
 - Main module: 5859 functions, 1632 of them Thumb (`config/jpn/arm9/symbols.txt`).
-  Which regions are Thumb (game code or libraries) is not known yet.
+  The Thumb code is the WiFi libraries (DWC, GameSpy, 0x02084880-0x020B32E0) and
+  a block using a Square Enix server (0x020B3358-0x020B4AF8); ov004's Thumb block is
+  the DWC setup utility. The game code found so far is all ARM (`notes/SPLITS.md`).
 - No `.init` section and an empty `.ctor` in the main module; overlays 2 and 3 have a
   non-empty `.ctor`.
 
