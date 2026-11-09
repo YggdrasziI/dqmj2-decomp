@@ -8,27 +8,28 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,san
 </style>
 <rect class="bg" x="0.5" y="0.5" width="759" height="539" rx="6"/>
 <text class="t b" x="16" y="34">Dragon Quest Monsters: Joker 2 (jpn)</text>
-<text class="m" x="744" y="34" text-anchor="end">commit 808d3d1</text>
+<text class="m" x="744" y="34" text-anchor="end">commit d394480</text>
 <text class="t" x="16" y="60">Code</text>
 <rect class="track" x="186" y="49" width="300" height="12" rx="3"/>
-<rect class="fuzzy" x="186" y="49" width="18.8" height="12" rx="2"/>
-<rect class="perfect" x="186" y="49" width="18.8" height="12" rx="2"/>
-<rect class="linked" x="186" y="49" width="18.7" height="12" rx="2"/>
-<text class="t" x="674" y="60" text-anchor="end">109,094 / 1,745,356 bytes</text>
-<text class="m" x="744" y="60" text-anchor="end">6.25 %</text>
+<rect class="fuzzy" x="186" y="49" width="19.0" height="12" rx="2"/>
+<rect class="perfect" x="186" y="49" width="19.0" height="12" rx="2"/>
+<rect class="linked" x="186" y="49" width="18.9" height="12" rx="2"/>
+<text class="t" x="674" y="60" text-anchor="end">110,358 / 1,745,356 bytes</text>
+<text class="m" x="744" y="60" text-anchor="end">6.32 %</text>
 <text class="t" x="16" y="86">Data</text>
 <rect class="track" x="186" y="75" width="300" height="12" rx="3"/>
 <rect class="fuzzy" x="186" y="75" width="1.0" height="12" rx="2"/>
 <rect class="perfect" x="186" y="75" width="1.0" height="12" rx="2"/>
-<text class="t" x="674" y="86" text-anchor="end">20 / 1,438,548 bytes</text>
-<text class="m" x="744" y="86" text-anchor="end">0.00 %</text>
+<rect class="linked" x="186" y="75" width="1.0" height="12" rx="2"/>
+<text class="t" x="674" y="86" text-anchor="end">116 / 1,438,548 bytes</text>
+<text class="m" x="744" y="86" text-anchor="end">0.01 %</text>
 <text class="t" x="16" y="112">Functions</text>
 <rect class="track" x="186" y="101" width="300" height="12" rx="3"/>
-<rect class="fuzzy" x="186" y="101" width="19.7" height="12" rx="2"/>
-<rect class="perfect" x="186" y="101" width="19.7" height="12" rx="2"/>
-<rect class="linked" x="186" y="101" width="19.5" height="12" rx="2"/>
-<text class="t" x="674" y="112" text-anchor="end">873 / 13,292</text>
-<text class="m" x="744" y="112" text-anchor="end">6.57 %</text>
+<rect class="fuzzy" x="186" y="101" width="19.8" height="12" rx="2"/>
+<rect class="perfect" x="186" y="101" width="19.8" height="12" rx="2"/>
+<rect class="linked" x="186" y="101" width="19.6" height="12" rx="2"/>
+<text class="t" x="674" y="112" text-anchor="end">879 / 13,292</text>
+<text class="m" x="744" y="112" text-anchor="end">6.61 %</text>
 <text class="t b" x="16" y="146">Code by region (main, ITCM)</text>
 <text class="t" x="16" y="172">Game (main, ITCM)</text>
 <rect class="track" x="186" y="161" width="300" height="12" rx="3"/>
@@ -39,18 +40,18 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,san
 <text class="m" x="744" y="172" text-anchor="end">0.34 %</text>
 <text class="t" x="16" y="198">NitroSDK (+ crt0, ITCM)</text>
 <rect class="track" x="186" y="187" width="300" height="12" rx="3"/>
-<rect class="fuzzy" x="186" y="187" width="164.6" height="12" rx="2"/>
-<rect class="perfect" x="186" y="187" width="164.6" height="12" rx="2"/>
-<rect class="linked" x="186" y="187" width="164.1" height="12" rx="2"/>
-<text class="t" x="674" y="198" text-anchor="end">59,794 / 108,998 bytes</text>
-<text class="m" x="744" y="198" text-anchor="end">54.86 %</text>
+<rect class="fuzzy" x="186" y="187" width="167.3" height="12" rx="2"/>
+<rect class="perfect" x="186" y="187" width="167.3" height="12" rx="2"/>
+<rect class="linked" x="186" y="187" width="166.9" height="12" rx="2"/>
+<text class="t" x="674" y="198" text-anchor="end">60,794 / 108,998 bytes</text>
+<text class="m" x="744" y="198" text-anchor="end">55.78 %</text>
 <text class="t" x="16" y="224">NitroSystem</text>
 <rect class="track" x="186" y="213" width="300" height="12" rx="3"/>
-<rect class="fuzzy" x="186" y="213" width="185.3" height="12" rx="2"/>
-<rect class="perfect" x="186" y="213" width="185.3" height="12" rx="2"/>
-<rect class="linked" x="186" y="213" width="185.3" height="12" rx="2"/>
-<text class="t" x="674" y="224" text-anchor="end">45,436 / 73,560 bytes</text>
-<text class="m" x="744" y="224" text-anchor="end">61.77 %</text>
+<rect class="fuzzy" x="186" y="213" width="186.4" height="12" rx="2"/>
+<rect class="perfect" x="186" y="213" width="186.4" height="12" rx="2"/>
+<rect class="linked" x="186" y="213" width="186.4" height="12" rx="2"/>
+<text class="t" x="674" y="224" text-anchor="end">45,700 / 73,560 bytes</text>
+<text class="m" x="744" y="224" text-anchor="end">62.13 %</text>
 <text class="t" x="16" y="250">MSL, runtime</text>
 <rect class="track" x="186" y="239" width="300" height="12" rx="3"/>
 <rect class="fuzzy" x="186" y="239" width="11.7" height="12" rx="2"/>
