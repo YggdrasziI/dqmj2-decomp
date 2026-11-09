@@ -25,6 +25,10 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
   r0, r0, #0xff`): write that return as `a > b ? 1 : 0`; a bare `a > b` and the
   `if` forms drop the `and`, a ternary returning other constants adds one
   (`func_02042db8`, 94.2 % -> 100 %).
+- A store of a call result followed by an early exit on null (`str r0, [r1]; moveq
+  r0, #0; ldmeqia`, then the unconditional path): write the positive test,
+  `if (p != 0) { ...; return 1; } return 0;`; `if (p == 0) return 0;` first
+  conditionalizes the rest instead (`func_02043cec`, 92.2 % -> 100 %).
 - Stack arrays and structs take their slots in reverse declaration order: the
   last declared gets the lowest offset (`func_02043938` buffers, `func_02043a4c`
   matrix and vectors).
