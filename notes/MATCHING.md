@@ -34,11 +34,13 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
 - A load of `T+0`, where dsd put a symbol `T` inside an object `S`, matches a source
   that writes `S.member` (`S+N`) once `relocs.txt` says `to:S add:N` (24 loads in
   the library units).
-- Two pool entries for one address come from two distinct symbols (khdays'
-  `data_02047370_budget` in `GfxQueue_Configure`; `SDK_OVERLAY_DIGEST` and
-  `SDK_OVERLAY_DIGEST_END` in `FS_StartOverlay`), or from a function's `static`
-  variable (`NNS_SndArcLoadWaveArcTable`): mwcc does not merge them. One symbol, or a
-  file-level `extern`, gives one entry.
+- Two pool entries for one address come from two distinct symbols
+  (`SDK_OVERLAY_DIGEST` and `SDK_OVERLAY_DIGEST_END` in `FS_StartOverlay`), from a
+  function's `static` variable (`NNS_SndArcLoadWaveArcTable`), or from a struct that
+  the file defines with `= {0}`: the member stores go through one word, the address
+  passed to a callee through the other (`GfxQueue_Configure`, 100 %; an `extern` or
+  an uninitialised definition gives one entry, 82 %). One `extern` symbol gives one
+  entry.
 - Scheduling around a volatile register read depends on how the stored variable is
   declared; each case was found by trying the forms:
   - `SND_RecvCommandReply`: the file defines its nine scalars at file level with
@@ -55,6 +57,11 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
 - A function `static` is a local symbol `name$N` in the object. In `symbols.txt` it
   is written `name$N ... local` (dsd's `check symbols` compares the part before `$`);
   dsd rejects a relocation from another unit to a local symbol.
+
+- Data inside code (constants read pc-relative by hand-written ARM) is written as
+  an `asm` function of `dcd` words (`.word` is rejected); mwcc keeps `asm` functions
+  in source order, so the block placed first lands before the function
+  (`DGTi_Hash2ProcessBlock`).
 
 ## Link-defined values
 

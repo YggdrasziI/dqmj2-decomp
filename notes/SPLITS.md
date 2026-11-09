@@ -96,14 +96,14 @@ original (bytes with relocated words masked, relocation types, symbols and adden
 before it is written. A unit whose merged sources do not build or match is split
 into one unit per reference file (each built alone in the sweep), which is why most
 library units hold one to three functions: a finer cut than the real files, still a
-hypothesis. 655 of the 659 library units (651 main, 4 ITCM; 108760 bytes) are
-`complete`; 66 of them came after fixes to the configuration and to the generator
+hypothesis. 657 of the 659 library units (653 main, 4 ITCM; 109456 bytes) are
+`complete`; 68 of them came after fixes to the configuration and to the generator
 (missing or inner-symbol relocations, header macros, twewy headers, edited drafts:
 `notes/MATCHING.md`, "Data addressing" and "Link-defined values").
 `libs/nitro/src/gx/unit_020038A8.c` matches on Windows but not under wibo in CI
 (`notes/COMPILER.md`), so it stays not `complete`.
 
-Six units needed their own data or link-defined values:
+Eight units needed their own data, link-defined values or asm data:
 
 | Unit | Function | How it matches |
 |---|---|---|
@@ -113,14 +113,14 @@ Six units needed their own data or link-defined values:
 | `snd/unit_020095E8.c` | `SND_RecvCommandReply` | defines its nine scalars and owns `.bss` 0x020CC080-0x020CC0A4 |
 | `fs/unit_0200C890.c` | `FS_StartOverlay` | `SDK_OVERLAY_DIGEST` and `SDK_OVERLAY_DIGEST_END` defined by the link, both 0x020CBBFC (an empty digest table) |
 | `snd/unit_02039248.c` | `NNS_SndArcLoadWaveArcTable` | a function `static` (`data_020ddac8$157`, local) owns `.bss` 0x020DDAC8-0x020DDB04 |
+| `gfd/unit_0203C044.c` | `GfxQueue_Configure` | defines the 0x14-byte queue `data_020dea60` (`= {0}`) and owns `.bss` 0x020DEA60-0x020DEA74 |
+| `dgt/unit_0200D630.c` | `DGTi_Hash2ProcessBlock` | hand-written ARM (khdays asm); the 0x14 bytes of constants before it are an `asm` block of `dcd` words first in the file |
 
-Three have no source and stay delinked from the original:
+One has no source and stays delinked from the original:
 
 | Unit | Function | Why |
 |---|---|---|
-| `dgt/unit_0200D630.c` | `DGTi_Hash2ProcessBlock` | the unit starts with the 0x14 bytes of SHA-1 constants, which C does not place before the function |
 | `ctrdg/unit_02019368.c` | `CTRDGi_InitModuleInfo` | matches (100 %) only with a function `static` at 0x020D4CC0, but `CTRDG_Init`, `CTRDGi_PulledOutCallback` and `func_020195f8` use that address too: dsd rejects a relocation to a local symbol from another unit, and a link-defined global is not seen by `check symbols` |
-| `gfd/unit_0203C044.c` | `GfxQueue_Configure` | two pool entries for one address (khdays uses a second symbol) |
 
 Symbols changed for these units: `_ll_udiv` (0x02025D20, which also holds
 `_ull_mod` at 0x02025D2C) and `_u32_div_f` (0x02025F94) are the entries that mwccarm
