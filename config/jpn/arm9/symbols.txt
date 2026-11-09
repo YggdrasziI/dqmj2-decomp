@@ -7319,7 +7319,15 @@ data_020cc02c kind:bss addr:0x020cc02c
 data_020cc040 kind:bss addr:0x020cc040
 data_020cc060 kind:bss addr:0x020cc060
 data_020cc064 kind:bss addr:0x020cc064
-data_020cc080 kind:bss addr:0x020cc080
+data_020cc080 kind:bss(size=0x4) addr:0x020cc080
+data_020cc084 kind:bss(size=0x4) addr:0x020cc084
+data_020cc088 kind:bss(size=0x4) addr:0x020cc088
+data_020cc08c kind:bss(size=0x4) addr:0x020cc08c
+data_020cc090 kind:bss(size=0x4) addr:0x020cc090
+data_020cc094 kind:bss(size=0x4) addr:0x020cc094
+data_020cc098 kind:bss(size=0x4) addr:0x020cc098
+data_020cc09c kind:bss(size=0x4) addr:0x020cc09c
+data_020cc0a0 kind:bss(size=0x4) addr:0x020cc0a0
 data_020cc0a4 kind:bss addr:0x020cc0a4
 data_020cc0e0 kind:bss addr:0x020cc0e0
 data_020cc360 kind:bss addr:0x020cc360
@@ -7462,7 +7470,7 @@ data_020dd654 kind:bss addr:0x020dd654
 data_020dd658 kind:bss addr:0x020dd658
 data_020ddab8 kind:bss addr:0x020ddab8
 data_020ddac4 kind:bss addr:0x020ddac4
-data_020ddac8 kind:bss addr:0x020ddac8
+data_020ddac8$157 kind:bss(size=0x3c) addr:0x020ddac8 local
 data_020ddb04 kind:bss addr:0x020ddb04
 data_020ddb10 kind:bss addr:0x020ddb10
 data_020ddb1c kind:bss addr:0x020ddb1c

@@ -932,7 +932,9 @@ libs/nitro/src/snd/unit_020094B4.c:
     .text       start:0x020094b4 end:0x020094ec
 
 libs/nitro/src/snd/unit_020095E8.c:
+    complete
     .text       start:0x020095e8 end:0x020096f8
+    .bss        start:0x020cc080 end:0x020cc0a4
 
 libs/nitro/src/snd/unit_020096F8.c:
     complete
@@ -2329,7 +2331,9 @@ libs/nns/src/snd/unit_02038E14.c:
     .text       start:0x02038e14 end:0x02039104
 
 libs/nns/src/snd/unit_02039248.c:
+    complete
     .text       start:0x02039248 end:0x02039350
+    .bss        start:0x020ddac8 end:0x020ddb04
 
 libs/nns/src/snd/unit_02039350.c:
     complete
