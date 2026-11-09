@@ -106,6 +106,15 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
   in source order, so the block placed first lands before the function
   (`DGTi_Hash2ProcessBlock`).
 
+- `.bss` objects of a file come out in declaration order, except byte arrays,
+  which the link places after the others: a 0x18-byte block cleared as a whole is
+  `u32 x[6]`, not `u8 x[0x18]` (`data_020df8e4`, `unit_02044078.cpp`, found by
+  `check symbols`).
+- Two loads at `[base, #off + 4]` and `[base, off]` from one `off = i * 4 + 4`
+  (`mov; add; add; ldr; ldr`): write the byte offset as a local and both reads
+  from it; `t->offsets[i + 1] - t->offsets[i]` scales the index twice
+  (`func_0204409c`, 84.6 % -> 100 %).
+
 ## Link-defined values
 
 - A value that the SDK's link script defines (`SDK_IRQ_STACKSIZE`,

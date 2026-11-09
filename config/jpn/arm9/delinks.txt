@@ -2655,3 +2655,8 @@ src/main/unit_02043CEC.cpp:
     .text       start:0x02043cec end:0x02044078
     .data       start:0x020c6a90 end:0x020c6b1c
     .bss        start:0x020df8c4 end:0x020df8e0
+
+src/main/unit_02044078.cpp:
+    complete
+    .text       start:0x02044078 end:0x020444fc
+    .bss        start:0x020df8e0 end:0x020df9bc
