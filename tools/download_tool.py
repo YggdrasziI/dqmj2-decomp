@@ -5,6 +5,7 @@ import zipfile
 import io
 import requests
 import stat
+import time
 
 root_path = Path(__file__).parent.parent
 
@@ -52,9 +53,27 @@ TOOLS = {
 }
 
 
+def fetch(url: str, attempts: int = 3) -> requests.Response:
+    """GET the URL, retrying: a failed request must not leave an error page behind
+    as the tool (seen in CI, 2026-11-09: objdiff-cli held a non-binary response)."""
+    for attempt in range(1, attempts + 1):
+        try:
+            response = requests.get(url, timeout=120)
+            response.raise_for_status()
+            if response.content:
+                return response
+            error = "empty response"
+        except requests.RequestException as e:
+            error = str(e)
+        print(f"Attempt {attempt}/{attempts} failed: {error}")
+        if attempt < attempts:
+            time.sleep(5 * attempt)
+    raise SystemExit(f"Could not download {url}")
+
+
 download_url = TOOLS[args.tool](args.tag)
 print(f"\nDownloading {args.tool} {args.tag}...")
-response = requests.get(download_url)
+response = fetch(download_url)
 if download_url.endswith(".zip"):
     zip_file = zipfile.ZipFile(io.BytesIO(response.content))
     zip_file.extractall(args.path)
