@@ -25,6 +25,16 @@ each overlay (battle, field, menus...) is not known.
 To do (Step 4): crt0 and NitroSDK, NitroSystem, WiFi / DWC / SSL, MSL and runtime,
 game code, per module.
 
+First clues (2026-11-09, hypotheses):
+
+- Main: library functions found by `tools/compiler_sweep.py` all lie in
+  0x02000950-0x0203C0C8 (NitroSDK, MSL 0x0201AD84-0x020266D8, NitroSystem
+  0x0202A1D8-0x0203C044; `notes/COMPILER.md`); ARM game code follows up to
+  0x02084870; then Thumb code 0x02084880-0x020B3280 (WiFi / DWC / SSL?) and ARM
+  0x020B4AF8-0x020BCB7C.
+- ov004: ARM 0x021CB360-0x021E1154, Thumb 0x021E116C-0x021FA014, ARM
+  0x021FA028-0x021FD484. The other overlays are all ARM.
+
 ## Units
 
 None yet.

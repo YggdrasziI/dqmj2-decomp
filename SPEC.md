@@ -79,9 +79,10 @@ Evidence and the candidate analysis go in `notes/COMPILER.md`.
   ROM rebuild (overlay compression, DS Protect re-encryption), checks, objdiff config.
 - objdiff-cli **v3.8.1** (report, diff with the unarm disassembler), objdiff GUI.
 - mwccarm / mwldarm from `decomp.aetias.com/files/mwccarm.zip` (1.2, 2.0 and DSi
-  families in `tools/mwccarm/`). **Compiler not identified**: `configure.py` uses
-  2.0/sp1p5 with twewy's flags (without `-ipa file`) as a provisional choice. The
-  all-assembly build does not depend on it.
+  families in `tools/mwccarm/`). Libraries are built with 2.0/sp2p2, sp2p3 or sp2p4;
+  game code with the 2.0 family, service pack not settled (`notes/COMPILER.md`).
+  `configure.py` uses 2.0/sp2p2 with twewy's flags (without `-ipa file`); the flags
+  are not proven beyond the functions listed in `notes/COMPILER.md`.
 - Linker flags: `-proc arm946e -interworking -dead -nostdlib -m Entry`, as in
   ts2-castaway. The all-assembly build links with them; whether the original link
   stripped dead code is not known yet (`notes/COMPILER.md`).

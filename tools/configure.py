@@ -64,9 +64,10 @@ GAME = "dqmj2"
 DSD_VERSION = "v0.12.1"
 WIBO_VERSION = "1.2.0"
 OBJDIFF_VERSION = "v3.8.1"
-# Provisional: not identified yet (see notes/COMPILER.md)
-MWCC_DEFAULT_VERSION = "2.0/sp1p5"
-DECOMP_ME_COMPILER = "mwcc_30_131"
+# Libraries: 2.0/sp2p2, sp2p3 or sp2p4 (sweep). Game code: 2.0 family, service pack
+# not settled; sp2p2 is the lowest version consistent with both (notes/COMPILER.md)
+MWCC_DEFAULT_VERSION = "2.0/sp2p2"
+DECOMP_ME_COMPILER = "mwcc_30_137"  # decomp.me name of 2.0/sp2p2, as in dqix-decomp
 
 COMMON_CC_FLAGS = (
     "-O4,p",  # Optimize heavily, prioritize speed
