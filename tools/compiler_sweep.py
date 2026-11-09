@@ -17,7 +17,9 @@ Usage:
       [--ref <reference project root>]           (adds its include/ and libs/*/include)
       [--flags "<mwccarm flags>"]                (default: tools/configure.py's)
       [--min-size 12]                            (smaller functions are not reported)
-      [--json out.json]                          (machine-readable results)
+      [--json out.json]                          (machine-readable results: source ->
+                                                  function -> compiler -> addresses;
+                                                  "<size>" -> function -> compiler -> bytes)
 
 Example (NitroSDK OS sources of twewy, every compiler):
   python tools/compiler_sweep.py --ref E:/Projets/Github/Decomp/DS/twewy \\
@@ -235,6 +237,8 @@ def main():
                     if len(code) < args.min_size:
                         continue
                     per_func.setdefault(name, {})[ver] = find(code, mask, align, mods)
+                    # Code size, to tell a hit on a whole function from one on its start
+                    per_func.setdefault("<size>", {}).setdefault(name, {})[ver] = len(code)
 
     totals = {ver: 0 for ver in versions}
     for src, funcs in results.items():
@@ -243,7 +247,7 @@ def main():
         if failed:
             print(f"   compile failed with: {', '.join(failed)}")
         for name, per_ver in sorted(funcs.items()):
-            if name == "<compile>":
+            if name.startswith("<"):  # <compile>, <size>
                 continue
             unique = {v: h[0] for v, h in per_ver.items() if h and len(h) == 1}
             multi = {v for v, h in per_ver.items() if h and len(h) > 1}

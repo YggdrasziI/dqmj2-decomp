@@ -128,7 +128,7 @@ def sweep_runs(files, module):
             data = json.load(f)
         for funcs in data.values():
             for name, per_version in funcs.items():
-                if name == "<compile>":
+                if name.startswith("<"):  # <compile>, <size>
                     continue
                 addrs = {a for h in per_version.values() if h for a in h}
                 if len(addrs) != 1:
