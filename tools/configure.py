@@ -738,7 +738,11 @@ def add_delink_and_lcf_builds(n: ninja_syntax.Writer, project: Project):
     objects_file = project.arm9_objects_file()
     n.build(
         inputs=project.delinks_files + [str(rom_config)],
-        implicit=[DSD, "tools/lcf_keep.py"],
+        # lcf_keep.py lists the functions of the units that have a source
+        # (FORCE_ACTIVE): it reads symbols.txt and checks which sources exist
+        implicit=[DSD, "tools/lcf_keep.py",
+                  *get_config_files(project.game_config, "symbols.txt"),
+                  *map(str, project.source_files())],
         rule="lcf",
         outputs=[lcf_file, objects_file],
         variables={

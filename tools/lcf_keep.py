@@ -13,12 +13,24 @@ absolute symbols. The SDK tests them at run time, so their sources reference the
 as symbols, and the ROM's literal pools hold their values (no relocation): they
 are defined here with the values found in those pools (ABSOLUTE_SYMBOLS).
 
+Every function of the ROM was linked, so every function of a unit that has a source
+is listed in a FORCE_ACTIVE block: `-dead` would otherwise drop one that nothing
+calls (an `asm` function ignores `#pragma force_active`), and the C1/C2 variant that
+the ROM lacks is not in symbols.txt, so it is still stripped. Functions of units
+without a source are in dsd's delinked objects and are kept as they are.
+
 Usage (from the ninja lcf rule):
   python tools/lcf_keep.py <lcf file> <dsd command and arguments...>
 """
 
+import glob
+import os
+import re
 import subprocess
 import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FUNC = re.compile(r"^(\S+) kind:function\(\S+\) addr:(0x[0-9a-f]+)")
 
 KEEP = ".exception"
 
@@ -35,6 +47,39 @@ def add_absolute_symbols(lcf):
     return lcf.replace(marker, marker + lines, 1)
 
 
+def sourced_functions(config_yaml):
+    """Function names of every delinks.txt unit whose source file exists."""
+    names = []
+    for delinks in glob.glob(os.path.join(os.path.dirname(config_yaml), "**", "delinks.txt"),
+                             recursive=True):
+        folder = os.path.dirname(delinks)
+        funcs = []
+        with open(os.path.join(folder, "symbols.txt"), encoding="utf-8") as f:
+            for line in f:
+                m = FUNC.match(line)
+                if m:
+                    funcs.append((int(m[2], 16), m[1]))
+        with open(delinks, encoding="utf-8") as f:
+            # universal newlines: the text already uses "\n"
+            blocks = f.read().split("\n\n")[1:]
+        for block in blocks:
+            path = block.strip().split("\n")[0].rstrip(":")
+            if not os.path.isfile(os.path.join(ROOT, path)):
+                continue
+            for lo, hi in re.findall(r"\.text\s+start:(0x[0-9a-f]+) end:(0x[0-9a-f]+)", block):
+                lo, hi = int(lo, 16), int(hi, 16)
+                names += [n for a, n in funcs if lo <= a < hi]
+    return names
+
+
+def add_force_active(lcf, names):
+    if not names:
+        return lcf
+    # comma-separated, like KEEP_SECTION (mwldarm rejects a list without commas)
+    block = "FORCE_ACTIVE {\n" + ",\n".join(f"    {n}" for n in names) + "\n}\n\n"
+    return lcf.replace("SECTIONS {", block + "SECTIONS {", 1)
+
+
 def main():
     if len(sys.argv) < 3:
         sys.exit(__doc__)
@@ -43,8 +88,11 @@ def main():
     if res.returncode != 0:
         return res.returncode
 
+    config = sys.argv[sys.argv.index("-c") + 1] if "-c" in sys.argv else None
     with open(lcf_path, encoding="utf-8") as f:
         lcf = add_absolute_symbols(f.read())
+    if config:
+        lcf = add_force_active(lcf, sourced_functions(config))
     if f"({KEEP})" not in lcf:
         with open(lcf_path, "w", encoding="utf-8", newline="\n") as f:
             f.write(lcf)
