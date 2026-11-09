@@ -131,7 +131,7 @@ func_020041e4 kind:function(arm,size=0x40) addr:0x020041e4
 func_02004224 kind:function(arm,size=0x58) addr:0x02004224
 func_0200427c kind:function(arm,size=0x48) addr:0x0200427c
 func_020042c4 kind:function(arm,size=0x1c) addr:0x020042c4
-func_020042e0 kind:function(arm,size=0x28) addr:0x020042e0
+G2x_SetBlendBrightness_ kind:function(arm,size=0x28) addr:0x020042e0
 func_02004308 kind:function(arm,size=0x44) addr:0x02004308
 func_0200434c kind:function(arm,size=0x1c) addr:0x0200434c
 func_02004368 kind:function(arm,size=0x1c) addr:0x02004368
@@ -989,7 +989,7 @@ func_02025b60 kind:function(arm,size=0x1c0) addr:0x02025b60
 func_02025d20 kind:function(arm,size=0x48) addr:0x02025d20
 .L_02025d2c kind:label(arm) addr:0x02025d2c
 func_02025d68 kind:function(arm,size=0x20) addr:0x02025d68
-func_02025d88 kind:function(arm,size=0x20c) addr:0x02025d88
+_s32_div_f kind:function(arm,size=0x20c) addr:0x02025d88
 func_02025f94 kind:function(arm,size=0x1e4) addr:0x02025f94
 .L_02025f9c kind:label(arm) addr:0x02025f9c
 func_02026190 kind:function(arm,size=0x544) addr:0x02026190
