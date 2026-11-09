@@ -54,7 +54,11 @@ Some units are written from an edited draft (`lib_unit_gen.py --source`; their
 header says so): the reference function's code is kept and the edit is commented
 in the file (a file's static data read through one struct, as this build
 addresses it; twewy header names set aside; `#pragma thumb` around a Thumb
-function).
+function). Six units are edited drafts checked with the objdiff report and the
+ROM instead (`OSi_InitStackChecker`, `OS_InitLock`, `OS_GetInitArenaHi`,
+`SND_RecvCommandReply`, `FS_StartOverlay`, `NNS_SndArcLoadWaveArcTable`): the
+khdays-decomp code is kept; the data the unit defines or the link defines, and the
+callee names of this ROM, are the edits.
 
 
 Library function names (`config/jpn/arm9/symbols.txt`, `itcm/symbols.txt`, written

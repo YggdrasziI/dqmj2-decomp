@@ -39,16 +39,35 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
   `SDK_OVERLAY_DIGEST_END` in `FS_StartOverlay`), or from a function's `static`
   variable (`NNS_SndArcLoadWaveArcTable`): mwcc does not merge them. One symbol, or a
   file-level `extern`, gives one entry.
-- Scheduling around a volatile register read depends on whether the stored variable
-  can alias it: a store to a variable that the file defines (a `static`, or khdays'
-  definitions) moves after the read; a store to an `extern` stays before it
-  (`OS_InitLock` with a constant lock address, `CTRDGi_InitModuleInfo`,
-  `SND_RecvCommandReply`). These need the unit to define its data (own `.bss`).
-- A value the linker defines (`SDK_IRQ_STACKSIZE`, `SDK_SYS_STACKSIZE`,
-  `SDK_SECTION_ARENA_DTCM_START`) keeps a runtime test the constant would fold
-  (`OS_GetInitArenaHi`, `OSi_InitStackChecker`): the source must name a symbol, which
-  `relocs.txt` cannot express (dsd has no absolute symbols), so the original word has
-  no relocation.
+- Scheduling around a volatile register read depends on how the stored variable is
+  declared; each case was found by trying the forms:
+  - `SND_RecvCommandReply`: the file defines its nine scalars at file level with
+    `= 0`. mwcc puts them in `.bss` and reaches them from the `.bss` section symbol;
+    without `= 0` they become commons, each loaded from its own pool word. objdiff
+    maps the section-symbol relocation to the symbol at that offset (100 %), while
+    `lib_unit_gen.py --source` reports "check after renames failed" on it. The unit
+    owns that `.bss` (`delinks.txt`, symbols sized in `symbols.txt`).
+  - `CTRDGi_InitModuleInfo`: only a function `static` moves the store after the read
+    (100 %); a global, a file `static` or an `extern` give 98.16 %. Its address is
+    also used by three other units, so it stays without a source (`notes/SPLITS.md`).
+  - `OS_InitLock`: a constant lock address (0x027FFFF0) schedules the stores
+    differently; an `extern` symbol matches, defined by the link (below).
+- A function `static` is a local symbol `name$N` in the object. In `symbols.txt` it
+  is written `name$N ... local` (dsd's `check symbols` compares the part before `$`);
+  dsd rejects a relocation from another unit to a local symbol.
+
+## Link-defined values
+
+- A value that the SDK's link script defines (`SDK_IRQ_STACKSIZE`,
+  `SDK_SYS_STACKSIZE`, `SDK_SECTION_ARENA_DTCM_START`, `SDK_OVERLAY_DIGEST[_END]`)
+  keeps a runtime test that a constant would fold, so the source names a symbol.
+  `tools/lcf_keep.py` defines it (`ABSOLUTE_SYMBOLS`, value read from the literal
+  pool). `relocs.txt` cannot express such a symbol (dsd has no absolute symbols), so
+  the original word has no relocation; objdiff still scores the function 100 % and
+  the ROM check proves the bytes (`OSi_InitStackChecker`, `OS_GetInitArenaHi`,
+  `FS_StartOverlay`, and the lock word of `OS_InitLock`).
+- A symbol defined this way is not seen by dsd's `check symbols` (it is in no module
+  section): it cannot stand for a `symbols.txt` entry.
 
 Beyond these, read the sibling project's notes,
 `E:\Projets\Dev\ts2-castaway\notes\MATCHING.md` (mwccarm 2.0, ARM code). A technique

@@ -96,23 +96,30 @@ original (bytes with relocated words masked, relocation types, symbols and adden
 before it is written. A unit whose merged sources do not build or match is split
 into one unit per reference file (each built alone in the sweep), which is why most
 library units hold one to three functions: a finer cut than the real files, still a
-hypothesis. 649 of the 659 library units (645 main, 4 ITCM; 107496 bytes) are
-`complete`; 60 of them came after fixes to the configuration and to the generator
+hypothesis. 655 of the 659 library units (651 main, 4 ITCM; 108760 bytes) are
+`complete`; 66 of them came after fixes to the configuration and to the generator
 (missing or inner-symbol relocations, header macros, twewy headers, edited drafts:
-`notes/MATCHING.md`, "Data addressing"). `libs/nitro/src/gx/unit_020038A8.c`
-matches on Windows but not under wibo in CI (`notes/COMPILER.md`), so it stays not
-`complete`. Nine have no source and stay delinked from the original:
+`notes/MATCHING.md`, "Data addressing" and "Link-defined values").
+`libs/nitro/src/gx/unit_020038A8.c` matches on Windows but not under wibo in CI
+(`notes/COMPILER.md`), so it stays not `complete`.
+
+Six units needed their own data or link-defined values:
+
+| Unit | Function | How it matches |
+|---|---|---|
+| `os/unit_02005DAC.c` | `OSi_InitStackChecker` | `SDK_IRQ_STACKSIZE` defined by the link (`tools/lcf_keep.py`) |
+| `os/unit_02005DE0.c` | `OS_InitLock` | the init lock word at 0x027FFFF0, reached through the symbol `data_027ffff0` that the link defines; a constant address schedules the stores differently |
+| `os/unit_02007560.c` | `OS_GetInitArenaHi` | `SDK_SYS_STACKSIZE`, `SDK_IRQ_STACKSIZE` and `SDK_SECTION_ARENA_DTCM_START` defined by the link |
+| `snd/unit_020095E8.c` | `SND_RecvCommandReply` | defines its nine scalars and owns `.bss` 0x020CC080-0x020CC0A4 |
+| `fs/unit_0200C890.c` | `FS_StartOverlay` | `SDK_OVERLAY_DIGEST` and `SDK_OVERLAY_DIGEST_END` defined by the link, both 0x020CBBFC (an empty digest table) |
+| `snd/unit_02039248.c` | `NNS_SndArcLoadWaveArcTable` | a function `static` (`data_020ddac8$157`, local) owns `.bss` 0x020DDAC8-0x020DDB04 |
+
+Three have no source and stay delinked from the original:
 
 | Unit | Function | Why |
 |---|---|---|
-| `os/unit_02005DAC.c` | `OSi_InitStackChecker` | reads `SDK_IRQ_STACKSIZE`, a linker-defined value |
-| `os/unit_02005DE0.c` | `OS_InitLock` | the lock word at 0x027FFFF0 has no symbol; as a constant the store scheduling differs |
-| `os/unit_02007560.c` | `OS_GetInitArenaHi` | linker-defined stack sizes and DTCM arena start |
-| `snd/unit_020095E8.c` | `SND_RecvCommandReply` | 96.76 % with the command block struct: scheduling needs the file's own data |
-| `fs/unit_0200C890.c` | `FS_StartOverlay` | keeps the overlay digest check: `SDK_OVERLAY_DIGEST` and `_END`, two linker symbols at one address |
 | `dgt/unit_0200D630.c` | `DGTi_Hash2ProcessBlock` | the unit starts with the 0x14 bytes of SHA-1 constants, which C does not place before the function |
-| `ctrdg/unit_02019368.c` | `CTRDGi_InitModuleInfo` | store scheduling around a register read: needs the file's own data |
-| `snd/unit_02039248.c` | `NNS_SndArcLoadWaveArcTable` | a function `static` (two pool entries for one address): needs its own `.bss` |
+| `ctrdg/unit_02019368.c` | `CTRDGi_InitModuleInfo` | matches (100 %) only with a function `static` at 0x020D4CC0, but `CTRDG_Init`, `CTRDGi_PulledOutCallback` and `func_020195f8` use that address too: dsd rejects a relocation to a local symbol from another unit, and a link-defined global is not seen by `check symbols` |
 | `gfd/unit_0203C044.c` | `GfxQueue_Configure` | two pool entries for one address (khdays uses a second symbol) |
 
 Symbols changed for these units: `_ll_udiv` (0x02025D20, which also holds
