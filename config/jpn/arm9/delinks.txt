@@ -2628,3 +2628,9 @@ libs/nitro/src/gx/unit_0203C0C8.c:
 src/main/unit_02040BD8.cpp:
     complete
     .text       start:0x02040bd8 end:0x02041090
+
+src/main/unit_02041090.cpp:
+    complete
+    .text       start:0x02041090 end:0x0204164c
+    .data       start:0x020c69f0 end:0x020c6a50
+    .bss        start:0x020defec end:0x020df88c

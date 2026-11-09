@@ -5885,7 +5885,7 @@ from:0x020414b0 kind:arm_call to:0x02040810 module:main
 from:0x020414d0 kind:load to:0x020defec module:main
 from:0x02041508 kind:arm_call to:0x020287f0 module:main
 from:0x02041528 kind:arm_call to:0x02041544 module:main
-from:0x02041538 kind:load to:0x020df025 module:main
+from:0x02041538 kind:load to:0x020defec add:0x39 module:main
 from:0x0204153c kind:load to:0x020defec module:main
 from:0x02041588 kind:arm_call to:0x02042660 module:main
 from:0x02041590 kind:arm_call to:0x020410d4 module:main
