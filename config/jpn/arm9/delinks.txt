@@ -340,9 +340,11 @@ libs/nitro/src/os/unit_02005D80.c:
     .text       start:0x02005d80 end:0x02005dac
 
 libs/nitro/src/os/unit_02005DAC.c:
+    complete
     .text       start:0x02005dac end:0x02005de0
 
 libs/nitro/src/os/unit_02005DE0.c:
+    complete
     .text       start:0x02005de0 end:0x02005eac
 
 libs/nitro/src/os/unit_02005EAC.c:
@@ -582,6 +584,7 @@ libs/nitro/src/os/unit_0200754C.c:
     .text       start:0x0200754c end:0x02007560
 
 libs/nitro/src/os/unit_02007560.c:
+    complete
     .text       start:0x02007560 end:0x02007644
 
 libs/nitro/src/os/unit_020076EC.c:
@@ -1276,6 +1279,7 @@ libs/nitro/src/fs/unit_0200C7FC.c:
     .text       start:0x0200c7fc end:0x0200c890
 
 libs/nitro/src/fs/unit_0200C890.c:
+    complete
     .text       start:0x0200c890 end:0x0200c984
 
 libs/nitro/src/fs/unit_0200C984.c:

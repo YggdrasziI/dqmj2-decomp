@@ -35,8 +35,16 @@ FUNC = re.compile(r"^(\S+) kind:function\(\S+\) addr:(0x[0-9a-f]+)")
 KEEP = ".exception"
 
 # name -> value, read from the literal pools of the functions that use them.
-# Empty until an SDK source that references one of them is linked.
-ABSOLUTE_SYMBOLS: dict[str, int] = {}
+ABSOLUTE_SYMBOLS: dict[str, int] = {
+    "SDK_IRQ_STACKSIZE": 0x1000,
+    "SDK_SYS_STACKSIZE": 0x1000,
+    "SDK_SECTION_ARENA_DTCM_START": 0x027E0080,
+    # The overlay digest table is empty: both bounds are one address
+    "SDK_OVERLAY_DIGEST": 0x020CBBFC,
+    "SDK_OVERLAY_DIGEST_END": 0x020CBBFC,
+    # The init lock word (HW_INIT_LOCK_BUF), reached through a symbol by OS_InitLock
+    "data_027ffff0": 0x027FFFF0,
+}
 
 
 def add_absolute_symbols(lcf):
