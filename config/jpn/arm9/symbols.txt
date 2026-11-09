@@ -6361,8 +6361,8 @@ data_020c6a14 kind:data(any) addr:0x020c6a14
 @211 kind:data(byte[9]) addr:0x020c6a30 local
 @212 kind:data(byte[6]) addr:0x020c6a3c local
 @318 kind:data(byte[10]) addr:0x020c6a44 local
-data_020c6a50 kind:data(any) addr:0x020c6a50
-data_020c6a60 kind:data(any) addr:0x020c6a60
+@19 kind:data(byte[13]) addr:0x020c6a50 local
+@34 kind:data(byte[14]) addr:0x020c6a60 local
 data_020c6a70 kind:data(any) addr:0x020c6a70
 data_020c6a74 kind:data(any) addr:0x020c6a74
 data_020c6a7c kind:data(any) addr:0x020c6a7c
@@ -7507,7 +7507,7 @@ data_020def80 kind:bss addr:0x020def80
 data_020defec kind:bss addr:0x020defec
 data_020df0f4 kind:bss addr:0x020df0f4
 data_020df48c kind:bss addr:0x020df48c
-data_020df88c kind:bss addr:0x020df88c
+data_020df88c kind:bss(size=0x10) addr:0x020df88c
 data_020df89c kind:bss addr:0x020df89c
 data_020df8c4 kind:bss addr:0x020df8c4
 data_020df8cc kind:bss addr:0x020df8cc
