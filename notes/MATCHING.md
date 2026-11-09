@@ -11,6 +11,13 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
   loads the address once before the `cmp` (57 % -> 100 %, `func_02040c98`,
   `func_02040cb4`).
 
+- A `>= 0` test on a `u16` field that the original keeps (`ldrh; cmp r0, #0; blt`):
+  write `(int)field >= 0`; a bare `field >= 0` is folded away (`func_020411c4`,
+  87 % -> 100 %).
+- `if (f() == 0) { ... } else { ret = 1; }` puts the `ret = 1` block after the
+  main path, as in the original; the inverted test gives `movne` early
+  (`func_020410ec`, `func_020412fc`).
+
 ## Registers
 
 - A repeated subexpression written out instead of kept in a local: in
@@ -21,6 +28,11 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
   fade->duration)` gives 100 %. Declaration order of the locals also moved this
   function from 98.66 % to 99.75 % (`target, level, done, dir, finished`; found by
   a script over the permutations).
+
+- A loop over a global table whose base stays in a register across calls: read
+  it through a local pointer (`UnkAnimRes *tbl = data_020df48c;`); indexing the
+  global reloads the pool word after each call (`func_02041244`, `func_020412a0`).
+  The order of the locals then fixes the registers (permutation script).
 
 ## Data addressing
 
@@ -54,6 +66,16 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
     also used by three other units, so it stays without a source (`notes/SPLITS.md`).
   - `OS_InitLock`: a constant lock address (0x027FFFF0) schedules the stores
     differently; an `extern` symbol matches, defined by the link (below).
+- String literals and file data: each literal gets its own `.data` section
+  (alignment 1) and the link places them 4-byte aligned, in source order; literals
+  of a table initializer come out in reverse order of appearance. Named `char[]`
+  arrays come out in reverse declaration order: the ROM's L, S, M strings of
+  `data_020c6a14` are declared M, S, L (`unit_02041090.cpp`; checked by the link).
+  Give each string symbol its exact length in `symbols.txt` (`kind:data(byte[10])`),
+  otherwise dsd counts the padding and objdiff scores `.data` below 100 %; rename
+  literals to the object's `@<n>` names (`local`) printed by `check symbols`.
+- A symbol that dsd placed inside an object (`data_020df025` = `data_020defec` +
+  0x39) is removed and its load becomes `to:0x020defec add:0x39` in `relocs.txt`.
 - A function `static` is a local symbol `name$N` in the object. In `symbols.txt` it
   is written `name$N ... local` (dsd's `check symbols` compares the part before `$`);
   dsd rejects a relocation from another unit to a local symbol.
