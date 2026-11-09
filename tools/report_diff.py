@@ -9,8 +9,12 @@ Usage:
   python tools/report_diff.py --base other.json # compare with another report
   python tools/report_diff.py --version jpn     # game version (default jpn)
 
-Exit status 1 when a function present in both reports lost match percentage, or a
-fully matched function or data section disappeared without a 100 % replacement.
+Exit status 1 when:
+  - a function or data section present in both reports lost match percentage;
+  - a function or data section with a non-zero match disappeared and no added item
+    of the same size in the same unit (a rename) matches at least as well; when the
+    unit itself is gone (a renamed file), an added item of the same size anywhere;
+  - a total (matched code, complete code, matched data, matched functions) went down.
 """
 
 import argparse
@@ -21,32 +25,80 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_VERSION = "jpn"
+MEASURES = ("matched_code", "complete_code", "matched_data", "matched_functions")
 
 
 def load(path):
-    """(measures, {key: percent}, {key: unit name})."""
+    """(measures, [(key, item)]); an item is {pct, unit, size, addr, kind}."""
     with open(path, encoding="utf-8") as f:
         report = json.load(f)
-    items, units = {}, {}
+    items = []
+
+    def put(key, item):
+        items.append((key, item))
+
     for unit in report["units"]:
         name = unit["name"]
-        # Functions are keyed by symbol name only (unique in a dsd project), so a
-        # function that moves from a dsd gap (_dsd_gap@main_5, renumbered whenever a
-        # file is delinked) to a source file is compared, not removed and re-added.
+        # Functions are keyed by symbol name, so a function that moves from a dsd
+        # gap (_dsd_gap@main_5, renumbered whenever a file is delinked) to a source
+        # file is compared, not removed and re-added. Gap functions have no score (0).
         for func in unit.get("functions", []):
-            key = ("fn", func["name"])
-            items[key] = func.get("fuzzy_match_percent", 0.0)
-            units[key] = name
+            put(("fn", func["name"]), {
+                "pct": func.get("fuzzy_match_percent", 0.0), "unit": name, "kind": "fn",
+                "size": int(func.get("size", 0)), "addr": func.get("address")})
         # Data sections of gaps are not diffed, and their names repeat across gaps.
         if name.startswith("_dsd_gap@"):
             continue
         for section in unit.get("sections", []):
             if section["name"].startswith(".text"):
                 continue
-            key = ("data", f"{name} {section['name']}")
-            items[key] = section.get("fuzzy_match_percent", 0.0)
-            units[key] = name
-    return report["measures"], items, units
+            put(("data", f"{name} {section['name']}"), {
+                "pct": section.get("fuzzy_match_percent", 0.0), "unit": name, "kind": "data",
+                "size": int(section.get("size", 0)), "addr": section["name"]})
+    return report["measures"], items
+
+
+def keyed(items, repeated):
+    """{key: item}. Names are unique in a dsd project; a name repeated in either
+    report (two static functions with one name) is keyed by unit in both reports,
+    so that neither hides the other and both sides use the same keys."""
+    out = {}
+    for (kind, name), item in items:
+        key = (kind, f"{item['unit']}:{name}") if (kind, name) in repeated else (kind, name)
+        if key in out:
+            sys.exit(f"{name} repeated in unit {item['unit']}")
+        out[key] = item
+    return out
+
+
+def repeats(items):
+    seen, rep = set(), set()
+    for key, _ in items:
+        (rep if key in seen else seen).add(key)
+    return rep
+
+
+def pair_renames(removed, added, cur_units):
+    """Pair each removed item with an added one that looks like its new name.
+
+    A candidate has the same kind and size and sits in the same unit (the same
+    offset or section first). When the removed item's unit no longer exists (a
+    renamed file), a candidate of another unit is accepted. Returns (pairs,
+    unpaired removed)."""
+    free = list(added)
+    pairs, unpaired = [], []
+    for key, item in removed:
+        cands = [(k, a) for k, a in free if a["kind"] == item["kind"] and a["size"] == item["size"]]
+        same = [(k, a) for k, a in cands if a["unit"] == item["unit"]]
+        exact = [(k, a) for k, a in same if a["addr"] == item["addr"]]
+        moved = cands if item["unit"] not in cur_units else []
+        pick = (exact or same or moved or [None])[0]
+        if pick is None:
+            unpaired.append((key, item))
+        else:
+            free.remove(pick)
+            pairs.append(((key, item), pick))
+    return pairs, unpaired
 
 
 def main():
@@ -68,8 +120,19 @@ def main():
         print(f"No baseline at {args.base}; run with --save first", file=sys.stderr)
         return 2
 
-    base_measures, base, base_units = load(args.base)
-    cur_measures, cur, cur_units = load(report)
+    base_measures, base_items = load(args.base)
+    cur_measures, cur_items = load(report)
+    repeated = repeats(base_items) | repeats(cur_items)
+    base, cur = keyed(base_items, repeated), keyed(cur_items, repeated)
+    cur_units = {item["unit"] for item in cur.values()}
+
+    def fmt(key, old=None, new=None):
+        kind, name = key
+        if kind == "data":
+            return f"data {name}"
+        units = [i["unit"] for i in (old, new) if i]
+        where = units[0] if len(set(units)) == 1 else f"{units[0]} -> {units[1]}"
+        return f"{where} fn {name}"
 
     regressions, improvements, removed, added = [], [], [], []
     for key in sorted(set(base) | set(cur)):
@@ -78,43 +141,51 @@ def main():
             added.append((key, new))
         elif new is None:
             removed.append((key, old))
-        elif new < old:
-            regressions.append((key, old, new))
-        elif new > old:
-            improvements.append((key, old, new))
+        elif new["pct"] < old["pct"]:
+            regressions.append((fmt(key, old, new), old["pct"], new["pct"]))
+        elif new["pct"] > old["pct"]:
+            improvements.append((fmt(key, old, new), old["pct"], new["pct"]))
 
-    # A matched item that only changed name (symbol renamed) is not a regression.
-    added_full = sum(1 for _, pct in added if pct == 100.0)
-    removed_full = [(key, pct) for key, pct in removed if pct == 100.0]
-    lost = removed_full[added_full:] if len(removed_full) > added_full else []
+    # A renamed item is removed under its old name and added under the new one:
+    # compare the two scores. A removed item with a score and no counterpart is lost.
+    pairs, unpaired = pair_renames(removed, added, cur_units)
+    renamed, lost = [], []
+    for (okey, old), (nkey, new) in pairs:
+        row = (f"{fmt(okey, old)} -> {nkey[1]}", old["pct"], new["pct"])
+        (regressions if new["pct"] < old["pct"] else renamed).append(row)
+    for key, old in unpaired:
+        if old["pct"] > 0:
+            lost.append((fmt(key, old), old["pct"]))
+    paired_new = {nkey for _, (nkey, _) in pairs}
 
-    def fmt(key):
-        kind, name = key
-        if kind == "data":
-            return f"data {name}"
-        old, new = base_units.get(key), cur_units.get(key)
-        where = old or new if old == new or None in (old, new) else f"{old} -> {new}"
-        return f"{where} fn {name}"
-
-    for title, rows in (("Regressions", regressions), ("Improvements", improvements)):
+    for title, rows in (("Regressions", regressions), ("Improvements", improvements),
+                        ("Renamed", renamed)):
         if rows:
             print(f"{title}:")
-            for key, old, new in rows:
-                print(f"  {fmt(key)}: {old:.2f} -> {new:.2f}")
-    if removed or added:
-        print(f"Removed: {len(removed)} ({len(removed_full)} at 100 %), "
-              f"added: {len(added)} ({added_full} at 100 %)")
-        for key, pct in removed:
-            print(f"  - {fmt(key)} ({pct:.2f})")
-        for key, pct in added:
-            print(f"  + {fmt(key)} ({pct:.2f})")
+            for text, old, new in rows:
+                print(f"  {text}: {old:.2f} -> {new:.2f}")
+    if lost:
+        print("Lost (removed with a score, no renamed counterpart):")
+        for text, pct in lost:
+            print(f"  - {text} ({pct:.2f})")
+    others_removed = [(k, i) for k, i in unpaired if i["pct"] == 0]
+    others_added = [(k, i) for k, i in added if k not in paired_new]
+    if others_removed or others_added:
+        print(f"Removed without score: {len(others_removed)}, added: {len(others_added)}")
+        for key, item in others_removed:
+            print(f"  - {fmt(key, item)}")
+        for key, item in others_added:
+            print(f"  + {fmt(key, None, item)} ({item['pct']:.2f})")
 
-    for field in ("matched_code", "complete_code", "matched_data", "matched_functions"):
+    dropped = []
+    for field in MEASURES:
         old, new = int(base_measures.get(field, 0)), int(cur_measures.get(field, 0))
         if old != new:
             print(f"{field}: {old} -> {new} ({new - old:+d})")
+            if new < old:
+                dropped.append(field)
 
-    if regressions or lost:
+    if regressions or lost or dropped:
         print("FAIL: regressions found")
         return 1
     print("OK: no regression")
