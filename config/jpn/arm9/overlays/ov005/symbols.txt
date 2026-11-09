@@ -168,8 +168,8 @@ data_ov005_021ce66c kind:data(any) addr:0x021ce66c
 data_ov005_021ce734 kind:data(any) addr:0x021ce734 ambiguous
 data_ov005_021ce850 kind:data(any) addr:0x021ce850
 data_ov005_021ce864 kind:data(any) addr:0x021ce864
-data_ov005_021ce878 kind:data(any) addr:0x021ce878
-data_ov005_021ce884 kind:data(any) addr:0x021ce884
+@39 kind:data(byte[11]) addr:0x021ce878 local
+@40 kind:data(byte[8]) addr:0x021ce884 local
 data_ov005_021ce88c kind:data(any) addr:0x021ce88c
 data_ov005_021ce890 kind:data(any) addr:0x021ce890
 data_ov005_021ce8ac kind:data(any) addr:0x021ce8ac
@@ -180,7 +180,6 @@ data_ov005_021ce938 kind:bss addr:0x021ce938
 data_ov005_021ce958 kind:bss addr:0x021ce958
 data_ov005_021ce95c kind:bss addr:0x021ce95c
 data_ov005_021ce98c kind:bss addr:0x021ce98c
-data_ov005_021ce990 kind:bss addr:0x021ce990
-data_ov005_021cf0eb kind:bss addr:0x021cf0eb
+data_ov005_021ce990 kind:bss(size=0x8a0) addr:0x021ce990
 data_ov005_021cf230 kind:bss addr:0x021cf230
 data_ov005_021cf248 kind:bss addr:0x021cf248

@@ -5,5 +5,7 @@
     .bss        start:0x021ce900 end:0x021cf260 kind:bss align:32
 
 src/ov005/unit_021CD658.cpp:
+    complete
     .text       start:0x021cd658 end:0x021cd7a0
     .data       start:0x021ce878 end:0x021ce88c
+    .bss        start:0x021ce990 end:0x021cf230

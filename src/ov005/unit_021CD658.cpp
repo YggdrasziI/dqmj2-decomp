@@ -5,9 +5,11 @@
  * Bounds: hypothesis. The objects at 0x021CE98C and 0x021CE990 are used only by
  * this range; the function before (func_ov005_021cd628) works on the object at
  * 0x021CE95C and the one after (func_ov005_021cd7a0) on 0x021CE88C. The two strings
- * of .data 0x021CE878-0x021CE88C are used only here, in this order. The .bss objects
- * are left outside the unit (their owner and size are not proven). Functions keep C
- * linkage and their addresses as names. Real file name unknown.
+ * of .data 0x021CE878-0x021CE88C are used only here, in this order. The unit owns
+ * the .bss object at 0x021CE990 (size 0x8A0, a hypothesis: the same object in ov000
+ * spans 0x8A0 bytes, and the next object used in ov005 is at 0x021CF230); the int
+ * at 0x021CE98C is defined elsewhere. Functions keep C linkage and their addresses
+ * as names. Real file name unknown.
  */
 
 #include "types.h"
@@ -19,10 +21,15 @@ typedef struct UnkOv005_021ce990 {
     /* 0x004 */ int unk4;
     /* 0x008 */ u8 unk8[0x448];
     /* 0x450 */ int unk450;
-} UnkOv005_021ce990;
+    /* 0x454 */ u8 unk454[0x44c];
+} UnkOv005_021ce990; // size 0x8A0 (hypothesis: the same object in ov000, 0x0222BBD0, spans 0x8A0 bytes)
 
+/* Not defined in this file: defining it makes mwccarm address the next object
+ * from it (+4). */
 extern int data_ov005_021ce98c;
-extern UnkOv005_021ce990 data_ov005_021ce990;
+/* Defined here: mwccarm then reaches the object through two pool words (stores
+ * at +0x450 and the call argument), as in the original. */
+UnkOv005_021ce990 data_ov005_021ce990 = {0};
 
 void func_0205baac(void);
 int func_0205bb18(int a, int b);
@@ -62,11 +69,6 @@ void func_ov005_021cd6a8(void) {
     func_0204abf0(&data_ov005_021ce990, "world.e", path);
 }
 
-// 96.12 %: the original loads the object's address for the call from a second
-// literal pool word (two words for 0x021CE990, one for the stores at +0x450, one
-// for the argument); mwccarm merges them here. Not fixed by: a local pointer, an
-// inline accessor (for the stores or the call), a cast to the first member or to
-// void *, an inline helper for the stores, an if chain (worse), a u32 field.
 int func_ov005_021cd6ec(int code) {
     switch (code) {
     case 0x8c:

@@ -52,7 +52,8 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
   the file defines with `= {0}`: the member stores go through one word, the address
   passed to a callee through the other (`GfxQueue_Configure`, 100 %; an `extern` or
   an uninitialised definition gives one entry, 82 %). One `extern` symbol gives one
-  entry.
+  entry. Same fix in `func_ov005_021cd6ec` (96.12 % -> 100 %); there the `int` just
+  before the object must stay `extern`, or mwcc reaches the object from it (+4).
 - Scheduling around a volatile register read depends on how the stored variable is
   declared; each case was found by trying the forms:
   - `SND_RecvCommandReply`: the file defines its nine scalars at file level with
