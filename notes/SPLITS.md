@@ -33,7 +33,7 @@ unit on it matches. "Hypothesis" marks a region whose content is inferred, not s
 
 | Range | Content | Evidence |
 |---|---|---|
-| 0x02000000-0x02000800 | secure area (data, not code) | starts with the words 0xE7FFDEFF 0xE7FFDEFF (the decrypted secure area marker, GBATEK), then data without a code pattern; dsd's 18 four-byte Thumb "functions" here are false hits (hypothesis: not checked one by one) |
+| 0x02000000-0x02000800 | secure area: BIOS call veneers and data | starts with the words 0xE7FFDEFF (the decrypted secure area marker, GBATEK); dsd found and named 18 Thumb BIOS call veneers in it (`Halt`, `IntrWait`, `CpuSet`, `Div`, `Sqrt`, ...: 4-6 bytes each). The rest is not identified |
 | 0x02000800-0x02000B68 | NitroSDK crt0 (`Entry`, `AutoloadCallback`, 8 functions) | entry point of `arm9.yaml`; sweep hits of khdays `libs/nitro/init` (`MIi_UncompressBackward` at 0x02000950, next to `Entry.c`) |
 | 0x02000B68-0x02000C34 | build info and `[SDK+...]` markers (data) | `arm9.yaml` (`build_info`), strings at 0x02000B8C-0x02000C34 |
 | 0x02000C34-0x02000C90 | `main` (dsd name, 0x50 bytes) and one Thumb function | owner unknown |
@@ -73,9 +73,27 @@ The role of each overlay is inferred from the game files and strings its code lo
 
 No overlay has a library sweep hit (`notes/COMPILER.md`).
 
+### Library units (2026-11-09)
+
+`tools/sweep_names.py` read the sweep of khdays `libs/{msl,nitro,nns}` and twewy
+`libs/nitro` with 2.0/sp2p2 (`compiler_sweep.py --json`, 993 unique hits) and kept
+848 whole library functions (one address, the whole dsd function, more than 8 bytes,
+in main 0x02000800-0x0203C130 or ITCM 0x01FF8000-0x01FF8580). 772 dsd names were
+replaced by the references' names (`SPEC.md`); 75 kept hits have no usable name.
+Each run of consecutive kept functions from one reference folder is a library unit
+in `delinks.txt` (`.text` only, not `complete`, no source yet): 226 in main, 3 in
+ITCM, 848 functions. Their bounds are hypotheses: a unit can lack unnamed functions
+of its file, or join two files; their data sections are not assigned.
+
+One bound set by hand: `libs/nitro/src/dgt/unit_0200D630.c` starts at 0x0200D630,
+before `DGTi_Hash2ProcessBlock` (0x0200D644), to hold the five SHA-1 constant words
+(0x00FF00FF, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC, 0xCA62C1D6) that it reads
+pc-relative; without them the link moved every later function by 0x14 bytes.
+
 ### Not assigned yet
 
-- main 0x02019B80-0x0201AD84 and 0x02026704-0x0202A1D8 (library side, no hit), and
+- Library functions between the library units (no hit: not compiled by a reference,
+  asm, or changed), main 0x02019B80-0x0201AD84 and 0x02026704-0x0202A1D8, and
   the WiFi sub-libraries (SOC, CPS, SSL, WCM) inside 0x02084880-0x020B32E0.
 - Bounds between game units: found unit by unit (`/decomp-unit`).
 - `.rodata`, `.data` and `.bss` owners: per unit.

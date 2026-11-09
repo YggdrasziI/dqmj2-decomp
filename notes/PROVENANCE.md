@@ -31,4 +31,13 @@ commit), rewritten for this ROM.
 
 ## Library and game code
 
-None yet.
+No code taken yet.
+
+Library function names (`config/jpn/arm9/symbols.txt`, `itcm/symbols.txt`, written
+by `tools/sweep_names.py` on 2026-11-09): names of functions compiled from
+[Yokimitsuro/khdays-decomp](https://github.com/Yokimitsuro/khdays-decomp) (CC0, local
+clone at `93535afd7ca082f3d856bbf1cadae65be16d44ba`) `libs/{msl,nitro,nns}` and
+[Yotona/twewy](https://github.com/Yotona/twewy) (CC0, local clone at
+`3f916f1a2d31f29bd7ec6fd89f3a87b696e79b9b`) `libs/nitro/src` that are byte-identical
+to this ROM's functions; names only, no code. The folder of each library unit
+(`libs/<lib>/src/<folder>/`) is the reference's folder.

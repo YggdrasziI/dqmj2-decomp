@@ -125,7 +125,14 @@ Evidence and the candidate analysis go in `notes/COMPILER.md`.
 - SDK and library code under `libs/<lib>/{include,src}` with the real names of the
   library once identified by signature or reference project (naming policy of
   ts2-castaway: khdays-decomp's NitroSDK / NitroSystem API names first, then twewy's,
-  for functions found byte-identical by `tools/compiler_sweep.py`).
+  for functions found byte-identical by `tools/compiler_sweep.py`). Applied by
+  `tools/sweep_names.py`: one address, the whole dsd function, more than 8 bytes,
+  inside a library region of `notes/SPLITS.md`; a reference name that is only an
+  address of the other game, its overlay prefix or a `_2` suffix is not taken, and
+  a name already set is never replaced. The name is the reference's: most follow
+  the NitroSDK / NitroSystem API, some are the reference's own (`Tilemap_FillRect`).
+  Library units are `libs/<lib>/src/<folder>/unit_<start address>.c`; the folder is
+  the reference's (not evidence) until a real file name is proven.
 - Code, comments, notes and commit messages are in English.
 
 ## Layout
