@@ -336,7 +336,7 @@ def unit_blocks(version):
             m = re.search(r"\.text\s+start:(0x[0-9a-f]+) end:(0x[0-9a-f]+)", block)
             if m:
                 out.append((module, lines[0].rstrip(":"), int(m[1], 16), int(m[2], 16),
-                            "complete" in lines[1:]))
+                            "complete" in [l.strip() for l in lines[1:]]))
     return out
 
 
