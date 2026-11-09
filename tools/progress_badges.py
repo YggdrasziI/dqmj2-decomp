@@ -38,10 +38,31 @@ BADGES = [
     ("linked", "Linked", "complete_code_percent", "#26a269"),
 ]
 
-# Code regions of the card per version, from the region map of notes/SPLITS.md. Each
-# region is a list of [start, end) ranges. Empty until the region map exists: the card
-# then shows the totals only.
-REGIONS: dict[str, list] = {"jpn": []}
+# Code regions of main and ITCM per version, from the region map of notes/SPLITS.md
+# (2026-11-09). Each region is a list of [start, end) ranges; bounds come from the
+# evidence there (first and last hit), not from matched units. "Other" gathers the
+# rest: the secure area veneers, `main` at 0x02000C34, the Square Enix Thumb block at
+# 0x020B3358 and `.init`. Overlays share one load address: they get one row each
+# (OVERLAY_LABELS) instead of a region.
+REGIONS: dict[str, list] = {"jpn": [
+    ("Game (main, ITCM)", [(0x0203C130, 0x02084880), (0x020B4AF8, 0x020BCE10),
+                           (0x01FF8580, 0x01FFF72C)]),
+    ("NitroSDK (+ crt0, ITCM)", [(0x02000800, 0x02000B68), (0x02000C90, 0x0201AD84),
+                                 (0x01FF8000, 0x01FF8580)]),
+    ("NitroSystem", [(0x0202A1D8, 0x0203C130)]),
+    ("MSL, runtime", [(0x0201AD84, 0x0202A1D8)]),
+    ("Nintendo Wi-Fi (DWC, GameSpy)", [(0x02084880, 0x020B32E0)]),
+]}
+
+# Overlay rows: the role of each overlay is a hypothesis (notes/SPLITS.md)
+OVERLAY_LABELS = {
+    "ov000": "ov000 field, synthesis",
+    "ov001": "ov001 battle",
+    "ov002": "ov002 protection",
+    "ov003": "ov003 arcade link",
+    "ov004": "ov004 Wi-Fi mode",
+    "ov005": "ov005 world map",
+}
 
 
 # Card colors (light, dark): bars are stacked fuzzy > perfect > linked.
@@ -140,15 +161,29 @@ def unit_modules(version):
     return modules
 
 
-def module_measures(report, version):
+def unit_module(unit, sources):
+    """Module of a report unit: from its name for dsd's gap units, else from the
+    delinks.txt that lists its source."""
+    m = re.match(r"_dsd_gap@(\w+?)_\d+$", unit["name"])
+    if m:
+        return m.group(1)
+    return sources.get(unit.get("metadata", {}).get("source_path", ""), "other")
+
+
+def is_overlay(module):
+    return re.fullmatch(r"ov\d+", module) is not None
+
+
+def module_measures(report, version, overlays_only=False):
     """[(label, total, fuzzy, perfect, linked)] code bytes per module. Overlays share
     one address range, so modules come from unit names, not from addresses."""
     sources = unit_modules(version)
     sums = {}
     for unit in report.get("units", []):
         meta = unit.get("metadata", {})
-        m = re.match(r"_dsd_gap@(\w+?)_\d+$", unit["name"])
-        module = m.group(1) if m else sources.get(meta.get("source_path", ""), "other")
+        module = unit_module(unit, sources)
+        if overlays_only and not is_overlay(module):
+            continue
         total = int(unit.get("measures", {}).get("total_code", 0) or 0)
         if not total:
             continue
@@ -161,18 +196,22 @@ def module_measures(report, version):
         acc[0] += total
         acc[3] += total if meta.get("complete") else 0
     order = sorted(sums, key=lambda k: (k != "main", k != "itcm", k != "dtcm", k))
-    return [(MODULE_LABELS.get(k, k), *sums[k]) for k in order]
+    return [(MODULE_LABELS.get(k) or OVERLAY_LABELS.get(k, k), *sums[k]) for k in order]
 
 
 def region_measures(report, regions, version):
     """[(label, total, fuzzy, perfect, linked)] code bytes per region, from every
-    function of the report (split or not), placed by its address."""
+    function of the report (split or not), placed by its address. Overlay units are
+    left out: their addresses overlap (module_measures counts them)."""
     if not regions:
         return []
     addrs = symbol_addresses(version)
+    sources = unit_modules(version)
     sums = {label: [0, 0.0, 0, 0] for label, _ in regions}
     other = [0, 0.0, 0, 0]
     for unit in report.get("units", []):
+        if is_overlay(unit_module(unit, sources)):
+            continue
         linked = bool(unit.get("metadata", {}).get("complete"))
         for fn in unit.get("functions", []):
             addr = addrs.get(fn["name"], 0)
@@ -211,8 +250,9 @@ def card(report, version, commit):
         ("Functions", num("total_functions"), num("matched_functions"),
          num("matched_functions"), linked_functions(report), ""),
     ]
-    modules = [(*row, "bytes") for row in module_measures(report, version)]
     regions = [(*row, "bytes") for row in region_measures(report, REGIONS.get(version, []), version)]
+    # With regions for main and ITCM, the module rows keep the overlays only
+    modules = [(*row, "bytes") for row in module_measures(report, version, overlays_only=bool(regions))]
 
     width, bar_x, bar_w, row_h = 760, 186, 300, 26
     y = 34
@@ -238,17 +278,18 @@ def card(report, version, commit):
 
     for row in overall:
         bar_row(*row)
-    if modules:
-        y += 16
-        body.append(f'<text class="t b" x="16" y="{y + row_h - 8}">Code by module</text>')
-        y += row_h - 8
-        for row in modules:
-            bar_row(*row)
     if regions:
         y += 16
-        body.append(f'<text class="t b" x="16" y="{y + row_h - 8}">Code by region</text>')
+        body.append(f'<text class="t b" x="16" y="{y + row_h - 8}">Code by region (main, ITCM)</text>')
         y += row_h - 8
         for row in regions:
+            bar_row(*row)
+    if modules:
+        y += 16
+        title = "Code by overlay (roles are hypotheses)" if regions else "Code by module"
+        body.append(f'<text class="t b" x="16" y="{y + row_h - 8}">{title}</text>')
+        y += row_h - 8
+        for row in modules:
             bar_row(*row)
     y += 30
     lx = 16
