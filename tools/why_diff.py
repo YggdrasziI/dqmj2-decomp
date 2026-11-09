@@ -182,11 +182,11 @@ def cycles(mapping):
 
 def trace_colors(unit, symbol):
     src = None
+    # unit: objdiff unit name, the source path without extension (src/ov005/unit_...)
     for ext in (".cpp", ".c"):
-        for base in ("src/game", "src"):
-            p = os.path.join(ROOT, base, os.path.basename(unit) + ext)
-            if os.path.exists(p):
-                src = p
+        p = os.path.join(ROOT, unit + ext)
+        if os.path.exists(p):
+            src = p
     if src is None:
         return None
     res = subprocess.run([sys.executable, os.path.join(ROOT, "tools", "mwcc_sched.py"),

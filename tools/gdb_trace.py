@@ -15,9 +15,15 @@ Usage:
 given time, counts the hits (each hit is stepped over, then the breakpoint is put
 back), then removes every breakpoint and lets the game go on. Keep the set small:
 each hit stops the emulator.
+
+Overlay functions (`func_ov<NNN>_...`) can be selected too, but all overlays share
+one address range: a breakpoint on an overlay address fires for whichever overlay is
+loaded there at that moment, so a hit only counts for the named overlay when that
+overlay is the resident one.
 """
 
 import argparse
+import glob
 import os
 import re
 import socket
@@ -29,6 +35,7 @@ SYMBOL_FILES = [
     os.path.join(ROOT, "config", "jpn", "arm9", "symbols.txt"),
     os.path.join(ROOT, "config", "jpn", "arm9", "itcm", "symbols.txt"),
     os.path.join(ROOT, "config", "jpn", "arm9", "dtcm", "symbols.txt"),
+    *sorted(glob.glob(os.path.join(ROOT, "config", "jpn", "arm9", "overlays", "ov*", "symbols.txt"))),
 ]
 SYMBOL_RE = re.compile(r"^(\S+) kind:function\((arm|thumb)[^)]*\) addr:(0x[0-9a-fA-F]+)")
 
@@ -128,14 +135,23 @@ def cmd_read(gdb, args):
 
 def cmd_calls(gdb, args):
     syms = load_symbols()
-    by_addr = {a: (n, t) for a, n, t in syms}
-    chosen = []
+    # Overlays share addresses: keep only the selected symbols, one per address
+    by_addr = {}
     for a in args.addr:
-        if a not in by_addr:
+        named = [(n, t) for sa, n, t in syms if sa == a]
+        if not named:
             sys.exit(f"{a:#x}: no function symbol at this address")
-        chosen.append(a)
+        if len(named) > 1:
+            sys.exit(f"{a:#x}: several overlays have a function here "
+                     f"({', '.join(n for n, _ in named)}); select one with --match")
+        by_addr[a] = named[0]
     if args.match:
-        chosen += [a for a, n, t in syms if re.search(args.match, n) and a not in chosen]
+        for a, n, t in syms:
+            if re.search(args.match, n):
+                if a in by_addr and by_addr[a][0] != n:
+                    sys.exit(f"{a:#x}: {by_addr[a][0]} and {n} share this address; narrow --match")
+                by_addr[a] = (n, t)
+    chosen = list(by_addr)
     if not chosen:
         sys.exit("no function selected (--addr or --match)")
     if len(chosen) > args.limit:

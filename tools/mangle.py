@@ -9,7 +9,10 @@ parser = argparse.ArgumentParser(description="Mangles function declarations")
 parser.add_argument("file", help="C/C++ source file with defined function to mangle")
 
 tools_dir = Path(os.path.dirname(os.path.realpath(__file__)))
-cc_path = tools_dir / "mwccarm" / "2.0" / "sp1p5" / "mwccarm.exe"
+# The project's game compiler (MWCC_DEFAULT_VERSION of tools/configure.py)
+mwcc_version = re.search(r'^MWCC_DEFAULT_VERSION = "([^"]+)"',
+                         (tools_dir / "configure.py").read_text(encoding="utf-8"), re.M)[1]
+cc_path = tools_dir / "mwccarm" / mwcc_version / "mwccarm.exe"
 root_dir = tools_dir.parent
 include_dir = root_dir / "include"
 libs_dir = root_dir / "libs"

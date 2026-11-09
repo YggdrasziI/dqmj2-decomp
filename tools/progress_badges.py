@@ -7,8 +7,9 @@ the ARM9 modules):
   progress/<version>/perfect.svg  perfectly matched code    (matched_code_percent)
   progress/<version>/linked.svg   code linked from source (complete_code_percent)
   progress/<version>/card.svg     progress card: code, data and functions, then code
-                                  by region (REGIONS), each as a stacked bar (fuzzy,
-                                  perfect, linked) with perfect / total counts
+                                  by module (main, ITCM, overlays) and by region
+                                  (REGIONS), each as a stacked bar (fuzzy, perfect,
+                                  linked) with perfect / total counts
   progress/<version>/history.csv  one line per --record
 
 Usage:
@@ -118,6 +119,51 @@ def symbol_addresses(version):
     return addrs
 
 
+MODULE_LABELS = {"main": "Main", "itcm": "ITCM", "dtcm": "DTCM"}
+
+
+def unit_modules(version):
+    """{source path: module} from every module's delinks.txt (main, itcm, dtcm,
+    ovNNN); dsd's gap units carry their module in their name instead."""
+    modules = {}
+    cfg = os.path.join(ROOT, "config", version, "arm9")
+    for root, _, files in os.walk(cfg):
+        if "delinks.txt" not in files:
+            continue
+        rel = os.path.relpath(root, cfg).replace(os.sep, "/")
+        module = "main" if rel == "." else rel.split("/")[-1]
+        with open(os.path.join(root, "delinks.txt"), encoding="utf-8") as f:
+            for line in f:
+                m = re.match(r"(\S+\.(?:c|cpp|s)):\s*$", line)
+                if m:
+                    modules[m.group(1)] = module
+    return modules
+
+
+def module_measures(report, version):
+    """[(label, total, fuzzy, perfect, linked)] code bytes per module. Overlays share
+    one address range, so modules come from unit names, not from addresses."""
+    sources = unit_modules(version)
+    sums = {}
+    for unit in report.get("units", []):
+        meta = unit.get("metadata", {})
+        m = re.match(r"_dsd_gap@(\w+?)_\d+$", unit["name"])
+        module = m.group(1) if m else sources.get(meta.get("source_path", ""), "other")
+        total = int(unit.get("measures", {}).get("total_code", 0) or 0)
+        if not total:
+            continue
+        acc = sums.setdefault(module, [0, 0.0, 0, 0])
+        for fn in unit.get("functions", []):
+            size = int(fn.get("size", 0))
+            score = float(fn.get("fuzzy_match_percent", 0.0) or 0.0)
+            acc[1] += size * score / 100
+            acc[2] += size if score == 100 else 0
+        acc[0] += total
+        acc[3] += total if meta.get("complete") else 0
+    order = sorted(sums, key=lambda k: (k != "main", k != "itcm", k != "dtcm", k))
+    return [(MODULE_LABELS.get(k, k), *sums[k]) for k in order]
+
+
 def region_measures(report, regions, version):
     """[(label, total, fuzzy, perfect, linked)] code bytes per region, from every
     function of the report (split or not), placed by its address."""
@@ -165,6 +211,7 @@ def card(report, version, commit):
         ("Functions", num("total_functions"), num("matched_functions"),
          num("matched_functions"), linked_functions(report), ""),
     ]
+    modules = [(*row, "bytes") for row in module_measures(report, version)]
     regions = [(*row, "bytes") for row in region_measures(report, REGIONS.get(version, []), version)]
 
     width, bar_x, bar_w, row_h = 760, 186, 300, 26
@@ -191,6 +238,12 @@ def card(report, version, commit):
 
     for row in overall:
         bar_row(*row)
+    if modules:
+        y += 16
+        body.append(f'<text class="t b" x="16" y="{y + row_h - 8}">Code by module</text>')
+        y += row_h - 8
+        for row in modules:
+            bar_row(*row)
     if regions:
         y += 16
         body.append(f'<text class="t b" x="16" y="{y + row_h - 8}">Code by region</text>')

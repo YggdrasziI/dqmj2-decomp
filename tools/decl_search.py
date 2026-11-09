@@ -7,8 +7,17 @@ check each applied file with tools/report_diff.py and revert any regression.
 import tempfile
 import subprocess,struct,re,os,sys
 D=tempfile.mkdtemp(prefix='decl_search')
-FLAGS='-O4,p -enum int -char signed -proc arm946e -gccext,on -fp soft -inline noauto -RTTI off -interworking -w off -sym on -gccinc -nolink -msgstyle gcc -enc SJIS -str reuse -Cpp_exceptions off -i include -i libs/c/include -i libs/cpp/include -i libs/nitro/include -i libs/runtime/include -lang=c++ -d REGION_JPN -c'.split()
-CC='tools/mwccarm/2.0/sp1p5/mwccarm.exe'
+INCLUDES=[d for d in ('include','libs/c/include','libs/cpp/include','libs/nitro/include','libs/runtime/include') if os.path.isdir(d)]
+FLAGS='-O4,p -enum int -char signed -proc arm946e -gccext,on -fp soft -inline noauto -RTTI off -interworking -w off -sym on -gccinc -nolink -msgstyle gcc -enc SJIS -str reuse -Cpp_exceptions off'.split()+[x for d in INCLUDES for x in ('-i',d)]+'-lang=c++ -d REGION_JPN -c'.split()
+# Game compiler: MWCC_DEFAULT_VERSION of tools/configure.py
+CC='tools/mwccarm/%s/mwccarm.exe'%re.search(r'^MWCC_DEFAULT_VERSION = "([^"]+)"',open('tools/configure.py',encoding='utf-8').read(),re.M)[1]
+import glob
+def unit_path(u):
+    """'src/<module>/unit_<addr>' from a unit id (0205D4D8) or that path itself."""
+    if u.startswith('src/'): return u
+    m=glob.glob(f'src/*/unit_{u}.cpp')
+    assert len(m)==1,(u,m)
+    return m[0][:-4].replace(os.sep,'/')
 def compile(src,name='v'):
     p=os.path.join(D,name+'.cpp'); o=os.path.join(D,name+'.o')
     open(p,'w',encoding='latin-1',newline='\n').write(src)
@@ -36,7 +45,7 @@ def sites(code):
         elif w==0xE1A01800: out+='1'
     return out
 def orig(unit,sym):
-    b=open(f'build/jpn/delinks/src/game/{unit}.o','rb').read()
+    b=open(f'build/jpn/delinks/{unit_path(unit.replace("unit_",""))}.o','rb').read()
     return func(b,sym)
 def wdiff(a,b):
     if a is None or b is None: return -1
@@ -72,9 +81,11 @@ def sdiff(a,b):
     return (len(x)-len(y), max(len(x),len(y))-m)
 def tv(u,fn,variants,base=None):
     """variants: {name: [(old,new),...]}; prints diff words per variant."""
-    t=open(f'src/game/unit_{u}.cpp',encoding='latin-1',newline='').read().replace('\r\n','\n')
-    if os.path.exists(f'build/jpn/delinks/src/game/unit_{u}.o'):
-        O=funcs(open(f'build/jpn/delinks/src/game/unit_{u}.o','rb').read())
+    u=unit_path(u)
+    t=open(f'{u}.cpp',encoding='latin-1',newline='').read().replace('\r\n','\n')
+    if not os.path.exists(f'build/jpn/delinks/{u}.o'):
+        sys.exit(f'{u}: no delinked object (build/jpn/delinks/{u}.o); run ninja')
+    O=funcs(open(f'build/jpn/delinks/{u}.o','rb').read())
     k=[n for n in O if fn in n][0]
     r={}
     for name,reps in variants.items():
@@ -82,7 +93,7 @@ def tv(u,fn,variants,base=None):
         for a,b in reps:
             assert a in s,(name,a)
             s=s.replace(a,b)
-        o,e=compile(s,'tv_'+u)
+        o,e=compile(s,'tv_'+os.path.basename(u))
         if not o: print(name,'ERR',e[-300:]);continue
         F=funcs(o); c=F.get(k)
         r[name]=sdiff(c,O[k]) if c else None
@@ -115,9 +126,9 @@ r=json.load(open('build/jpn/report.json'))
 work={}
 for u in r['units']:
     n=u['name']
-    if not n.startswith('src/game/unit_'): continue
-    uid=n.split('unit_')[1]
-    p=f'src/game/unit_{uid}.cpp'
+    if not re.match(r'src/\w+/unit_',n): continue
+    uid=n
+    p=f'{uid}.cpp'
     if not os.path.exists(p): continue
     fs=[(f['name'],int(f['size'])) for f in u.get('functions',[]) if 98<=(f.get('fuzzy_match_percent') or 0)<100 and int(f['size'])<=3600]
     if fs: work[uid]=fs
@@ -183,9 +194,9 @@ def score(src,name,O,keys):
         x=CACHE[ck]; s+=abs(x[0])*3+x[1]
     return s
 def run(uid):
-    name='pm'+uid; p=f'src/game/unit_{uid}.cpp'
+    name='pm'+uid.replace('/','_'); p=f'{uid}.cpp'
     t=open(p,encoding='latin-1',newline='').read().replace('\r\n','\n')
-    op=f'build/jpn/delinks/src/game/unit_{uid}.o'
+    op=f'build/jpn/delinks/{uid}.o'
     if not os.path.exists(op): return uid,[]
     O=funcs(open(op,'rb').read())
     res=[]
@@ -216,7 +227,7 @@ def run(uid):
         t=t[:a]+bestbody+t[e_:]
         res.append((sym,start,best,n))
         print(uid,sym[-28:],start,'->',best,n,flush=True)
-        open(os.path.join(D,f'p2_{uid}.cpp'),'w',encoding='latin-1',newline='\n').write(t)
+        open(os.path.join(D,'p2_'+uid.replace('/','_')+'.cpp'),'w',encoding='latin-1',newline='\n').write(t)
     return uid,res
 with ThreadPoolExecutor(10) as ex:
     for u,rs in ex.map(run,list(work)): print('DONE',u,flush=True)

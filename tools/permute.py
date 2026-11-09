@@ -9,7 +9,7 @@ written. A result counts only when the bytes equal the target (`score` 0), and t
 evidence of the original source.
 
   python tools/permute.py <unit> <symbol> [--seconds N] [--workers N] [--out DIR]
-  python tools/permute.py src/game/unit_02093648 _ZN11Unk0209364813func_02093a9cEi
+  python tools/permute.py src/ov005/unit_021CD658 func_ov005_021cd6ec
 
 With 0 reached, mutations that are not needed are reverted and the function, from its
 signature to its closing brace, is written to <out>/<symbol>.txt after a line naming the
@@ -28,11 +28,18 @@ import tempfile
 import time
 from concurrent.futures import ThreadPoolExecutor
 
-CC = r"tools\mwccarm\2.0\sp1p5\mwccarm.exe"
+# The project's game compiler (MWCC_DEFAULT_VERSION of tools/configure.py)
+CC = os.path.join("tools", "mwccarm", re.search(
+    r'^MWCC_DEFAULT_VERSION = "([^"]+)"',
+    open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "configure.py"), encoding="utf-8").read(),
+    re.M)[1], "mwccarm.exe")
+# mwccarm refuses an include folder that does not exist: keep the existing ones
+INCLUDES = [d for d in ("include", "libs/c/include", "libs/cpp/include", "libs/nitro/include",
+                        "libs/runtime/include") if os.path.isdir(d)]
 FLAGS = ("-O4,p -enum int -char signed -proc arm946e -gccext,on -fp soft -inline noauto -RTTI off "
          "-interworking -w off -sym on -gccinc -nolink -msgstyle gcc -enc SJIS -str reuse "
-         "-Cpp_exceptions off -i include -i libs/c/include -i libs/cpp/include "
-         "-i libs/nitro/include -i libs/runtime/include -lang=c++ -d REGION_JPN").split()
+         "-Cpp_exceptions off").split() + [x for d in INCLUDES for x in ("-i", d)] + \
+        "-lang=c++ -d REGION_JPN".split()
 
 
 def elf_func(path, name):

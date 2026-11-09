@@ -36,6 +36,7 @@ WORK = os.path.join(ROOT, "build", "irdump")
 
 # SHA-1 of the compiler the patches were found in.
 COMPILER_SHA1 = {"2.0/sp1p5": "6153c610734690650e563e03c5bbf45c9a060ee6"}
+TRACE_COMPILER = os.path.join("tools", "mwccarm", "2.0", "sp1p5", "mwccarm.exe")
 
 # (virtual address, original bytes, patched bytes) for mwccarm 2.0/sp1p5
 PATCHES = [
@@ -95,8 +96,14 @@ def compile_command(source, version):
     if r.returncode or not lines:
         sys.exit("mwcc_irdump: no build command for %s\n%s" % (obj, r.stdout + r.stderr))
     # posix=False keeps the backslashes of Windows paths, and also the quotes
-    return [a[1:-1] if len(a) > 1 and a[0] == a[-1] == '"' else a
+    args = [a[1:-1] if len(a) > 1 and a[0] == a[-1] == '"' else a
             for a in shlex.split(lines[-1], posix=False)]
+    # The patches are for 2.0/sp1p5's binary, while the build may use another 2.0
+    # (MWCC_DEFAULT_VERSION). Trace with sp1p5 and the build's flags: the trace only
+    # explains the build's code when sp1p5 compiles the unit to the same bytes (true
+    # for every unit checked so far, notes/COMPILER.md).
+    args[0] = TRACE_COMPILER
+    return args
 
 
 def run(source, version):
