@@ -215,6 +215,24 @@ for root, dirs, _ in os.walk(libs_path):
             includes.append(Path(root) / dir)
 CC_INCLUDES = " ".join(f"-i {include}" for include in includes)
 
+# Library units built from twewy's sources include twewy's own NitroSDK and MSL
+# headers (directories not named "include", so not in CC_INCLUDES), searched first
+TWEWY_INCLUDES = " ".join(
+    f"-i {libs_path / d}" for d in ("nitro/include_twewy", "msl/include_twewy")
+)
+TWEWY_HEADER_SOURCES = {
+    Path(p)
+    for p in (
+        "libs/nitro/src/fx/unit_02000DE8.c",
+        "libs/nitro/src/fx/unit_02002618.c",
+        "libs/nitro/src/gx/unit_020036A8.c",
+        "libs/nitro/src/os/unit_020071A8.c",
+        "libs/nitro/src/mi/unit_02008F3C.c",
+        "libs/nitro/src/fs/unit_0200B8BC.c",
+        "libs/nitro/src/fs/unit_0200BB2C.c",
+    )
+}
+
 
 # Platform info
 platform = get_platform()
@@ -402,7 +420,7 @@ def main():
         # -MMD excludes all includes instead of just system includes for some reason, so use -MD instead.
         mwcc_prefix = f"{WINE} " if WINE else ""
         mwcc_cmd = (
-            f'{mwcc_prefix}"$compiler" $common_cc_flags {CC_INCLUDES} $cc_flags '
+            f'{mwcc_prefix}"$compiler" $common_cc_flags $cc_includes {CC_INCLUDES} $cc_flags '
             "-d $region_define -MD -c $in -o $basedir"
         )
         mwcc_common_implicit: list[str] = []
@@ -679,6 +697,9 @@ def add_mwcc_builds(
             variables={
                 "region_define": f"REGION_{project.game_version.upper()}",
                 "cc_flags": " ".join(cc_flags),
+                "cc_includes": TWEWY_INCLUDES
+                if to_repo_relative(source_file) in TWEWY_HEADER_SOURCES
+                else "",
                 "basedir": os.path.dirname(src_obj_path),
                 "basefile": str(src_obj_path.with_suffix("")),
                 "compiler": compiler_path,

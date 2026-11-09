@@ -17,12 +17,17 @@ The merged file is compiled (project compiler and flags, -lang=c99) and compared
 with the delinked original object (build/<version>/delinks/<unit>.o): same .text
 size and bytes with relocated words masked. The symbols our code uses (callees,
 data, the unit's own functions) are then renamed to this ROM's names, read from the
-original object's relocations and symbols at the same offsets, with #define lines.
-The file is written only when the check passes; nothing else is changed.
+original object's relocations and symbols at the same offsets: identifiers of the
+text are replaced, and a name that a header uses gets a #define. The file is
+written only when the check passes; nothing else is changed.
+
+When the merged file does not match, --drafts writes it out; once edited by hand,
+--source checks, renames and writes it the same way.
 
 Usage:
   python tools/lib_unit_gen.py libs/msl/src/c/unit_0201AD84.c [--force]
-  python tools/lib_unit_gen.py --all [--split] [--module main] [--limit N]
+  python tools/lib_unit_gen.py --all [--split] [--module main] [--limit N] [--drafts DIR]
+  python tools/lib_unit_gen.py --source DIR/libs/.../unit_X.c libs/.../unit_X.c
   python tools/lib_unit_gen.py --mark-complete    # after ninja: units at 100 %
 """
 
@@ -44,7 +49,13 @@ SWEEP_GLOB = os.path.join(ROOT, "build", "{version}", "sweep", "*.json")
 HEADER = ("/* {lib}; built from {refs} (CC0) per-function sources of the functions\n"
           " * found byte-identical (tools/lib_unit_gen.py). File bounds are a hypothesis. */\n"
           "#pragma force_active on\n\n")
+HEADER_EDITED = ("/* {lib}; built from {refs} (CC0) per-function sources, edited where this\n"
+                 " * build differs (comments below); checked by tools/lib_unit_gen.py --source.\n"
+                 " * File bounds are a hypothesis. */\n"
+                 "#pragma force_active on\n\n")
 R_ARM_V4BX = 40
+TWEWY_INCLUDE = [os.path.join(ROOT, "libs", "nitro", "include_twewy"),
+                 os.path.join(ROOT, "libs", "msl", "include_twewy")]
 # Units that match with mwccarm on Windows but not under wibo (CI): never marked
 # complete, so that the CI build links the original bytes
 NOT_COMPLETE = {
@@ -215,6 +226,19 @@ def merge(sources, unit_names):
                 head = chunk[:top_brace(chunk)].strip()
                 if name in unit_names:
                     chunk = re.sub(r"^\s*static\s+(?!inline)", "", chunk)
+                    # A function's static variable becomes a file-level extern
+                    # declaration: its data stays with the rest of the data
+                    hoisted = []
+
+                    def hoist(m):
+                        hoisted.append(f"extern {m[1].strip()} {m[2]};")
+                        return ""
+                    chunk = re.sub(r"(?m)^[ \t]*static\s+(?!inline)([\w\s\*]+?)\s*\b(\w+(?:\[[^\]]*\])*)\s*(?:=[^;]*)?;[ \t]*\n?",
+                                   hoist, chunk)
+                    for decl in hoisted:
+                        if re.sub(r"\s+", " ", decl) not in seen:
+                            seen.add(re.sub(r"\s+", " ", decl))
+                            out.append(decl)
                 elif not re.search(r"\binline\b", head):
                     chunk = re.sub(r"^\s*static\s+", "", head) + ";"
             elif variable_definition(chunk):
@@ -252,13 +276,13 @@ def defines(chunk, ident):
                 or re.match(r"(struct|union|enum)\s+" + ident + r"\s*\{\}", flat))
 
 
-def compile_chunks(parts, tmp):
+def compile_chunks(parts, tmp, extra=()):
     """Compile, dropping a local type definition that a header already gives
     (mwccarm: "identifier 'X' redeclared") until it compiles."""
     parts = list(parts)
     err = ""
     for _ in range(20):
-        obj, err = compile_c("\n\n".join(parts) + "\n", tmp)
+        obj, err = compile_c("\n\n".join(parts) + "\n", tmp, extra)
         if obj is not None:
             return obj, parts, ""
         m = re.search(r"identifier '(\w+)' redeclared", err)
@@ -271,7 +295,7 @@ def compile_chunks(parts, tmp):
 
 # --- generation --------------------------------------------------------------
 
-def compile_c(text, tmp):
+def compile_c(text, tmp, extra=()):
     src = os.path.join(tmp, "unit.c")
     obj = os.path.join(tmp, "unit.o")
     with open(src, "w", encoding="utf-8") as f:
@@ -281,6 +305,7 @@ def compile_c(text, tmp):
     ver = sweep_names_version()
     exe = os.path.join(ROOT, "tools", "mwccarm", *ver.split("/"), "mwccarm.exe")
     cmd = [exe, *compiler_sweep.flags_for(compiler_sweep.project_flags(), ver), "-lang=c99",
+           *[a for d in extra for a in ("-i", d)],
            "-i", os.path.join(ROOT, "include"), "-i", os.path.join(ROOT, "libs", "nitro", "include"),
            "-c", src, "-o", obj]
     res = subprocess.run(cmd, capture_output=True, text=True)
@@ -352,9 +377,12 @@ def slice_obj(orig, lo, hi):
             [(o - lo, t, n, a) for o, t, n, a in relocs if lo <= o < hi])
 
 
-def generate(module, path, start, end, kept, modules, version, tmp, orig=None):
+def generate(module, path, start, end, kept, modules, version, tmp, orig=None, source=None):
     """(source text, "ok") or (None, reason). `orig` is the original object of
-    [start, end) (default: the delinked object of `path`)."""
+    [start, end) (default: the delinked object of `path`). The last candidate
+    text is left in generate.draft, also on failure. `source` is a hand-edited
+    draft used instead of the merged reference sources."""
+    generate.draft = None
     funcs = sorted(a for a in modules[module] if start <= a < end)
     missing = [a for a in funcs if (module, a) not in kept]
     if missing:
@@ -376,11 +404,19 @@ def generate(module, path, start, end, kept, modules, version, tmp, orig=None):
 
     # mwccarm 2.0 emits a file's functions in reverse source order: try the sources
     # in reverse address order first.
-    for order in (list(reversed(sources)), sources):
-        obj, parts, err = compile_chunks(merge(order, unit_names), tmp)
+    orders = [list(reversed(sources)), sources]
+    # twewy's sources include twewy's own NitroSDK headers, searched first
+    extra = TWEWY_INCLUDE if refs == ["twewy"] else []
+    if source is not None:
+        with open(source, encoding="utf-8") as f:
+            orders = [[f.read().strip()]]
+    for order in orders:
+        merged = order if source is not None else merge(order, unit_names)
+        obj, parts, err = compile_chunks(merged, tmp, extra)
+        body = "\n\n".join(parts) + "\n"
+        generate.draft = body
         if obj is None:
             return None, "compile error: " + (err.splitlines()[0] if err else "?")
-        body = "\n\n".join(parts) + "\n"
         code, our_funcs, relocs = read_obj(obj)
         # The unit may end with the padding after a Thumb function
         if sorted(our_funcs) == sorted(o_funcs) and len(code) <= len(o_code) < len(code) + 4 \
@@ -391,7 +427,10 @@ def generate(module, path, start, end, kept, modules, version, tmp, orig=None):
         return None, (f"layout differs: ours {len(code):#x} bytes "
                       + str({hex(k): v for k, v in sorted(our_funcs.items())})[:200])
     if masked(code, relocs) != masked(o_code, o_relocs):
-        return None, "bytes differ"
+        a, b = masked(code, relocs), masked(o_code, o_relocs)
+        ends = sorted(our_funcs) + [len(code)]
+        bad = [our_funcs[lo] for lo, hi in zip(ends, ends[1:]) if a[lo:hi] != b[lo:hi]]
+        return None, "bytes differ in " + ", ".join(bad)
     if [(o, t) for o, t, _, _ in relocs] != [(o, t) for o, t, _, _ in o_relocs]:
         return None, "relocations differ"
     if [a for _, _, _, a in relocs] != [a for _, _, _, a in o_relocs]:
@@ -407,14 +446,26 @@ def generate(module, path, start, end, kept, modules, version, tmp, orig=None):
             renames[ours] = orig_name
     lib = {"nitro": "NitroSDK", "nns": "NitroSystem", "msl": "MSL"}.get(path.split("/")[1], path.split("/")[1])
     names = {"khdays": "khdays-decomp", "twewy": "twewy"}
-    text = HEADER.format(lib=lib, refs=" and ".join(names[r] for r in refs))
+    text = (HEADER if source is None else HEADER_EDITED).format(
+        lib=lib, refs=" and ".join(names[r] for r in refs))
     # The reference's names of callees, data and the unit's own functions become
     # this ROM's (an identifier rename; strings and comments hold none of them)
     if renames:
+        # A name that a header macro uses keeps its spelling there: map it with a
+        # #define after the last leading directive
+        headers = header_text()
+        hidden = [k for k in renames if re.search(r"\b" + re.escape(k) + r"\b", headers)]
         pattern = re.compile(r"\b(" + "|".join(map(re.escape, renames)) + r")\b")
         body = pattern.sub(lambda m: renames[m[1]], body)
+        if hidden:
+            lines = body.split("\n")
+            at = max((i + 1 for i, l in enumerate(lines) if l.startswith("#include")), default=0)
+            lines[at:at] = ["", "/* used by header macros under the reference's names */"] + \
+                [f"#define {k} {renames[k]}" for k in hidden]
+            body = "\n".join(lines)
     text += body
-    obj, err = compile_c(text, tmp)
+    generate.draft = text
+    obj, err = compile_c(text, tmp, extra)
     if obj is None:
         return None, "compile error after renames: " + err.splitlines()[0]
     code, our_funcs, relocs = read_obj(obj)
@@ -422,6 +473,21 @@ def generate(module, path, start, end, kept, modules, version, tmp, orig=None):
             or [r[1:] for r in relocs] != [r[1:] for r in o_relocs] or our_funcs != o_funcs:
         return None, "check after renames failed"
     return text, "ok"
+
+
+def header_text():
+    """Text of every header of the include directories (cached)."""
+    if not hasattr(header_text, "text"):
+        parts = []
+        for inc in (os.path.join(ROOT, "include"), os.path.join(ROOT, "libs", "nitro", "include"),
+                    *TWEWY_INCLUDE):
+            for dirpath, _, files in os.walk(inc):
+                for name in files:
+                    if name.endswith(".h"):
+                        with open(os.path.join(dirpath, name), encoding="utf-8", errors="replace") as f:
+                            parts.append(f.read())
+        header_text.text = "\n".join(parts)
+    return header_text.text
 
 
 def write(target, text):
@@ -506,9 +572,15 @@ def main():
     ap.add_argument("--version", default="jpn")
     ap.add_argument("--split", action="store_true",
                     help="split a unit that does not build as one into one unit per reference file")
+    ap.add_argument("--source", metavar="DRAFT",
+                    help="check and write one unit from a hand-edited draft (a --drafts file)")
+    ap.add_argument("--drafts", metavar="DIR",
+                    help="write the last candidate source of a failed unit under DIR")
     ap.add_argument("--mark-complete", action="store_true",
                     help="only mark the libs/ units at 100 %% in report.json complete")
     args = ap.parse_args()
+    if args.source and (len(args.units) != 1 or args.all):
+        sys.exit("--source takes exactly one unit")
     if args.mark_complete:
         return mark_complete(args.version)
 
@@ -529,8 +601,11 @@ def main():
                 continue
             if args.limit is not None and done >= args.limit:
                 break
-            text, why = generate(module, path, start, end, kept, modules, args.version, tmp)
+            text, why = generate(module, path, start, end, kept, modules, args.version, tmp,
+                                 source=args.source)
             print(f"{path}: {why}")
+            if text is None and args.drafts and generate.draft:
+                write(os.path.join(args.drafts, path), generate.draft)
             if text is not None:
                 write(target, text)
                 done += 1

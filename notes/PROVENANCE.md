@@ -45,6 +45,17 @@ file's header names its references.
 Headers `libs/nitro/include/{nitro,nnsys}/*.h`: khdays-decomp (CC0, same commit)
 `include/{nitro,nnsys}`, copied unchanged.
 
+Headers `libs/nitro/include_twewy/` and `libs/msl/include_twewy/` (2026-11-09):
+twewy (CC0, same commit) `libs/nitro/include` and `libs/c/include`, copied
+unchanged; only the units built from twewy sources use them
+(`TWEWY_HEADER_SOURCES` in `tools/configure.py`).
+
+Some units are written from an edited draft (`lib_unit_gen.py --source`; their
+header says so): the reference function's code is kept and the edit is commented
+in the file (a file's static data read through one struct, as this build
+addresses it; twewy header names set aside; `#pragma thumb` around a Thumb
+function).
+
 
 Library function names (`config/jpn/arm9/symbols.txt`, `itcm/symbols.txt`, written
 by `tools/sweep_names.py` on 2026-11-09): names of functions compiled from
