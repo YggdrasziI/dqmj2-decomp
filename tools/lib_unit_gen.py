@@ -251,7 +251,10 @@ def merge(sources, unit_names):
             out.append(chunk)
     # Each reference file declares what it uses before its function: once merged,
     # the directives, types, declarations and inline helpers of every file go first,
-    # then the emitted functions in the order given.
+    # then the emitted functions in the order given. One file keeps its own order
+    # (a #define may follow the type whose member it names).
+    if len(sources) == 1:
+        return out
     return sorted(out, key=chunk_rank)
 
 
