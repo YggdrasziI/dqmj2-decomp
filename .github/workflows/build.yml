@@ -39,6 +39,19 @@ jobs:
           python tools/configure.py --version ${{ matrix.version }} -w ./wibo --compiler /mwccarm
           ninja
 
+      # On failure, keep what is needed to compare with a local build: our compiled
+      # objects (our own code, no ROM bytes) and the link script
+      - name: Upload objects on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.version }}_objects
+          path: |
+            build/${{ matrix.version }}/libs
+            build/${{ matrix.version }}/src
+            build/${{ matrix.version }}/arm9.lcf
+            build/${{ matrix.version }}/objects.txt
+
       # Draw the progress badges (nothing is committed by CI)
       - name: Progress badges
         run: python tools/progress_badges.py --version ${{ matrix.version }} --report build/${{ matrix.version }}/report.json --out build/${{ matrix.version }}/progress_badges
