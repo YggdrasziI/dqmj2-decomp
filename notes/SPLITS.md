@@ -96,12 +96,30 @@ original (bytes with relocated words masked, relocation types, symbols and adden
 before it is written. A unit whose merged sources do not build or match is split
 into one unit per reference file (each built alone in the sweep), which is why most
 library units hold one to three functions: a finer cut than the real files, still a
-hypothesis. 589 library units (585 main, 4 ITCM; 777 functions, 92508 bytes) are
-`complete`. `libs/nitro/src/gx/unit_020038A8.c` matches on Windows but not under
-wibo in CI (`notes/COMPILER.md`), so it stays not `complete`. 69 have no source yet (the merge fails: conflicting declarations
-between reference files, twewy files needing twewy's own headers, addends that
-point inside another symbol, bytes that differ once merged). Units without a source
-stay delinked from the original.
+hypothesis. 649 of the 659 library units (645 main, 4 ITCM; 107496 bytes) are
+`complete`; 60 of them came after fixes to the configuration and to the generator
+(missing or inner-symbol relocations, header macros, twewy headers, edited drafts:
+`notes/MATCHING.md`, "Data addressing"). `libs/nitro/src/gx/unit_020038A8.c`
+matches on Windows but not under wibo in CI (`notes/COMPILER.md`), so it stays not
+`complete`. Nine have no source and stay delinked from the original:
+
+| Unit | Function | Why |
+|---|---|---|
+| `os/unit_02005DAC.c` | `OSi_InitStackChecker` | reads `SDK_IRQ_STACKSIZE`, a linker-defined value |
+| `os/unit_02005DE0.c` | `OS_InitLock` | the lock word at 0x027FFFF0 has no symbol; as a constant the store scheduling differs |
+| `os/unit_02007560.c` | `OS_GetInitArenaHi` | linker-defined stack sizes and DTCM arena start |
+| `snd/unit_020095E8.c` | `SND_RecvCommandReply` | 96.76 % with the command block struct: scheduling needs the file's own data |
+| `fs/unit_0200C890.c` | `FS_StartOverlay` | keeps the overlay digest check: `SDK_OVERLAY_DIGEST` and `_END`, two linker symbols at one address |
+| `dgt/unit_0200D630.c` | `DGTi_Hash2ProcessBlock` | the unit starts with the 0x14 bytes of SHA-1 constants, which C does not place before the function |
+| `ctrdg/unit_02019368.c` | `CTRDGi_InitModuleInfo` | store scheduling around a register read: needs the file's own data |
+| `snd/unit_02039248.c` | `NNS_SndArcLoadWaveArcTable` | a function `static` (two pool entries for one address): needs its own `.bss` |
+| `gfd/unit_0203C044.c` | `GfxQueue_Configure` | two pool entries for one address (khdays uses a second symbol) |
+
+Symbols changed for these units: `_ll_udiv` (0x02025D20, which also holds
+`_ull_mod` at 0x02025D2C) and `_u32_div_f` (0x02025F94) are the entries that mwccarm
+calls for 64-bit and unsigned division; `func_02025b70` became a function (the
+matrix code calls it at 0x020022F0) and `func_02025b60` is a separate 0x10-byte
+entry that saves the same registers, sets r4 = r1 | 1 and branches into its body.
 
 ### Not assigned yet
 
