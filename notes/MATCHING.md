@@ -17,6 +17,14 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
 - `if (f() == 0) { ... } else { ret = 1; }` puts the `ret = 1` block after the
   main path, as in the original; the inverted test gives `movne` early
   (`func_020410ec`, `func_020412fc`).
+- A store of a call result in one branch and of a constant in the other, with the
+  constant store conditionalized (`ldrne; movne; strneb; bne`): write the call
+  branch first, `if (!f()) g.x = h(); else g.x = 0;` (`func_02042e88`, 95 % ->
+  100 %).
+- A `u8` function that masks only the result of a comparison (`movgt; movle; and
+  r0, r0, #0xff`): write that return as `a > b ? 1 : 0`; a bare `a > b` and the
+  `if` forms drop the `and`, a ternary returning other constants adds one
+  (`func_02042db8`, 94.2 % -> 100 %).
 
 ## Registers
 
@@ -33,6 +41,11 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
   it through a local pointer (`UnkAnimRes *tbl = data_020df48c;`); indexing the
   global reloads the pool word after each call (`func_02041244`, `func_020412a0`).
   The order of the locals then fixes the registers (permutation script).
+- A `u16` local set from a field load stays merged with the load's virtual
+  register, so its declaration place has no effect on its color: declare it
+  `int` and the declaration order applies again (`func_02042950`, `int id;`
+  between `i` and `n`, 98.4 % -> 100 %). `python tools/mwcc_sched.py <src>
+  <symbol> --colors` prints the coloring order (higher virtual register first).
 
 ## Data addressing
 

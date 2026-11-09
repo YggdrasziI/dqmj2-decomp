@@ -2640,3 +2640,8 @@ src/main/unit_02042508.cpp:
     .text       start:0x02042508 end:0x02042678
     .data       start:0x020c6a50 end:0x020c6a70
     .bss        start:0x020df88c end:0x020df89c
+
+src/main/unit_02042678.cpp:
+    .text       start:0x02042678 end:0x02043938
+    .data       start:0x020c6a70 end:0x020c6a74
+    .bss        start:0x020df89c end:0x020df8c4
