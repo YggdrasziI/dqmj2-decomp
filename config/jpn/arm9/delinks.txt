@@ -5,681 +5,2554 @@
     .bss        start:0x020cbc00 end:0x021cb360 kind:bss align:32
 
 libs/nitro/src/init/unit_02000950.c:
-    .text       start:0x02000950 end:0x02000a74
+    complete
+    .text       start:0x02000950 end:0x020009fc
+
+libs/nitro/src/init/unit_020009FC.c:
+    .text       start:0x020009fc end:0x02000a74
 
 libs/nitro/src/init/unit_02000A78.c:
     .text       start:0x02000a78 end:0x02000b60
 
 libs/nitro/src/mtx/unit_02000C90.c:
-    .text       start:0x02000c90 end:0x02000dcc
+    complete
+    .text       start:0x02000c90 end:0x02000ce8
+
+libs/nitro/src/mtx/unit_02000CE8.c:
+    complete
+    .text       start:0x02000ce8 end:0x02000d0c
+
+libs/nitro/src/mtx/unit_02000D0C.c:
+    complete
+    .text       start:0x02000d0c end:0x02000dcc
 
 libs/nitro/src/fx/unit_02000DE8.c:
     .text       start:0x02000de8 end:0x02000e04
 
 libs/nitro/src/mtx/unit_02000E1C.c:
+    complete
     .text       start:0x02000e1c end:0x020019b0
 
 libs/nitro/src/mtx/unit_02001BAC.c:
-    .text       start:0x02001bac end:0x0200235c
+    complete
+    .text       start:0x02001bac end:0x02002210
+
+libs/nitro/src/mtx/unit_02002210.c:
+    .text       start:0x02002210 end:0x0200235c
 
 libs/nitro/src/fx/unit_0200236C.c:
-    .text       start:0x0200236c end:0x02002480
+    complete
+    .text       start:0x0200236c end:0x020023a0
+
+libs/nitro/src/fx/unit_020023A0.c:
+    complete
+    .text       start:0x020023a0 end:0x020023c4
+
+libs/nitro/src/fx/unit_020023C4.c:
+    complete
+    .text       start:0x020023c4 end:0x020023fc
+
+libs/nitro/src/fx/unit_020023FC.c:
+    complete
+    .text       start:0x020023fc end:0x0200242c
+
+libs/nitro/src/fx/unit_0200242C.c:
+    complete
+    .text       start:0x0200242c end:0x02002458
+
+libs/nitro/src/fx/unit_02002458.c:
+    complete
+    .text       start:0x02002458 end:0x02002480
 
 libs/nitro/src/fx/unit_020024F8.c:
-    .text       start:0x020024f8 end:0x02002730
+    complete
+    .text       start:0x020024f8 end:0x02002534
+
+libs/nitro/src/fx/unit_02002534.c:
+    complete
+    .text       start:0x02002534 end:0x020025b8
+
+libs/nitro/src/fx/unit_020025B8.c:
+    complete
+    .text       start:0x020025b8 end:0x02002618
+
+libs/nitro/src/fx/unit_02002618.c:
+    .text       start:0x02002618 end:0x02002730
 
 libs/nitro/src/fx/unit_0200285C.c:
+    complete
     .text       start:0x0200285c end:0x02002a90
 
 libs/nitro/src/gx/unit_02002A94.c:
-    .text       start:0x02002a94 end:0x020037dc
+    complete
+    .text       start:0x02002a94 end:0x02002be0
+
+libs/nitro/src/gx/unit_02002BE0.c:
+    complete
+    .text       start:0x02002be0 end:0x02002c14
+
+libs/nitro/src/gx/unit_02002C14.c:
+    complete
+    .text       start:0x02002c14 end:0x02002c50
+
+libs/nitro/src/gx/unit_02002C50.c:
+    complete
+    .text       start:0x02002c50 end:0x02002c98
+
+libs/nitro/src/gx/unit_02002C98.c:
+    complete
+    .text       start:0x02002c98 end:0x02002d00
+
+libs/nitro/src/gx/unit_02002D00.c:
+    complete
+    .text       start:0x02002d00 end:0x02002d1c
+
+libs/nitro/src/gx/unit_02002D1C.c:
+    complete
+    .text       start:0x02002d1c end:0x02002d44
+
+libs/nitro/src/gx/unit_02002D44.c:
+    complete
+    .text       start:0x02002d44 end:0x02002da4
+
+libs/nitro/src/gx/unit_02002DA4.c:
+    complete
+    .text       start:0x02002da4 end:0x02002e5c
+
+libs/nitro/src/gx/unit_02002E5C.c:
+    complete
+    .text       start:0x02002e5c end:0x020030ec
+
+libs/nitro/src/gx/unit_020030EC.c:
+    complete
+    .text       start:0x020030ec end:0x0200323c
+
+libs/nitro/src/gx/unit_0200323C.c:
+    complete
+    .text       start:0x0200323c end:0x0200333c
+
+libs/nitro/src/gx/unit_0200333C.c:
+    complete
+    .text       start:0x0200333c end:0x020033e8
+
+libs/nitro/src/gx/unit_020033E8.c:
+    complete
+    .text       start:0x020033e8 end:0x020035c0
+
+libs/nitro/src/gx/unit_020035C0.c:
+    complete
+    .text       start:0x020035c0 end:0x020036a8
+
+libs/nitro/src/gx/unit_020036A8.c:
+    .text       start:0x020036a8 end:0x020037dc
 
 libs/nitro/src/gx/unit_02003888.c:
-    .text       start:0x02003888 end:0x02003af4
+    complete
+    .text       start:0x02003888 end:0x020038a8
+
+libs/nitro/src/gx/unit_020038A8.c:
+    complete
+    .text       start:0x020038a8 end:0x02003950
+
+libs/nitro/src/gx/unit_02003950.c:
+    complete
+    .text       start:0x02003950 end:0x020039c0
+
+libs/nitro/src/gx/unit_020039C0.c:
+    complete
+    .text       start:0x020039c0 end:0x02003a40
+
+libs/nitro/src/gx/unit_02003A40.c:
+    complete
+    .text       start:0x02003a40 end:0x02003ac0
+
+libs/nitro/src/gx/unit_02003AC0.c:
+    complete
+    .text       start:0x02003ac0 end:0x02003af4
 
 libs/nitro/src/gx/unit_02003C18.c:
+    complete
     .text       start:0x02003c18 end:0x02003cf8
 
 libs/nitro/src/gx/unit_02003E54.c:
+    complete
     .text       start:0x02003e54 end:0x020046c8
 
 libs/nitro/src/gx/unit_0200470C.c:
-    .text       start:0x0200470c end:0x02004b58
+    .text       start:0x0200470c end:0x020047ac
+
+libs/nitro/src/gx/unit_020047AC.c:
+    complete
+    .text       start:0x020047ac end:0x020047dc
+
+libs/nitro/src/gx/unit_020047DC.c:
+    complete
+    .text       start:0x020047dc end:0x0200480c
+
+libs/nitro/src/gx/unit_0200480C.c:
+    complete
+    .text       start:0x0200480c end:0x020048a0
+
+libs/nitro/src/gx/unit_020048A0.c:
+    complete
+    .text       start:0x020048a0 end:0x020048f4
+
+libs/nitro/src/gx/unit_020048F4.c:
+    complete
+    .text       start:0x020048f4 end:0x0200494c
+
+libs/nitro/src/gx/unit_0200494C.c:
+    complete
+    .text       start:0x0200494c end:0x020049a4
+
+libs/nitro/src/gx/unit_020049A4.c:
+    complete
+    .text       start:0x020049a4 end:0x020049fc
+
+libs/nitro/src/gx/unit_020049FC.c:
+    complete
+    .text       start:0x020049fc end:0x02004a50
+
+libs/nitro/src/gx/unit_02004A50.c:
+    complete
+    .text       start:0x02004a50 end:0x02004aa8
+
+libs/nitro/src/gx/unit_02004AA8.c:
+    complete
+    .text       start:0x02004aa8 end:0x02004b00
+
+libs/nitro/src/gx/unit_02004B00.c:
+    complete
+    .text       start:0x02004b00 end:0x02004b58
 
 libs/nitro/src/gx/unit_02005158.c:
-    .text       start:0x02005158 end:0x020053a8
+    .text       start:0x02005158 end:0x020051f8
+
+libs/nitro/src/gx/unit_020051F8.c:
+    complete
+    .text       start:0x020051f8 end:0x02005268
+
+libs/nitro/src/gx/unit_02005268.c:
+    complete
+    .text       start:0x02005268 end:0x020052b0
+
+libs/nitro/src/gx/unit_020052B0.c:
+    .text       start:0x020052b0 end:0x020052f8
+
+libs/nitro/src/gx/unit_020052F8.c:
+    complete
+    .text       start:0x020052f8 end:0x02005364
+
+libs/nitro/src/gx/unit_02005364.c:
+    complete
+    .text       start:0x02005364 end:0x020053a8
 
 libs/nitro/src/gx/unit_020053C0.c:
+    complete
     .text       start:0x020053c0 end:0x02005464
 
 libs/nitro/src/gx/unit_0200547C.c:
-    .text       start:0x0200547c end:0x020057ec
+    complete
+    .text       start:0x0200547c end:0x020054e0
+
+libs/nitro/src/gx/unit_020054E0.c:
+    complete
+    .text       start:0x020054e0 end:0x02005520
+
+libs/nitro/src/gx/unit_02005520.c:
+    .text       start:0x02005520 end:0x0200557c
+
+libs/nitro/src/gx/unit_0200557C.c:
+    .text       start:0x0200557c end:0x020056bc
+
+libs/nitro/src/gx/unit_020056BC.c:
+    complete
+    .text       start:0x020056bc end:0x02005708
+
+libs/nitro/src/gx/unit_02005708.c:
+    complete
+    .text       start:0x02005708 end:0x0200573c
+
+libs/nitro/src/gx/unit_0200573C.c:
+    complete
+    .text       start:0x0200573c end:0x020057a8
+
+libs/nitro/src/gx/unit_020057A8.c:
+    complete
+    .text       start:0x020057a8 end:0x020057ec
 
 libs/nitro/src/gx/unit_02005994.c:
+    complete
     .text       start:0x02005994 end:0x020059b8
 
 libs/nitro/src/os/unit_020059B8.c:
+    complete
     .text       start:0x020059b8 end:0x02005a2c
 
 libs/nitro/src/os/unit_02005A30.c:
     .text       start:0x02005a30 end:0x02005ab8
 
 libs/nitro/src/os/unit_02005B38.c:
-    .text       start:0x02005b38 end:0x02005ef8
+    complete
+    .text       start:0x02005b38 end:0x02005b50
+
+libs/nitro/src/os/unit_02005B50.c:
+    complete
+    .text       start:0x02005b50 end:0x02005bd8
+
+libs/nitro/src/os/unit_02005BD8.c:
+    complete
+    .text       start:0x02005bd8 end:0x02005c64
+
+libs/nitro/src/os/unit_02005C64.c:
+    .text       start:0x02005c64 end:0x02005cac
+
+libs/nitro/src/os/unit_02005CAC.c:
+    .text       start:0x02005cac end:0x02005cf4
+
+libs/nitro/src/os/unit_02005CF4.c:
+    complete
+    .text       start:0x02005cf4 end:0x02005d20
+
+libs/nitro/src/os/unit_02005D20.c:
+    complete
+    .text       start:0x02005d20 end:0x02005d50
+
+libs/nitro/src/os/unit_02005D50.c:
+    complete
+    .text       start:0x02005d50 end:0x02005d80
+
+libs/nitro/src/os/unit_02005D80.c:
+    complete
+    .text       start:0x02005d80 end:0x02005dac
+
+libs/nitro/src/os/unit_02005DAC.c:
+    .text       start:0x02005dac end:0x02005de0
+
+libs/nitro/src/os/unit_02005DE0.c:
+    .text       start:0x02005de0 end:0x02005eac
+
+libs/nitro/src/os/unit_02005EAC.c:
+    complete
+    .text       start:0x02005eac end:0x02005ef8
 
 libs/nitro/src/os/unit_02005F08.c:
+    complete
     .text       start:0x02005f08 end:0x02005f7c
 
 libs/nitro/src/os/unit_02005F8C.c:
+    complete
     .text       start:0x02005f8c end:0x02005ff8
 
 libs/nitro/src/os/unit_02006018.c:
+    complete
     .text       start:0x02006018 end:0x02006024
 
 libs/nitro/src/os/unit_02006044.c:
-    .text       start:0x02006044 end:0x02006074
+    complete
+    .text       start:0x02006044 end:0x0200605c
+
+libs/nitro/src/os/unit_0200605C.c:
+    complete
+    .text       start:0x0200605c end:0x02006074
 
 libs/nitro/src/os/unit_020060AC.c:
-    .text       start:0x020060ac end:0x020060dc
+    complete
+    .text       start:0x020060ac end:0x020060c4
+
+libs/nitro/src/os/unit_020060C4.c:
+    complete
+    .text       start:0x020060c4 end:0x020060dc
 
 libs/nitro/src/os/unit_020060E4.c:
+    complete
     .text       start:0x020060e4 end:0x0200616c
 
 libs/nitro/src/os/unit_02006194.c:
+    complete
     .text       start:0x02006194 end:0x020061ac
 
 libs/nitro/src/os/unit_020061E0.c:
-    .text       start:0x020061e0 end:0x02006498
+    .text       start:0x020061e0 end:0x020061f8
+
+libs/nitro/src/os/unit_020061F8.c:
+    complete
+    .text       start:0x020061f8 end:0x02006270
+
+libs/nitro/src/os/unit_02006270.c:
+    complete
+    .text       start:0x02006270 end:0x020062a4
+
+libs/nitro/src/os/unit_020062A4.c:
+    complete
+    .text       start:0x020062a4 end:0x020062f8
+
+libs/nitro/src/os/unit_020062F8.c:
+    complete
+    .text       start:0x020062f8 end:0x02006328
+
+libs/nitro/src/os/unit_02006328.c:
+    complete
+    .text       start:0x02006328 end:0x02006388
+
+libs/nitro/src/os/unit_02006388.c:
+    .text       start:0x02006388 end:0x020063d0
+
+libs/nitro/src/os/unit_020063D0.c:
+    complete
+    .text       start:0x020063d0 end:0x02006498
 
 libs/nitro/src/os/unit_020065F0.c:
-    .text       start:0x020065f0 end:0x020067fc
+    complete
+    .text       start:0x020065f0 end:0x020066ec
+
+libs/nitro/src/os/unit_020066EC.c:
+    .text       start:0x020066ec end:0x0200670c
+
+libs/nitro/src/os/unit_0200670C.c:
+    .text       start:0x0200670c end:0x02006768
+
+libs/nitro/src/os/unit_02006768.c:
+    .text       start:0x02006768 end:0x020067a0
+
+libs/nitro/src/os/unit_020067A0.c:
+    .text       start:0x020067a0 end:0x020067fc
 
 libs/nitro/src/os/unit_020068C0.c:
-    .text       start:0x020068c0 end:0x020069f8
+    complete
+    .text       start:0x020068c0 end:0x020068d4
+
+libs/nitro/src/os/unit_020068D4.c:
+    .text       start:0x020068d4 end:0x02006924
+
+libs/nitro/src/os/unit_02006924.c:
+    complete
+    .text       start:0x02006924 end:0x0200698c
+
+libs/nitro/src/os/unit_0200698C.c:
+    complete
+    .text       start:0x0200698c end:0x020069b4
+
+libs/nitro/src/os/unit_020069B4.c:
+    complete
+    .text       start:0x020069b4 end:0x020069dc
+
+libs/nitro/src/os/unit_020069DC.c:
+    complete
+    .text       start:0x020069dc end:0x020069f8
 
 libs/nitro/src/os/unit_02006ACC.c:
+    complete
     .text       start:0x02006acc end:0x02006b74
 
 libs/nitro/src/os/unit_02006B7C.c:
-    .text       start:0x02006b7c end:0x02006cd8
+    complete
+    .text       start:0x02006b7c end:0x02006c18
+
+libs/nitro/src/os/unit_02006C18.c:
+    complete
+    .text       start:0x02006c18 end:0x02006c38
+
+libs/nitro/src/os/unit_02006C38.c:
+    complete
+    .text       start:0x02006c38 end:0x02006c60
+
+libs/nitro/src/os/unit_02006C60.c:
+    complete
+    .text       start:0x02006c60 end:0x02006c70
+
+libs/nitro/src/os/unit_02006C70.c:
+    .text       start:0x02006c70 end:0x02006ca4
+
+libs/nitro/src/os/unit_02006CA4.c:
+    .text       start:0x02006ca4 end:0x02006cd8
 
 libs/nitro/src/os/unit_02006CE0.c:
+    complete
     .text       start:0x02006ce0 end:0x02006ddc
 
 libs/nitro/src/os/unit_02006DE4.c:
+    complete
     .text       start:0x02006de4 end:0x02006ff8
 
 libs/nitro/src/os/unit_02007074.c:
-    .text       start:0x02007074 end:0x02007380
+    complete
+    .text       start:0x02007074 end:0x0200708c
+
+libs/nitro/src/os/unit_0200708C.c:
+    complete
+    .text       start:0x0200708c end:0x02007110
+
+libs/nitro/src/os/unit_02007110.c:
+    complete
+    .text       start:0x02007110 end:0x0200716c
+
+libs/nitro/src/os/unit_0200716C.c:
+    complete
+    .text       start:0x0200716c end:0x020071a8
+
+libs/nitro/src/os/unit_020071A8.c:
+    .text       start:0x020071a8 end:0x0200721c
+
+libs/nitro/src/os/unit_0200721C.c:
+    complete
+    .text       start:0x0200721c end:0x02007240
+
+libs/nitro/src/os/unit_02007240.c:
+    complete
+    .text       start:0x02007240 end:0x02007264
+
+libs/nitro/src/os/unit_02007264.c:
+    complete
+    .text       start:0x02007264 end:0x02007270
+
+libs/nitro/src/os/unit_02007270.c:
+    complete
+    .text       start:0x02007270 end:0x0200729c
+
+libs/nitro/src/os/unit_0200729C.c:
+    complete
+    .text       start:0x0200729c end:0x020072d0
+
+libs/nitro/src/os/unit_020072D0.c:
+    complete
+    .text       start:0x020072d0 end:0x020072ec
+
+libs/nitro/src/os/unit_020072EC.c:
+    complete
+    .text       start:0x020072ec end:0x02007308
+
+libs/nitro/src/os/unit_02007308.c:
+    complete
+    .text       start:0x02007308 end:0x0200732c
+
+libs/nitro/src/os/unit_0200732C.c:
+    complete
+    .text       start:0x0200732c end:0x02007338
+
+libs/nitro/src/os/unit_02007338.c:
+    complete
+    .text       start:0x02007338 end:0x02007344
+
+libs/nitro/src/os/unit_02007344.c:
+    complete
+    .text       start:0x02007344 end:0x02007360
+
+libs/nitro/src/os/unit_02007360.c:
+    complete
+    .text       start:0x02007360 end:0x02007380
 
 libs/nitro/src/os/unit_020073C8.c:
-    .text       start:0x020073c8 end:0x02007644
+    complete
+    .text       start:0x020073c8 end:0x020074cc
+
+libs/nitro/src/os/unit_020074CC.c:
+    complete
+    .text       start:0x020074cc end:0x02007538
+
+libs/nitro/src/os/unit_02007538.c:
+    complete
+    .text       start:0x02007538 end:0x0200754c
+
+libs/nitro/src/os/unit_0200754C.c:
+    complete
+    .text       start:0x0200754c end:0x02007560
+
+libs/nitro/src/os/unit_02007560.c:
+    .text       start:0x02007560 end:0x02007644
 
 libs/nitro/src/os/unit_020076EC.c:
+    complete
     .text       start:0x020076ec end:0x0200775c
 
 libs/nitro/src/os/unit_0200776C.c:
-    .text       start:0x0200776c end:0x02007970
+    complete
+    .text       start:0x0200776c end:0x020077dc
+
+libs/nitro/src/os/unit_020077DC.c:
+    complete
+    .text       start:0x020077dc end:0x02007850
+
+libs/nitro/src/os/unit_02007850.c:
+    complete
+    .text       start:0x02007850 end:0x02007864
+
+libs/nitro/src/os/unit_02007864.c:
+    complete
+    .text       start:0x02007864 end:0x020078f4
+
+libs/nitro/src/os/unit_020078F4.c:
+    .text       start:0x020078f4 end:0x02007970
 
 libs/nitro/src/os/unit_020079AC.c:
+    complete
     .text       start:0x020079ac end:0x02007a24
 
 libs/nitro/src/os/unit_02007A34.c:
-    .text       start:0x02007a34 end:0x02007c58
+    complete
+    .text       start:0x02007a34 end:0x02007a9c
+
+libs/nitro/src/os/unit_02007A9C.c:
+    .text       start:0x02007a9c end:0x02007b3c
+
+libs/nitro/src/os/unit_02007B3C.c:
+    complete
+    .text       start:0x02007b3c end:0x02007b4c
+
+libs/nitro/src/os/unit_02007B4C.c:
+    complete
+    .text       start:0x02007b4c end:0x02007bd8
+
+libs/nitro/src/os/unit_02007BD8.c:
+    complete
+    .text       start:0x02007bd8 end:0x02007c18
+
+libs/nitro/src/os/unit_02007C18.c:
+    complete
+    .text       start:0x02007c18 end:0x02007c58
 
 libs/nitro/src/os/unit_02007C68.c:
-    .text       start:0x02007c68 end:0x02008140
+    complete
+    .text       start:0x02007c68 end:0x02007c78
+
+libs/nitro/src/os/unit_02007C78.c:
+    .text       start:0x02007c78 end:0x02007da4
+
+libs/nitro/src/os/unit_02007DA4.c:
+    complete
+    .text       start:0x02007da4 end:0x02007e10
+
+libs/nitro/src/os/unit_02007E10.c:
+    complete
+    .text       start:0x02007e10 end:0x02007e98
+
+libs/nitro/src/os/unit_02007E98.c:
+    complete
+    .text       start:0x02007e98 end:0x02007ea8
+
+libs/nitro/src/os/unit_02007EA8.c:
+    complete
+    .text       start:0x02007ea8 end:0x02007f98
+
+libs/nitro/src/os/unit_02007F98.c:
+    complete
+    .text       start:0x02007f98 end:0x02007fe0
+
+libs/nitro/src/os/unit_02007FE0.c:
+    complete
+    .text       start:0x02007fe0 end:0x02007ff4
+
+libs/nitro/src/os/unit_02007FF4.c:
+    complete
+    .text       start:0x02007ff4 end:0x02008008
+
+libs/nitro/src/os/unit_02008008.c:
+    complete
+    .text       start:0x02008008 end:0x02008020
+
+libs/nitro/src/os/unit_02008020.c:
+    complete
+    .text       start:0x02008020 end:0x02008034
+
+libs/nitro/src/os/unit_02008034.c:
+    complete
+    .text       start:0x02008034 end:0x0200804c
+
+libs/nitro/src/os/unit_0200804C.c:
+    complete
+    .text       start:0x0200804c end:0x02008058
+
+libs/nitro/src/os/unit_02008058.c:
+    complete
+    .text       start:0x02008058 end:0x02008064
+
+libs/nitro/src/os/unit_02008064.c:
+    complete
+    .text       start:0x02008064 end:0x02008070
+
+libs/nitro/src/os/unit_02008070.c:
+    complete
+    .text       start:0x02008070 end:0x0200808c
+
+libs/nitro/src/os/unit_0200808C.c:
+    complete
+    .text       start:0x0200808c end:0x020080e0
+
+libs/nitro/src/os/unit_020080E0.c:
+    complete
+    .text       start:0x020080e0 end:0x02008114
+
+libs/nitro/src/os/unit_02008114.c:
+    complete
+    .text       start:0x02008114 end:0x02008140
 
 libs/nitro/src/os/unit_020081FC.c:
+    complete
     .text       start:0x020081fc end:0x0200829c
 
 libs/nitro/src/os/unit_020082A4.c:
-    .text       start:0x020082a4 end:0x0200844c
+    complete
+    .text       start:0x020082a4 end:0x020082d8
+
+libs/nitro/src/os/unit_020082D8.c:
+    complete
+    .text       start:0x020082d8 end:0x02008360
+
+libs/nitro/src/os/unit_02008360.c:
+    complete
+    .text       start:0x02008360 end:0x02008430
+
+libs/nitro/src/os/unit_02008430.c:
+    complete
+    .text       start:0x02008430 end:0x02008440
+
+libs/nitro/src/os/unit_02008440.c:
+    complete
+    .text       start:0x02008440 end:0x0200844c
 
 libs/nitro/src/mi/unit_0200844C.c:
-    .text       start:0x0200844c end:0x020087f8
+    complete
+    .text       start:0x0200844c end:0x0200845c
+
+libs/nitro/src/mi/unit_0200845C.c:
+    complete
+    .text       start:0x0200845c end:0x020084dc
+
+libs/nitro/src/mi/unit_020084DC.c:
+    complete
+    .text       start:0x020084dc end:0x0200854c
+
+libs/nitro/src/mi/unit_0200854C.c:
+    complete
+    .text       start:0x0200854c end:0x020085b8
+
+libs/nitro/src/mi/unit_020085B8.c:
+    complete
+    .text       start:0x020085b8 end:0x0200867c
+
+libs/nitro/src/mi/unit_0200867C.c:
+    complete
+    .text       start:0x0200867c end:0x02008714
+
+libs/nitro/src/mi/unit_02008714.c:
+    complete
+    .text       start:0x02008714 end:0x0200877c
+
+libs/nitro/src/mi/unit_0200877C.c:
+    complete
+    .text       start:0x0200877c end:0x020087f8
 
 libs/nitro/src/mi/unit_02008820.c:
-    .text       start:0x02008820 end:0x02008c14
+    complete
+    .text       start:0x02008820 end:0x020088a4
+
+libs/nitro/src/mi/unit_020088A4.c:
+    complete
+    .text       start:0x020088a4 end:0x020088f8
+
+libs/nitro/src/mi/unit_020088F8.c:
+    complete
+    .text       start:0x020088f8 end:0x020089f0
+
+libs/nitro/src/mi/unit_020089F0.c:
+    complete
+    .text       start:0x020089f0 end:0x02008a9c
+
+libs/nitro/src/mi/unit_02008A9C.c:
+    complete
+    .text       start:0x02008a9c end:0x02008afc
+
+libs/nitro/src/mi/unit_02008AFC.c:
+    complete
+    .text       start:0x02008afc end:0x02008bb4
+
+libs/nitro/src/mi/unit_02008BB4.c:
+    complete
+    .text       start:0x02008bb4 end:0x02008be0
+
+libs/nitro/src/mi/unit_02008BE0.c:
+    complete
+    .text       start:0x02008be0 end:0x02008bf8
+
+libs/nitro/src/mi/unit_02008BF8.c:
+    complete
+    .text       start:0x02008bf8 end:0x02008c14
 
 libs/nitro/src/mi/unit_02008C28.c:
+    complete
     .text       start:0x02008c28 end:0x02008cdc
 
 libs/nitro/src/mi/unit_02008D28.c:
-    .text       start:0x02008d28 end:0x02008f4c
+    complete
+    .text       start:0x02008d28 end:0x02008d4c
+
+libs/nitro/src/mi/unit_02008D4C.c:
+    complete
+    .text       start:0x02008d4c end:0x02008d78
+
+libs/nitro/src/mi/unit_02008D78.c:
+    complete
+    .text       start:0x02008d78 end:0x02008e0c
+
+libs/nitro/src/mi/unit_02008E0C.c:
+    complete
+    .text       start:0x02008e0c end:0x02008f3c
+
+libs/nitro/src/mi/unit_02008F3C.c:
+    .text       start:0x02008f3c end:0x02008f4c
 
 libs/nitro/src/mi/unit_02009034.c:
+    complete
     .text       start:0x02009034 end:0x020090c0
 
 libs/nitro/src/snd/unit_020090C0.c:
-    .text       start:0x020090c0 end:0x02009178
+    complete
+    .text       start:0x020090c0 end:0x020090e0
+
+libs/nitro/src/snd/unit_020090E0.c:
+    complete
+    .text       start:0x020090e0 end:0x02009108
+
+libs/nitro/src/snd/unit_02009108.c:
+    complete
+    .text       start:0x02009108 end:0x02009128
+
+libs/nitro/src/snd/unit_02009128.c:
+    complete
+    .text       start:0x02009128 end:0x02009148
+
+libs/nitro/src/snd/unit_02009148.c:
+    complete
+    .text       start:0x02009148 end:0x02009160
+
+libs/nitro/src/snd/unit_02009160.c:
+    complete
+    .text       start:0x02009160 end:0x02009178
 
 libs/nitro/src/snd/unit_02009194.c:
-    .text       start:0x02009194 end:0x02009400
+    complete
+    .text       start:0x02009194 end:0x020091b0
+
+libs/nitro/src/snd/unit_020091B0.c:
+    complete
+    .text       start:0x020091b0 end:0x020091d8
+
+libs/nitro/src/snd/unit_020091D8.c:
+    complete
+    .text       start:0x020091d8 end:0x02009200
+
+libs/nitro/src/snd/unit_02009200.c:
+    complete
+    .text       start:0x02009200 end:0x02009264
+
+libs/nitro/src/snd/unit_02009264.c:
+    complete
+    .text       start:0x02009264 end:0x020092a4
+
+libs/nitro/src/snd/unit_020092A4.c:
+    complete
+    .text       start:0x020092a4 end:0x020092c4
+
+libs/nitro/src/snd/unit_020092C4.c:
+    complete
+    .text       start:0x020092c4 end:0x020092e4
+
+libs/nitro/src/snd/unit_020092E4.c:
+    complete
+    .text       start:0x020092e4 end:0x0200930c
+
+libs/nitro/src/snd/unit_0200930C.c:
+    complete
+    .text       start:0x0200930c end:0x0200932c
+
+libs/nitro/src/snd/unit_0200932C.c:
+    complete
+    .text       start:0x0200932c end:0x02009378
+
+libs/nitro/src/snd/unit_02009378.c:
+    complete
+    .text       start:0x02009378 end:0x02009398
+
+libs/nitro/src/snd/unit_02009398.c:
+    complete
+    .text       start:0x02009398 end:0x020093b8
+
+libs/nitro/src/snd/unit_020093B8.c:
+    complete
+    .text       start:0x020093b8 end:0x020093d8
+
+libs/nitro/src/snd/unit_020093D8.c:
+    complete
+    .text       start:0x020093d8 end:0x02009400
 
 libs/nitro/src/snd/unit_02009420.c:
-    .text       start:0x02009420 end:0x020094ec
+    complete
+    .text       start:0x02009420 end:0x02009448
+
+libs/nitro/src/snd/unit_02009448.c:
+    complete
+    .text       start:0x02009448 end:0x02009470
+
+libs/nitro/src/snd/unit_02009470.c:
+    complete
+    .text       start:0x02009470 end:0x020094b4
+
+libs/nitro/src/snd/unit_020094B4.c:
+    complete
+    .text       start:0x020094b4 end:0x020094ec
 
 libs/nitro/src/snd/unit_020095E8.c:
-    .text       start:0x020095e8 end:0x02009d14
+    .text       start:0x020095e8 end:0x020096f8
+
+libs/nitro/src/snd/unit_020096F8.c:
+    complete
+    .text       start:0x020096f8 end:0x02009780
+
+libs/nitro/src/snd/unit_02009780.c:
+    complete
+    .text       start:0x02009780 end:0x020097b8
+
+libs/nitro/src/snd/unit_020097B8.c:
+    complete
+    .text       start:0x020097b8 end:0x02009974
+
+libs/nitro/src/snd/unit_02009974.c:
+    complete
+    .text       start:0x02009974 end:0x020099e0
+
+libs/nitro/src/snd/unit_020099E0.c:
+    complete
+    .text       start:0x020099e0 end:0x02009a0c
+
+libs/nitro/src/snd/unit_02009A0C.c:
+    complete
+    .text       start:0x02009a0c end:0x02009a5c
+
+libs/nitro/src/snd/unit_02009A5C.c:
+    complete
+    .text       start:0x02009a5c end:0x02009a98
+
+libs/nitro/src/snd/unit_02009A98.c:
+    complete
+    .text       start:0x02009a98 end:0x02009ad4
+
+libs/nitro/src/snd/unit_02009AD4.c:
+    complete
+    .text       start:0x02009ad4 end:0x02009af0
+
+libs/nitro/src/snd/unit_02009AF0.c:
+    complete
+    .text       start:0x02009af0 end:0x02009b14
+
+libs/nitro/src/snd/unit_02009B14.c:
+    complete
+    .text       start:0x02009b14 end:0x02009b74
+
+libs/nitro/src/snd/unit_02009B74.c:
+    complete
+    .text       start:0x02009b74 end:0x02009b9c
+
+libs/nitro/src/snd/unit_02009B9C.c:
+    complete
+    .text       start:0x02009b9c end:0x02009be4
+
+libs/nitro/src/snd/unit_02009BE4.c:
+    complete
+    .text       start:0x02009be4 end:0x02009c24
+
+libs/nitro/src/snd/unit_02009C24.c:
+    complete
+    .text       start:0x02009c24 end:0x02009c54
+
+libs/nitro/src/snd/unit_02009C54.c:
+    complete
+    .text       start:0x02009c54 end:0x02009c74
+
+libs/nitro/src/snd/unit_02009C74.c:
+    complete
+    .text       start:0x02009c74 end:0x02009ca4
+
+libs/nitro/src/snd/unit_02009CA4.c:
+    complete
+    .text       start:0x02009ca4 end:0x02009ce8
+
+libs/nitro/src/snd/unit_02009CE8.c:
+    complete
+    .text       start:0x02009ce8 end:0x02009d14
 
 libs/nitro/src/snd/unit_02009DBC.c:
-    .text       start:0x02009dbc end:0x0200a24c
+    complete
+    .text       start:0x02009dbc end:0x02009de4
+
+libs/nitro/src/snd/unit_02009DE4.c:
+    complete
+    .text       start:0x02009de4 end:0x02009e60
+
+libs/nitro/src/snd/unit_02009E60.c:
+    complete
+    .text       start:0x02009e60 end:0x02009ed0
+
+libs/nitro/src/snd/unit_02009ED0.c:
+    complete
+    .text       start:0x02009ed0 end:0x02009f9c
+
+libs/nitro/src/snd/unit_02009F9C.c:
+    complete
+    .text       start:0x02009f9c end:0x0200a034
+
+libs/nitro/src/snd/unit_0200A034.c:
+    complete
+    .text       start:0x0200a034 end:0x0200a07c
+
+libs/nitro/src/snd/unit_0200A07C.c:
+    complete
+    .text       start:0x0200a07c end:0x0200a09c
+
+libs/nitro/src/snd/unit_0200A09C.c:
+    complete
+    .text       start:0x0200a09c end:0x0200a24c
 
 libs/nitro/src/snd/unit_0200A254.c:
-    .text       start:0x0200a254 end:0x0200a2c4
+    complete
+    .text       start:0x0200a254 end:0x0200a288
+
+libs/nitro/src/snd/unit_0200A288.c:
+    complete
+    .text       start:0x0200a288 end:0x0200a2c4
 
 libs/nitro/src/pxi/unit_0200A2D0.c:
-    .text       start:0x0200a2d0 end:0x0200a5e0
+    complete
+    .text       start:0x0200a2d0 end:0x0200a3d0
+
+libs/nitro/src/pxi/unit_0200A3D0.c:
+    complete
+    .text       start:0x0200a3d0 end:0x0200a41c
+
+libs/nitro/src/pxi/unit_0200A41C.c:
+    complete
+    .text       start:0x0200a41c end:0x0200a440
+
+libs/nitro/src/pxi/unit_0200A440.c:
+    complete
+    .text       start:0x0200a440 end:0x0200a4c8
+
+libs/nitro/src/pxi/unit_0200A4C8.c:
+    complete
+    .text       start:0x0200a4c8 end:0x0200a5e0
 
 libs/nitro/src/fs/unit_0200A5E0.c:
-    .text       start:0x0200a5e0 end:0x0200b164
+    complete
+    .text       start:0x0200a5e0 end:0x0200a63c
+
+libs/nitro/src/fs/unit_0200A63C.c:
+    .text       start:0x0200a63c end:0x0200a7cc
+
+libs/nitro/src/fs/unit_0200A7CC.c:
+    complete
+    .text       start:0x0200a7cc end:0x0200a81c
+
+libs/nitro/src/fs/unit_0200A81C.c:
+    complete
+    .text       start:0x0200a81c end:0x0200a8dc
+
+libs/nitro/src/fs/unit_0200A8DC.c:
+    complete
+    .text       start:0x0200a8dc end:0x0200a910
+
+libs/nitro/src/fs/unit_0200A910.c:
+    complete
+    .text       start:0x0200a910 end:0x0200a93c
+
+libs/nitro/src/fs/unit_0200A93C.c:
+    complete
+    .text       start:0x0200a93c end:0x0200a968
+
+libs/nitro/src/fs/unit_0200A968.c:
+    complete
+    .text       start:0x0200a968 end:0x0200aa00
+
+libs/nitro/src/fs/unit_0200AA00.c:
+    complete
+    .text       start:0x0200aa00 end:0x0200ab2c
+
+libs/nitro/src/fs/unit_0200AB2C.c:
+    complete
+    .text       start:0x0200ab2c end:0x0200ad10
+
+libs/nitro/src/fs/unit_0200AD10.c:
+    complete
+    .text       start:0x0200ad10 end:0x0200b0bc
+
+libs/nitro/src/fs/unit_0200B0BC.c:
+    complete
+    .text       start:0x0200b0bc end:0x0200b13c
+
+libs/nitro/src/fs/unit_0200B13C.c:
+    complete
+    .text       start:0x0200b13c end:0x0200b164
 
 libs/nitro/src/fs/unit_0200B16C.c:
-    .text       start:0x0200b16c end:0x0200b7c8
+    complete
+    .text       start:0x0200b16c end:0x0200b1c4
+
+libs/nitro/src/fs/unit_0200B1C4.c:
+    complete
+    .text       start:0x0200b1c4 end:0x0200b1e0
+
+libs/nitro/src/fs/unit_0200B1E0.c:
+    complete
+    .text       start:0x0200b1e0 end:0x0200b200
+
+libs/nitro/src/fs/unit_0200B200.c:
+    complete
+    .text       start:0x0200b200 end:0x0200b218
+
+libs/nitro/src/fs/unit_0200B218.c:
+    .text       start:0x0200b218 end:0x0200b42c
+
+libs/nitro/src/fs/unit_0200B42C.c:
+    complete
+    .text       start:0x0200b42c end:0x0200b4c0
+
+libs/nitro/src/fs/unit_0200B4C0.c:
+    complete
+    .text       start:0x0200b4c0 end:0x0200b504
+
+libs/nitro/src/fs/unit_0200B504.c:
+    .text       start:0x0200b504 end:0x0200b6a8
+
+libs/nitro/src/fs/unit_0200B6A8.c:
+    complete
+    .text       start:0x0200b6a8 end:0x0200b6d4
+
+libs/nitro/src/fs/unit_0200B6D4.c:
+    complete
+    .text       start:0x0200b6d4 end:0x0200b714
+
+libs/nitro/src/fs/unit_0200B714.c:
+    .text       start:0x0200b714 end:0x0200b7c8
 
 libs/nitro/src/fs/unit_0200B84C.c:
-    .text       start:0x0200b84c end:0x0200baa0
+    complete
+    .text       start:0x0200b84c end:0x0200b8bc
+
+libs/nitro/src/fs/unit_0200B8BC.c:
+    .text       start:0x0200b8bc end:0x0200b97c
+
+libs/nitro/src/fs/unit_0200B97C.c:
+    .text       start:0x0200b97c end:0x0200baa0
 
 libs/nitro/src/fs/unit_0200BB2C.c:
-    .text       start:0x0200bb2c end:0x0200c170
+    .text       start:0x0200bb2c end:0x0200bc38
+
+libs/nitro/src/fs/unit_0200BC38.c:
+    complete
+    .text       start:0x0200bc38 end:0x0200bc58
+
+libs/nitro/src/fs/unit_0200BC58.c:
+    complete
+    .text       start:0x0200bc58 end:0x0200bcdc
+
+libs/nitro/src/fs/unit_0200BCDC.c:
+    complete
+    .text       start:0x0200bcdc end:0x0200bd04
+
+libs/nitro/src/fs/unit_0200BD04.c:
+    complete
+    .text       start:0x0200bd04 end:0x0200bd2c
+
+libs/nitro/src/fs/unit_0200BD2C.c:
+    complete
+    .text       start:0x0200bd2c end:0x0200be70
+
+libs/nitro/src/fs/unit_0200BE70.c:
+    complete
+    .text       start:0x0200be70 end:0x0200beec
+
+libs/nitro/src/fs/unit_0200BEEC.c:
+    complete
+    .text       start:0x0200beec end:0x0200bf2c
+
+libs/nitro/src/fs/unit_0200BF2C.c:
+    complete
+    .text       start:0x0200bf2c end:0x0200bf74
+
+libs/nitro/src/fs/unit_0200BF74.c:
+    complete
+    .text       start:0x0200bf74 end:0x0200bfe4
+
+libs/nitro/src/fs/unit_0200BFE4.c:
+    complete
+    .text       start:0x0200bfe4 end:0x0200c02c
+
+libs/nitro/src/fs/unit_0200C02C.c:
+    complete
+    .text       start:0x0200c02c end:0x0200c068
+
+libs/nitro/src/fs/unit_0200C068.c:
+    complete
+    .text       start:0x0200c068 end:0x0200c128
+
+libs/nitro/src/fs/unit_0200C128.c:
+    complete
+    .text       start:0x0200c128 end:0x0200c170
 
 libs/nitro/src/fs/unit_0200C190.c:
+    complete
     .text       start:0x0200c190 end:0x0200c1fc
 
 libs/nitro/src/fs/unit_0200C254.c:
-    .text       start:0x0200c254 end:0x0200c2c0
+    complete
+    .text       start:0x0200c254 end:0x0200c278
+
+libs/nitro/src/fs/unit_0200C278.c:
+    complete
+    .text       start:0x0200c278 end:0x0200c2c0
 
 libs/nitro/src/fs/unit_0200C2C8.c:
+    complete
     .text       start:0x0200c2c8 end:0x0200c334
 
 libs/nitro/src/fs/unit_0200C344.c:
     .text       start:0x0200c344 end:0x0200c48c
 
 libs/nitro/src/fs/unit_0200C4FC.c:
-    .text       start:0x0200c4fc end:0x0200c770
+    complete
+    .text       start:0x0200c4fc end:0x0200c518
+
+libs/nitro/src/fs/unit_0200C518.c:
+    complete
+    .text       start:0x0200c518 end:0x0200c554
+
+libs/nitro/src/fs/unit_0200C554.c:
+    complete
+    .text       start:0x0200c554 end:0x0200c57c
+
+libs/nitro/src/fs/unit_0200C57C.c:
+    complete
+    .text       start:0x0200c57c end:0x0200c674
+
+libs/nitro/src/fs/unit_0200C674.c:
+    complete
+    .text       start:0x0200c674 end:0x0200c770
 
 libs/nitro/src/fs/unit_0200C7FC.c:
-    .text       start:0x0200c7fc end:0x0200ca74
+    complete
+    .text       start:0x0200c7fc end:0x0200c890
+
+libs/nitro/src/fs/unit_0200C890.c:
+    .text       start:0x0200c890 end:0x0200c984
+
+libs/nitro/src/fs/unit_0200C984.c:
+    complete
+    .text       start:0x0200c984 end:0x0200ca74
 
 libs/nitro/src/fs/unit_0200CA84.c:
+    complete
     .text       start:0x0200ca84 end:0x0200cad0
 
 libs/nitro/src/dgt/unit_0200D044.c:
+    complete
     .text       start:0x0200d044 end:0x0200d3e4
 
 libs/nitro/src/math/unit_0200D3E4.c:
-    .text       start:0x0200d3e4 end:0x0200d630
+    complete
+    .text       start:0x0200d3e4 end:0x0200d478
+
+libs/nitro/src/math/unit_0200D478.c:
+    complete
+    .text       start:0x0200d478 end:0x0200d630
 
 libs/nitro/src/dgt/unit_0200D630.c:
     .text       start:0x0200d630 end:0x0200d8c4
 
 libs/nitro/src/gx/unit_0200D8C4.c:
+    complete
     .text       start:0x0200d8c4 end:0x0200d940
 
 libs/nitro/src/spi/unit_0200D940.c:
-    .text       start:0x0200d940 end:0x0200ddf4
+    complete
+    .text       start:0x0200d940 end:0x0200dbc0
+
+libs/nitro/src/spi/unit_0200DBC0.c:
+    complete
+    .text       start:0x0200dbc0 end:0x0200dc38
+
+libs/nitro/src/spi/unit_0200DC38.c:
+    complete
+    .text       start:0x0200dc38 end:0x0200dccc
+
+libs/nitro/src/spi/unit_0200DCCC.c:
+    complete
+    .text       start:0x0200dccc end:0x0200ddf4
 
 libs/nitro/src/spi/unit_0200DED8.c:
-    .text       start:0x0200ded8 end:0x0200e3bc
+    complete
+    .text       start:0x0200ded8 end:0x0200dfd8
+
+libs/nitro/src/spi/unit_0200DFD8.c:
+    complete
+    .text       start:0x0200dfd8 end:0x0200e070
+
+libs/nitro/src/spi/unit_0200E070.c:
+    complete
+    .text       start:0x0200e070 end:0x0200e080
+
+libs/nitro/src/spi/unit_0200E080.c:
+    complete
+    .text       start:0x0200e080 end:0x0200e26c
+
+libs/nitro/src/spi/unit_0200E26C.c:
+    complete
+    .text       start:0x0200e26c end:0x0200e390
+
+libs/nitro/src/spi/unit_0200E390.c:
+    complete
+    .text       start:0x0200e390 end:0x0200e3a8
+
+libs/nitro/src/spi/unit_0200E3A8.c:
+    complete
+    .text       start:0x0200e3a8 end:0x0200e3bc
 
 libs/nitro/src/spi/unit_0200EB54.c:
+    complete
     .text       start:0x0200eb54 end:0x0200eb80
 
 libs/nitro/src/spi/unit_0200F0A4.c:
-    .text       start:0x0200f0a4 end:0x0200f0e0
+    complete
+    .text       start:0x0200f0a4 end:0x0200f0c4
+
+libs/nitro/src/spi/unit_0200F0C4.c:
+    complete
+    .text       start:0x0200f0c4 end:0x0200f0e0
 
 libs/nitro/src/spi/unit_0200F138.c:
+    complete
     .text       start:0x0200f138 end:0x0200f198
 
 libs/nitro/src/spi/unit_0200F1F0.c:
+    complete
     .text       start:0x0200f1f0 end:0x0200f218
 
 libs/nitro/src/rtc/unit_0200F304.c:
+    complete
     .text       start:0x0200f304 end:0x0200f370
 
 libs/nitro/src/rtc/unit_0200F418.c:
+    complete
     .text       start:0x0200f418 end:0x0200f48c
 
 libs/nitro/src/rtc/unit_0200F578.c:
-    .text       start:0x0200f578 end:0x0200fb60
+    complete
+    .text       start:0x0200f578 end:0x0200fac8
+
+libs/nitro/src/rtc/unit_0200FAC8.c:
+    complete
+    .text       start:0x0200fac8 end:0x0200fb38
+
+libs/nitro/src/rtc/unit_0200FB38.c:
+    complete
+    .text       start:0x0200fb38 end:0x0200fb48
+
+libs/nitro/src/rtc/unit_0200FB48.c:
+    complete
+    .text       start:0x0200fb48 end:0x0200fb60
 
 libs/nitro/src/rtc/unit_0200FBA0.c:
+    complete
     .text       start:0x0200fba0 end:0x0200fbc8
 
 libs/nitro/src/rtc/unit_0200FCD0.c:
+    complete
     .text       start:0x0200fcd0 end:0x0200fd8c
 
 libs/nitro/src/card/unit_0200FD8C.c:
-    .text       start:0x0200fd8c end:0x0200ffe8
+    complete
+    .text       start:0x0200fd8c end:0x0200fdc8
+
+libs/nitro/src/card/unit_0200FDC8.c:
+    complete
+    .text       start:0x0200fdc8 end:0x0200fe4c
+
+libs/nitro/src/card/unit_0200FE4C.c:
+    complete
+    .text       start:0x0200fe4c end:0x0200fed8
+
+libs/nitro/src/card/unit_0200FED8.c:
+    complete
+    .text       start:0x0200fed8 end:0x0200ffe8
 
 libs/nitro/src/card/unit_0200FFF8.c:
+    complete
     .text       start:0x0200fff8 end:0x02010010
 
 libs/nitro/src/card/unit_02010020.c:
-    .text       start:0x02010020 end:0x02010088
+    complete
+    .text       start:0x02010020 end:0x0201006c
+
+libs/nitro/src/card/unit_0201006C.c:
+    complete
+    .text       start:0x0201006c end:0x02010088
 
 libs/nitro/src/card/unit_020100A4.c:
+    complete
     .text       start:0x020100a4 end:0x020100f0
 
 libs/nitro/src/card/unit_02010100.c:
+    complete
     .text       start:0x02010100 end:0x02010128
 
 libs/nitro/src/card/unit_020104B8.c:
-    .text       start:0x020104b8 end:0x02010790
+    complete
+    .text       start:0x020104b8 end:0x020106a8
+
+libs/nitro/src/card/unit_020106A8.c:
+    complete
+    .text       start:0x020106a8 end:0x02010790
 
 libs/nitro/src/card/unit_020107A4.c:
+    complete
     .text       start:0x020107a4 end:0x020107b8
 
 libs/nitro/src/card/unit_020107CC.c:
+    complete
     .text       start:0x020107cc end:0x02010904
 
 libs/nitro/src/card/unit_0201091C.c:
-    .text       start:0x0201091c end:0x02010f94
+    complete
+    .text       start:0x0201091c end:0x020109a8
+
+libs/nitro/src/card/unit_020109A8.c:
+    complete
+    .text       start:0x020109a8 end:0x02010a08
+
+libs/nitro/src/card/unit_02010A08.c:
+    complete
+    .text       start:0x02010a08 end:0x02010a5c
+
+libs/nitro/src/card/unit_02010A5C.c:
+    complete
+    .text       start:0x02010a5c end:0x02010b2c
+
+libs/nitro/src/card/unit_02010B2C.c:
+    complete
+    .text       start:0x02010b2c end:0x02010cb8
+
+libs/nitro/src/card/unit_02010CB8.c:
+    complete
+    .text       start:0x02010cb8 end:0x02010da8
+
+libs/nitro/src/card/unit_02010DA8.c:
+    complete
+    .text       start:0x02010da8 end:0x02010e04
+
+libs/nitro/src/card/unit_02010E04.c:
+    complete
+    .text       start:0x02010e04 end:0x02010e9c
+
+libs/nitro/src/card/unit_02010E9C.c:
+    complete
+    .text       start:0x02010e9c end:0x02010f94
 
 libs/nitro/src/card/unit_02011010.c:
-    .text       start:0x02011010 end:0x02011268
+    complete
+    .text       start:0x02011010 end:0x02011044
+
+libs/nitro/src/card/unit_02011044.c:
+    complete
+    .text       start:0x02011044 end:0x02011094
+
+libs/nitro/src/card/unit_02011094.c:
+    complete
+    .text       start:0x02011094 end:0x020111e8
+
+libs/nitro/src/card/unit_020111E8.c:
+    complete
+    .text       start:0x020111e8 end:0x02011214
+
+libs/nitro/src/card/unit_02011214.c:
+    complete
+    .text       start:0x02011214 end:0x02011268
 
 libs/nitro/src/card/unit_02011278.c:
-    .text       start:0x02011278 end:0x020113b4
+    complete
+    .text       start:0x02011278 end:0x02011304
+
+libs/nitro/src/card/unit_02011304.c:
+    complete
+    .text       start:0x02011304 end:0x02011364
+
+libs/nitro/src/card/unit_02011364.c:
+    complete
+    .text       start:0x02011364 end:0x020113b4
 
 libs/nitro/src/wm/unit_020113E0.c:
     .text       start:0x020113e0 end:0x020115c4
 
 libs/nitro/src/wm/unit_02011634.c:
-    .text       start:0x02011634 end:0x020117c0
+    complete
+    .text       start:0x02011634 end:0x0201164c
+
+libs/nitro/src/wm/unit_0201164C.c:
+    complete
+    .text       start:0x0201164c end:0x020116a4
+
+libs/nitro/src/wm/unit_020116A4.c:
+    complete
+    .text       start:0x020116a4 end:0x02011750
+
+libs/nitro/src/wm/unit_02011750.c:
+    complete
+    .text       start:0x02011750 end:0x020117c0
 
 libs/nitro/src/wm/unit_020117D0.c:
-    .text       start:0x020117d0 end:0x020118c8
+    complete
+    .text       start:0x020117d0 end:0x020117ec
+
+libs/nitro/src/wm/unit_020117EC.c:
+    complete
+    .text       start:0x020117ec end:0x02011834
+
+libs/nitro/src/wm/unit_02011834.c:
+    complete
+    .text       start:0x02011834 end:0x020118c8
 
 libs/nitro/src/wm/unit_02011CB4.c:
-    .text       start:0x02011cb4 end:0x02011d14
+    complete
+    .text       start:0x02011cb4 end:0x02011ce4
+
+libs/nitro/src/wm/unit_02011CE4.c:
+    complete
+    .text       start:0x02011ce4 end:0x02011d14
 
 libs/nitro/src/wm/unit_02011D58.c:
+    complete
     .text       start:0x02011d58 end:0x02011e30
 
 libs/nitro/src/wm/unit_02011E7C.c:
+    complete
     .text       start:0x02011e7c end:0x02011fac
 
 libs/nitro/src/wm/unit_02012090.c:
+    complete
     .text       start:0x02012090 end:0x02012264
 
 libs/nitro/src/wm/unit_020123BC.c:
+    complete
     .text       start:0x020123bc end:0x02012430
 
 libs/nitro/src/wm/unit_0201258C.c:
-    .text       start:0x0201258c end:0x020127ec
+    complete
+    .text       start:0x0201258c end:0x020125ec
+
+libs/nitro/src/wm/unit_020125EC.c:
+    complete
+    .text       start:0x020125ec end:0x02012624
+
+libs/nitro/src/wm/unit_02012624.c:
+    complete
+    .text       start:0x02012624 end:0x02012664
+
+libs/nitro/src/wm/unit_02012664.c:
+    complete
+    .text       start:0x02012664 end:0x02012740
+
+libs/nitro/src/wm/unit_02012740.c:
+    complete
+    .text       start:0x02012740 end:0x02012790
+
+libs/nitro/src/wm/unit_02012790.c:
+    complete
+    .text       start:0x02012790 end:0x020127ec
 
 libs/nitro/src/wm/unit_020127FC.c:
-    .text       start:0x020127fc end:0x02012928
+    complete
+    .text       start:0x020127fc end:0x0201283c
+
+libs/nitro/src/wm/unit_0201283C.c:
+    complete
+    .text       start:0x0201283c end:0x02012928
 
 libs/nitro/src/wm/unit_02012A78.c:
-    .text       start:0x02012a78 end:0x02012ddc
+    complete
+    .text       start:0x02012a78 end:0x02012ab8
+
+libs/nitro/src/wm/unit_02012AB8.c:
+    complete
+    .text       start:0x02012ab8 end:0x02012b84
+
+libs/nitro/src/wm/unit_02012B84.c:
+    complete
+    .text       start:0x02012b84 end:0x02012c6c
+
+libs/nitro/src/wm/unit_02012C6C.c:
+    complete
+    .text       start:0x02012c6c end:0x02012ddc
 
 libs/nitro/src/wm/unit_02012E80.c:
+    complete
     .text       start:0x02012e80 end:0x02013088
 
 libs/nitro/src/wm/unit_02013E08.c:
+    complete
     .text       start:0x02013e08 end:0x02013e7c
 
 libs/nitro/src/wm/unit_02014060.c:
-    .text       start:0x02014060 end:0x02014124
+    .text       start:0x02014060 end:0x020140d8
+
+libs/nitro/src/wm/unit_020140D8.c:
+    complete
+    .text       start:0x020140d8 end:0x02014124
 
 libs/nitro/src/ctrdg/unit_02018F9C.c:
+    complete
     .text       start:0x02018f9c end:0x02018fd4
 
 libs/nitro/src/nitro/unit_02018FD4.c:
+    complete
     .text       start:0x02018fd4 end:0x02018ffc
 
 libs/nitro/src/ctrdg/unit_02018FFC.c:
+    complete
     .text       start:0x02018ffc end:0x02019120
 
 libs/nitro/src/nitro/unit_02019120.c:
+    complete
     .text       start:0x02019120 end:0x02019168
 
 libs/nitro/src/ctrdg/unit_02019168.c:
+    complete
     .text       start:0x02019168 end:0x0201919c
 
 libs/nitro/src/nitro/unit_0201919C.c:
+    complete
     .text       start:0x0201919c end:0x0201921c
 
 libs/nitro/src/ctrdg/unit_0201921C.c:
+    complete
     .text       start:0x0201921c end:0x0201926c
 
 libs/nitro/src/nitro/unit_0201926C.c:
+    complete
     .text       start:0x0201926c end:0x020192b4
 
 libs/nitro/src/ctrdg/unit_020192B4.c:
-    .text       start:0x020192b4 end:0x02019698
+    complete
+    .text       start:0x020192b4 end:0x02019368
+
+libs/nitro/src/ctrdg/unit_02019368.c:
+    .text       start:0x02019368 end:0x0201955c
+
+libs/nitro/src/ctrdg/unit_0201955C.c:
+    complete
+    .text       start:0x0201955c end:0x02019588
+
+libs/nitro/src/ctrdg/unit_02019588.c:
+    complete
+    .text       start:0x02019588 end:0x020195e4
+
+libs/nitro/src/ctrdg/unit_020195E4.c:
+    complete
+    .text       start:0x020195e4 end:0x020195f8
+
+libs/nitro/src/ctrdg/unit_020195F8.c:
+    complete
+    .text       start:0x020195f8 end:0x0201960c
+
+libs/nitro/src/ctrdg/unit_0201960C.c:
+    complete
+    .text       start:0x0201960c end:0x02019698
 
 libs/nitro/src/mi/unit_02019698.c:
-    .text       start:0x02019698 end:0x0201979c
+    complete
+    .text       start:0x02019698 end:0x020196ac
+
+libs/nitro/src/mi/unit_020196AC.c:
+    complete
+    .text       start:0x020196ac end:0x0201979c
 
 libs/nitro/src/ctrdg/unit_02019A88.c:
+    complete
     .text       start:0x02019a88 end:0x02019b20
 
 libs/nitro/src/std/unit_02019B80.c:
+    complete
     .text       start:0x02019b80 end:0x02019ba8
 
 libs/msl/src/c/unit_0201AD84.c:
+    complete
     .text       start:0x0201ad84 end:0x0201ae18
 
 libs/msl/src/c/unit_0201B048.c:
+    complete
     .text       start:0x0201b048 end:0x0201b088
 
 libs/msl/src/c/unit_0201D418.c:
+    complete
     .text       start:0x0201d418 end:0x0201d748
 
 libs/msl/src/c/unit_0201EB2C.c:
     .text       start:0x0201eb2c end:0x0201ef14
 
 libs/msl/src/c/unit_0201EFAC.c:
-    .text       start:0x0201efac end:0x0201f088
+    complete
+    .text       start:0x0201efac end:0x0201f074
+
+libs/msl/src/c/unit_0201F074.c:
+    complete
+    .text       start:0x0201f074 end:0x0201f088
 
 libs/msl/src/c/unit_02021058.c:
+    complete
     .text       start:0x02021058 end:0x020210c4
 
 libs/msl/src/c/unit_02025D68.c:
+    complete
     .text       start:0x02025d68 end:0x02025d88
 
 libs/msl/src/runtime/unit_020266D8.c:
+    complete
     .text       start:0x020266d8 end:0x02026704
 
 libs/nns/src/misc/unit_0202A1D8.c:
-    .text       start:0x0202a1d8 end:0x0202a200
+    complete
+    .text       start:0x0202a1d8 end:0x0202a1ec
+
+libs/nns/src/misc/unit_0202A1EC.c:
+    complete
+    .text       start:0x0202a1ec end:0x0202a200
 
 libs/nns/src/misc/unit_0202A95C.c:
-    .text       start:0x0202a95c end:0x0202aa80
+    complete
+    .text       start:0x0202a95c end:0x0202a988
+
+libs/nns/src/misc/unit_0202A988.c:
+    complete
+    .text       start:0x0202a988 end:0x0202a9b0
+
+libs/nns/src/misc/unit_0202A9B0.c:
+    complete
+    .text       start:0x0202a9b0 end:0x0202a9e0
+
+libs/nns/src/misc/unit_0202A9E0.c:
+    complete
+    .text       start:0x0202a9e0 end:0x0202aa0c
+
+libs/nns/src/misc/unit_0202AA0C.c:
+    complete
+    .text       start:0x0202aa0c end:0x0202aa80
 
 libs/nns/src/misc/unit_0202AC28.c:
+    complete
     .text       start:0x0202ac28 end:0x0202ad8c
 
 libs/nns/src/misc/unit_0202AED4.c:
+    complete
     .text       start:0x0202aed4 end:0x0202af0c
 
 libs/nns/src/misc/unit_0202AF18.c:
+    complete
     .text       start:0x0202af18 end:0x0202af48
 
 libs/nns/src/fnd/unit_0202B0CC.c:
+    complete
     .text       start:0x0202b0cc end:0x0202b108
 
 libs/nns/src/misc/unit_0202B130.c:
+    complete
     .text       start:0x0202b130 end:0x0202b178
 
 libs/nns/src/misc/unit_0202B324.c:
+    complete
     .text       start:0x0202b324 end:0x0202b35c
 
 libs/nns/src/fnd/unit_0202B368.c:
-    .text       start:0x0202b368 end:0x0202b468
+    complete
+    .text       start:0x0202b368 end:0x0202b39c
+
+libs/nns/src/fnd/unit_0202B39C.c:
+    complete
+    .text       start:0x0202b39c end:0x0202b3c8
+
+libs/nns/src/fnd/unit_0202B3C8.c:
+    complete
+    .text       start:0x0202b3c8 end:0x0202b418
+
+libs/nns/src/fnd/unit_0202B418.c:
+    complete
+    .text       start:0x0202b418 end:0x0202b468
 
 libs/nns/src/misc/unit_0202B468.c:
-    .text       start:0x0202b468 end:0x0202b4f8
+    complete
+    .text       start:0x0202b468 end:0x0202b4d0
+
+libs/nns/src/misc/unit_0202B4D0.c:
+    complete
+    .text       start:0x0202b4d0 end:0x0202b4f8
 
 libs/nns/src/misc/unit_0202B5C0.c:
-    .text       start:0x0202b5c0 end:0x0202b798
+    complete
+    .text       start:0x0202b5c0 end:0x0202b5d8
+
+libs/nns/src/misc/unit_0202B5D8.c:
+    complete
+    .text       start:0x0202b5d8 end:0x0202b604
+
+libs/nns/src/misc/unit_0202B604.c:
+    complete
+    .text       start:0x0202b604 end:0x0202b658
+
+libs/nns/src/misc/unit_0202B658.c:
+    complete
+    .text       start:0x0202b658 end:0x0202b6a8
+
+libs/nns/src/misc/unit_0202B6A8.c:
+    complete
+    .text       start:0x0202b6a8 end:0x0202b70c
+
+libs/nns/src/misc/unit_0202B70C.c:
+    complete
+    .text       start:0x0202b70c end:0x0202b76c
+
+libs/nns/src/misc/unit_0202B76C.c:
+    complete
+    .text       start:0x0202b76c end:0x0202b784
+
+libs/nns/src/misc/unit_0202B784.c:
+    complete
+    .text       start:0x0202b784 end:0x0202b798
 
 libs/nns/src/g3d/unit_0202B798.c:
+    complete
     .text       start:0x0202b798 end:0x0202c144
 
 libs/nns/src/misc/unit_0202C2B0.c:
-    .text       start:0x0202c2b0 end:0x0202c580
+    complete
+    .text       start:0x0202c2b0 end:0x0202c32c
+
+libs/nns/src/misc/unit_0202C32C.c:
+    complete
+    .text       start:0x0202c32c end:0x0202c36c
+
+libs/nns/src/misc/unit_0202C36C.c:
+    complete
+    .text       start:0x0202c36c end:0x0202c430
+
+libs/nns/src/misc/unit_0202C430.c:
+    complete
+    .text       start:0x0202c430 end:0x0202c580
 
 libs/nns/src/g3d/unit_0202C580.c:
+    complete
     .text       start:0x0202c580 end:0x0202c9f8
 
 libs/nns/src/misc/unit_0202D6E0.c:
+    complete
     .text       start:0x0202d6e0 end:0x0202d984
 
 libs/nns/src/g3d/unit_0202D9E8.c:
+    complete
     .text       start:0x0202d9e8 end:0x0202da58
 
 libs/nns/src/misc/unit_0202DA58.c:
     .text       start:0x0202da58 end:0x0202de44
 
 libs/nns/src/g3d/unit_0202DEC4.c:
+    complete
     .text       start:0x0202dec4 end:0x0202dee4
 
 libs/nitro/src/nitro/unit_0202E448.c:
+    complete
     .text       start:0x0202e448 end:0x0202e4a8
 
 libs/nns/src/g3d/unit_0202E4A8.c:
-    .text       start:0x0202e4a8 end:0x0202e654
+    .text       start:0x0202e4a8 end:0x0202e548
+
+libs/nns/src/g3d/unit_0202E548.c:
+    complete
+    .text       start:0x0202e548 end:0x0202e59c
+
+libs/nns/src/g3d/unit_0202E59C.c:
+    complete
+    .text       start:0x0202e59c end:0x0202e654
 
 libs/nns/src/g3d/unit_0202E6BC.c:
+    complete
     .text       start:0x0202e6bc end:0x0202e818
 
 libs/nns/src/g3d/unit_0202E820.c:
-    .text       start:0x0202e820 end:0x0202e85c
+    complete
+    .text       start:0x0202e820 end:0x0202e834
+
+libs/nns/src/g3d/unit_0202E834.c:
+    complete
+    .text       start:0x0202e834 end:0x0202e848
+
+libs/nns/src/g3d/unit_0202E848.c:
+    complete
+    .text       start:0x0202e848 end:0x0202e85c
 
 libs/nns/src/g3d/unit_0202E914.c:
+    complete
     .text       start:0x0202e914 end:0x0202e974
 
 libs/nns/src/g3d/unit_0202E9CC.c:
+    complete
     .text       start:0x0202e9cc end:0x0202f110
 
 libs/nns/src/g3d/unit_0202F1B8.c:
-    .text       start:0x0202f1b8 end:0x0202f410
+    complete
+    .text       start:0x0202f1b8 end:0x0202f230
+
+libs/nns/src/g3d/unit_0202F230.c:
+    complete
+    .text       start:0x0202f230 end:0x0202f2a8
+
+libs/nns/src/g3d/unit_0202F2A8.c:
+    complete
+    .text       start:0x0202f2a8 end:0x0202f320
+
+libs/nns/src/g3d/unit_0202F320.c:
+    complete
+    .text       start:0x0202f320 end:0x0202f398
+
+libs/nns/src/g3d/unit_0202F398.c:
+    complete
+    .text       start:0x0202f398 end:0x0202f410
 
 libs/nns/src/g3d/unit_0202F738.c:
-    .text       start:0x0202f738 end:0x0202f788
+    complete
+    .text       start:0x0202f738 end:0x0202f760
+
+libs/nns/src/g3d/unit_0202F760.c:
+    complete
+    .text       start:0x0202f760 end:0x0202f788
 
 libs/nns/src/misc/unit_02030B48.c:
+    complete
     .text       start:0x02030b48 end:0x020312a4
 
 libs/nns/src/misc/unit_02031380.c:
+    complete
     .text       start:0x02031380 end:0x020313f0
 
 libs/nns/src/g3d/unit_02031AE4.c:
+    complete
     .text       start:0x02031ae4 end:0x02031b98
 
 libs/nns/src/g3d/unit_02031DD0.c:
-    .text       start:0x02031dd0 end:0x020320f8
+    complete
+    .text       start:0x02031dd0 end:0x02031f18
+
+libs/nns/src/g3d/unit_02031F18.c:
+    complete
+    .text       start:0x02031f18 end:0x02031f94
+
+libs/nns/src/g3d/unit_02031F94.c:
+    complete
+    .text       start:0x02031f94 end:0x02031fd0
+
+libs/nns/src/g3d/unit_02031FD0.c:
+    complete
+    .text       start:0x02031fd0 end:0x02032068
+
+libs/nns/src/g3d/unit_02032068.c:
+    complete
+    .text       start:0x02032068 end:0x020320f8
 
 libs/nns/src/misc/unit_020320F8.c:
     .text       start:0x020320f8 end:0x02032278
 
 libs/nns/src/g3d/unit_02032278.c:
+    complete
     .text       start:0x02032278 end:0x020328e0
 
 libs/nns/src/misc/unit_020328E0.c:
+    complete
     .text       start:0x020328e0 end:0x02033074
 
 libs/nns/src/g3d/unit_02033074.c:
-    .text       start:0x02033074 end:0x02033524
+    complete
+    .text       start:0x02033074 end:0x020333b8
+
+libs/nns/src/g3d/unit_020333B8.c:
+    .text       start:0x020333b8 end:0x02033524
 
 libs/nns/src/misc/unit_02033524.c:
+    complete
     .text       start:0x02033524 end:0x0203368c
 
 libs/nns/src/g3d/unit_0203368C.c:
+    complete
     .text       start:0x0203368c end:0x02033778
 
 libs/nns/src/g3d/unit_0203384C.c:
+    complete
     .text       start:0x0203384c end:0x02033c48
 
 libs/nns/src/g3d/unit_02033D1C.c:
-    .text       start:0x02033d1c end:0x02034074
+    complete
+    .text       start:0x02033d1c end:0x02033d60
+
+libs/nns/src/g3d/unit_02033D60.c:
+    complete
+    .text       start:0x02033d60 end:0x02033e3c
+
+libs/nns/src/g3d/unit_02033E3C.c:
+    complete
+    .text       start:0x02033e3c end:0x02033f14
+
+libs/nns/src/g3d/unit_02033F14.c:
+    complete
+    .text       start:0x02033f14 end:0x02033f7c
+
+libs/nns/src/g3d/unit_02033F7C.c:
+    complete
+    .text       start:0x02033f7c end:0x02033ff0
+
+libs/nns/src/g3d/unit_02033FF0.c:
+    complete
+    .text       start:0x02033ff0 end:0x0203403c
+
+libs/nns/src/g3d/unit_0203403C.c:
+    complete
+    .text       start:0x0203403c end:0x02034074
 
 libs/nns/src/g2d/unit_02034074.c:
+    complete
     .text       start:0x02034074 end:0x02034140
 
 libs/nns/src/g2d/unit_0203414C.c:
-    .text       start:0x0203414c end:0x0203434c
+    complete
+    .text       start:0x0203414c end:0x0203429c
+
+libs/nns/src/g2d/unit_0203429C.c:
+    complete
+    .text       start:0x0203429c end:0x020342b4
+
+libs/nns/src/g2d/unit_020342B4.c:
+    complete
+    .text       start:0x020342b4 end:0x020342f0
+
+libs/nns/src/g2d/unit_020342F0.c:
+    complete
+    .text       start:0x020342f0 end:0x02034300
+
+libs/nns/src/g2d/unit_02034300.c:
+    complete
+    .text       start:0x02034300 end:0x0203433c
+
+libs/nns/src/g2d/unit_0203433C.c:
+    complete
+    .text       start:0x0203433c end:0x0203434c
 
 libs/nns/src/misc/unit_0203434C.c:
-    .text       start:0x0203434c end:0x0203457c
+    complete
+    .text       start:0x0203434c end:0x020344a0
+
+libs/nns/src/misc/unit_020344A0.c:
+    complete
+    .text       start:0x020344a0 end:0x0203457c
 
 libs/nns/src/g2d/unit_0203457C.c:
+    complete
     .text       start:0x0203457c end:0x02034720
 
 libs/nns/src/g2d/unit_02034804.c:
+    complete
     .text       start:0x02034804 end:0x0203495c
 
 libs/nns/src/misc/unit_0203495C.c:
+    complete
     .text       start:0x0203495c end:0x02034b10
 
 libs/nns/src/g2d/unit_02034B10.c:
+    complete
     .text       start:0x02034b10 end:0x02034bf4
 
 libs/nns/src/misc/unit_02034C0C.c:
+    complete
     .text       start:0x02034c0c end:0x02034cfc
 
 libs/nns/src/g2d/unit_02034CFC.c:
+    complete
     .text       start:0x02034cfc end:0x02034d38
 
 libs/nns/src/misc/unit_02034D90.c:
+    complete
     .text       start:0x02034d90 end:0x0203510c
 
 libs/nns/src/g2d/unit_0203510C.c:
+    complete
     .text       start:0x0203510c end:0x02035130
 
 libs/nns/src/g2d/unit_02035244.c:
+    complete
     .text       start:0x02035244 end:0x0203537c
 
 libs/nns/src/g2d/unit_02035964.c:
+    complete
     .text       start:0x02035964 end:0x020359b4
 
 libs/nns/src/g2d/unit_02035A34.c:
+    complete
     .text       start:0x02035a34 end:0x02035bd0
 
 libs/nns/src/g2d/unit_02035DC4.c:
+    complete
     .text       start:0x02035dc4 end:0x02035f3c
 
 libs/nns/src/misc/unit_02035FC4.c:
+    complete
     .text       start:0x02035fc4 end:0x02036074
 
 libs/nns/src/g2d/unit_02036074.c:
+    complete
     .text       start:0x02036074 end:0x020360d0
 
 libs/nns/src/g2d/unit_02036424.c:
+    complete
     .text       start:0x02036424 end:0x020364ec
 
 libs/nns/src/g2d/unit_0203651C.c:
+    complete
     .text       start:0x0203651c end:0x02036680
 
 libs/nns/src/g2d/unit_020366F4.c:
+    complete
     .text       start:0x020366f4 end:0x02036788
 
 libs/nns/src/g2d/unit_02036E88.c:
-    .text       start:0x02036e88 end:0x02037264
+    complete
+    .text       start:0x02036e88 end:0x02036eac
+
+libs/nns/src/g2d/unit_02036EAC.c:
+    complete
+    .text       start:0x02036eac end:0x02036ecc
+
+libs/nns/src/g2d/unit_02036ECC.c:
+    complete
+    .text       start:0x02036ecc end:0x02036eec
+
+libs/nns/src/g2d/unit_02036EEC.c:
+    complete
+    .text       start:0x02036eec end:0x02036efc
+
+libs/nns/src/g2d/unit_02036EFC.c:
+    complete
+    .text       start:0x02036efc end:0x02036f24
+
+libs/nns/src/g2d/unit_02036F24.c:
+    complete
+    .text       start:0x02036f24 end:0x02036fd8
+
+libs/nns/src/g2d/unit_02036FD8.c:
+    complete
+    .text       start:0x02036fd8 end:0x02037140
+
+libs/nns/src/g2d/unit_02037140.c:
+    complete
+    .text       start:0x02037140 end:0x02037264
 
 libs/nns/src/snd/unit_020375B8.c:
+    complete
     .text       start:0x020375b8 end:0x02037928
 
 libs/nns/src/snd/unit_02037944.c:
+    complete
     .text       start:0x02037944 end:0x02037a8c
 
 libs/nns/src/snd/unit_02037BB8.c:
+    complete
     .text       start:0x02037bb8 end:0x02037bf0
 
 libs/nns/src/snd/unit_02037C14.c:
-    .text       start:0x02037c14 end:0x02037ce0
+    .text       start:0x02037c14 end:0x02037c34
+
+libs/nns/src/snd/unit_02037C34.c:
+    .text       start:0x02037c34 end:0x02037c4c
+
+libs/nns/src/snd/unit_02037C4C.c:
+    complete
+    .text       start:0x02037c4c end:0x02037ce0
 
 libs/nns/src/snd/unit_02037D0C.c:
+    complete
     .text       start:0x02037d0c end:0x02037da0
 
 libs/nns/src/snd/unit_02037DE0.c:
+    complete
     .text       start:0x02037de0 end:0x02037e30
 
 libs/nns/src/snd/unit_02037E54.c:
+    complete
     .text       start:0x02037e54 end:0x02038104
 
 libs/nns/src/snd/unit_02038110.c:
-    .text       start:0x02038110 end:0x020385c4
+    complete
+    .text       start:0x02038110 end:0x02038160
+
+libs/nns/src/snd/unit_02038160.c:
+    complete
+    .text       start:0x02038160 end:0x020381ac
+
+libs/nns/src/snd/unit_020381AC.c:
+    complete
+    .text       start:0x020381ac end:0x020381d4
+
+libs/nns/src/snd/unit_020381D4.c:
+    complete
+    .text       start:0x020381d4 end:0x02038228
+
+libs/nns/src/snd/unit_02038228.c:
+    complete
+    .text       start:0x02038228 end:0x02038270
+
+libs/nns/src/snd/unit_02038270.c:
+    complete
+    .text       start:0x02038270 end:0x020382c0
+
+libs/nns/src/snd/unit_020382C0.c:
+    complete
+    .text       start:0x020382c0 end:0x02038314
+
+libs/nns/src/snd/unit_02038314.c:
+    complete
+    .text       start:0x02038314 end:0x0203834c
+
+libs/nns/src/snd/unit_0203834C.c:
+    complete
+    .text       start:0x0203834c end:0x020383b4
+
+libs/nns/src/snd/unit_020383B4.c:
+    complete
+    .text       start:0x020383b4 end:0x02038438
+
+libs/nns/src/snd/unit_02038438.c:
+    complete
+    .text       start:0x02038438 end:0x02038488
+
+libs/nns/src/snd/unit_02038488.c:
+    complete
+    .text       start:0x02038488 end:0x020384e8
+
+libs/nns/src/snd/unit_020384E8.c:
+    .text       start:0x020384e8 end:0x02038530
+
+libs/nns/src/snd/unit_02038530.c:
+    .text       start:0x02038530 end:0x02038560
+
+libs/nns/src/snd/unit_02038560.c:
+    complete
+    .text       start:0x02038560 end:0x0203857c
+
+libs/nns/src/snd/unit_0203857C.c:
+    .text       start:0x0203857c end:0x020385c4
 
 libs/nitro/src/snd/unit_020385C4.c:
-    .text       start:0x020385c4 end:0x02038600
+    complete
+    .text       start:0x020385c4 end:0x020385e4
+
+libs/nitro/src/snd/unit_020385E4.c:
+    complete
+    .text       start:0x020385e4 end:0x02038600
 
 libs/nns/src/snd/unit_02038600.c:
+    complete
     .text       start:0x02038600 end:0x02038640
 
 libs/nns/src/snd/unit_020386D0.c:
+    complete
     .text       start:0x020386d0 end:0x020388a8
 
 libs/nns/src/snd/unit_02038994.c:
+    complete
     .text       start:0x02038994 end:0x02038ca0
 
 libs/nns/src/snd/unit_02038D68.c:
+    complete
     .text       start:0x02038d68 end:0x02038df0
 
 libs/nns/src/snd/unit_02038E14.c:
+    complete
     .text       start:0x02038e14 end:0x02039104
 
 libs/nns/src/snd/unit_02039248.c:
-    .text       start:0x02039248 end:0x020393d0
+    .text       start:0x02039248 end:0x02039350
+
+libs/nns/src/snd/unit_02039350.c:
+    complete
+    .text       start:0x02039350 end:0x020393a8
+
+libs/nns/src/snd/unit_020393A8.c:
+    complete
+    .text       start:0x020393a8 end:0x020393d0
 
 libs/nns/src/snd/unit_02039430.c:
+    complete
     .text       start:0x02039430 end:0x02039498
 
 libs/nitro/src/snd/unit_02039498.c:
+    complete
     .text       start:0x02039498 end:0x02039560
 
 libs/nns/src/snd/unit_02039560.c:
+    complete
     .text       start:0x02039560 end:0x020396bc
 
 libs/nns/src/snd/unit_0203972C.c:
-    .text       start:0x0203972c end:0x02039b38
+    complete
+    .text       start:0x0203972c end:0x020397ac
+
+libs/nns/src/snd/unit_020397AC.c:
+    complete
+    .text       start:0x020397ac end:0x020398a8
+
+libs/nns/src/snd/unit_020398A8.c:
+    complete
+    .text       start:0x020398a8 end:0x0203996c
+
+libs/nns/src/snd/unit_0203996C.c:
+    .text       start:0x0203996c end:0x02039a70
+
+libs/nns/src/snd/unit_02039A70.c:
+    complete
+    .text       start:0x02039a70 end:0x02039b38
 
 libs/nns/src/snd/unit_02039BB0.c:
+    complete
     .text       start:0x02039bb0 end:0x02039bd0
 
 libs/nns/src/snd/unit_02039C0C.c:
+    complete
     .text       start:0x02039c0c end:0x02039c28
 
 libs/nns/src/snd/unit_02039C84.c:
-    .text       start:0x02039c84 end:0x0203a108
+    complete
+    .text       start:0x02039c84 end:0x02039c9c
+
+libs/nns/src/snd/unit_02039C9C.c:
+    .text       start:0x02039c9c end:0x02039cd0
+
+libs/nns/src/snd/unit_02039CD0.c:
+    complete
+    .text       start:0x02039cd0 end:0x02039de0
+
+libs/nns/src/snd/unit_02039DE0.c:
+    complete
+    .text       start:0x02039de0 end:0x02039e6c
+
+libs/nns/src/snd/unit_02039E6C.c:
+    complete
+    .text       start:0x02039e6c end:0x02039e98
+
+libs/nns/src/snd/unit_02039E98.c:
+    .text       start:0x02039e98 end:0x0203a108
 
 libs/nitro/src/snd/unit_0203A108.c:
+    complete
     .text       start:0x0203a108 end:0x0203a160
 
 libs/nns/src/snd/unit_0203A160.c:
     .text       start:0x0203a160 end:0x0203a1f8
 
 libs/nitro/src/os/unit_0203A1F8.c:
+    complete
     .text       start:0x0203a1f8 end:0x0203a25c
 
 libs/nns/src/snd/unit_0203A25C.c:
-    .text       start:0x0203a25c end:0x0203b078
+    complete
+    .text       start:0x0203a25c end:0x0203a294
+
+libs/nns/src/snd/unit_0203A294.c:
+    complete
+    .text       start:0x0203a294 end:0x0203a2b8
+
+libs/nns/src/snd/unit_0203A2B8.c:
+    complete
+    .text       start:0x0203a2b8 end:0x0203a318
+
+libs/nns/src/snd/unit_0203A318.c:
+    complete
+    .text       start:0x0203a318 end:0x0203a388
+
+libs/nns/src/snd/unit_0203A388.c:
+    complete
+    .text       start:0x0203a388 end:0x0203a3d8
+
+libs/nns/src/snd/unit_0203A3D8.c:
+    complete
+    .text       start:0x0203a3d8 end:0x0203a418
+
+libs/nns/src/snd/unit_0203A418.c:
+    complete
+    .text       start:0x0203a418 end:0x0203a444
+
+libs/nns/src/snd/unit_0203A444.c:
+    .text       start:0x0203a444 end:0x0203a4e0
+
+libs/nns/src/snd/unit_0203A4E0.c:
+    .text       start:0x0203a4e0 end:0x0203a618
+
+libs/nns/src/snd/unit_0203A618.c:
+    .text       start:0x0203a618 end:0x0203a75c
+
+libs/nns/src/snd/unit_0203A75C.c:
+    .text       start:0x0203a75c end:0x0203af84
+
+libs/nns/src/snd/unit_0203AF84.c:
+    complete
+    .text       start:0x0203af84 end:0x0203b004
+
+libs/nns/src/snd/unit_0203B004.c:
+    complete
+    .text       start:0x0203b004 end:0x0203b078
 
 libs/nns/src/snd/unit_0203B088.c:
+    complete
     .text       start:0x0203b088 end:0x0203b0c0
 
 libs/nns/src/snd/unit_0203B0D0.c:
+    complete
     .text       start:0x0203b0d0 end:0x0203b0f8
 
 libs/nns/src/snd/unit_0203B0FC.c:
+    complete
     .text       start:0x0203b0fc end:0x0203b118
 
 libs/nns/src/snd/unit_0203B11C.c:
-    .text       start:0x0203b11c end:0x0203b5bc
+    complete
+    .text       start:0x0203b11c end:0x0203b16c
+
+libs/nns/src/snd/unit_0203B16C.c:
+    complete
+    .text       start:0x0203b16c end:0x0203b1e4
+
+libs/nns/src/snd/unit_0203B1E4.c:
+    complete
+    .text       start:0x0203b1e4 end:0x0203b244
+
+libs/nns/src/snd/unit_0203B244.c:
+    complete
+    .text       start:0x0203b244 end:0x0203b26c
+
+libs/nns/src/snd/unit_0203B26C.c:
+    .text       start:0x0203b26c end:0x0203b40c
+
+libs/nns/src/snd/unit_0203B40C.c:
+    complete
+    .text       start:0x0203b40c end:0x0203b460
+
+libs/nns/src/snd/unit_0203B460.c:
+    complete
+    .text       start:0x0203b460 end:0x0203b47c
+
+libs/nns/src/snd/unit_0203B47C.c:
+    complete
+    .text       start:0x0203b47c end:0x0203b4e8
+
+libs/nns/src/snd/unit_0203B4E8.c:
+    complete
+    .text       start:0x0203b4e8 end:0x0203b518
+
+libs/nns/src/snd/unit_0203B518.c:
+    complete
+    .text       start:0x0203b518 end:0x0203b58c
+
+libs/nns/src/snd/unit_0203B58C.c:
+    complete
+    .text       start:0x0203b58c end:0x0203b5bc
 
 libs/nns/src/snd/unit_0203B5CC.c:
-    .text       start:0x0203b5cc end:0x0203b738
+    .text       start:0x0203b5cc end:0x0203b67c
+
+libs/nns/src/snd/unit_0203B67C.c:
+    complete
+    .text       start:0x0203b67c end:0x0203b6c8
+
+libs/nns/src/snd/unit_0203B6C8.c:
+    complete
+    .text       start:0x0203b6c8 end:0x0203b738
 
 libs/nns/src/gfd/unit_0203B738.c:
+    complete
     .text       start:0x0203b738 end:0x0203b784
 
 libs/nns/src/misc/unit_0203B784.c:
+    complete
     .text       start:0x0203b784 end:0x0203b8c0
 
 libs/nitro/src/gx/unit_0203B8C8.c:
+    complete
     .text       start:0x0203b8c8 end:0x0203b8e4
 
 libs/nns/src/gfd/unit_0203B8E4.c:
-    .text       start:0x0203b8e4 end:0x0203ba60
+    complete
+    .text       start:0x0203b8e4 end:0x0203b900
+
+libs/nns/src/gfd/unit_0203B900.c:
+    complete
+    .text       start:0x0203b900 end:0x0203b91c
+
+libs/nns/src/gfd/unit_0203B91C.c:
+    complete
+    .text       start:0x0203b91c end:0x0203b964
+
+libs/nns/src/gfd/unit_0203B964.c:
+    complete
+    .text       start:0x0203b964 end:0x0203b9ec
+
+libs/nns/src/gfd/unit_0203B9EC.c:
+    complete
+    .text       start:0x0203b9ec end:0x0203ba60
 
 libs/nns/src/misc/unit_0203BA60.c:
     .text       start:0x0203ba60 end:0x0203bbd0
 
 libs/nns/src/gfd/unit_0203BBD8.c:
-    .text       start:0x0203bbd8 end:0x0203bc58
+    complete
+    .text       start:0x0203bbd8 end:0x0203bc18
+
+libs/nns/src/gfd/unit_0203BC18.c:
+    complete
+    .text       start:0x0203bc18 end:0x0203bc58
 
 libs/nns/src/gfd/unit_0203BC78.c:
-    .text       start:0x0203bc78 end:0x0203bcc4
+    .text       start:0x0203bc78 end:0x0203bc98
+
+libs/nns/src/gfd/unit_0203BC98.c:
+    complete
+    .text       start:0x0203bc98 end:0x0203bcb0
+
+libs/nns/src/gfd/unit_0203BCB0.c:
+    complete
+    .text       start:0x0203bcb0 end:0x0203bcc4
 
 libs/nns/src/gfd/unit_0203BF94.c:
-    .text       start:0x0203bf94 end:0x0203c068
+    complete
+    .text       start:0x0203bf94 end:0x0203bfac
+
+libs/nns/src/gfd/unit_0203BFAC.c:
+    complete
+    .text       start:0x0203bfac end:0x0203bfe8
+
+libs/nns/src/gfd/unit_0203BFE8.c:
+    complete
+    .text       start:0x0203bfe8 end:0x0203bff8
+
+libs/nns/src/gfd/unit_0203BFF8.c:
+    complete
+    .text       start:0x0203bff8 end:0x0203c008
+
+libs/nns/src/gfd/unit_0203C008.c:
+    complete
+    .text       start:0x0203c008 end:0x0203c044
+
+libs/nns/src/gfd/unit_0203C044.c:
+    .text       start:0x0203c044 end:0x0203c068
 
 libs/nitro/src/gx/unit_0203C0C8.c:
+    complete
     .text       start:0x0203c0c8 end:0x0203c130
 
 src/main/unit_02040BD8.cpp:

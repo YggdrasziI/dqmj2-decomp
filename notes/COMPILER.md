@@ -111,8 +111,17 @@ Open points:
 - Reference points, not evidence: dqix-decomp (Dragon Quest IX, 2009) uses 2.0/sp2p2
   for the game and 2.0/sp1p2 for its SDK; DQIV-DECOMP uses 2.0/sp1p6.
 
+- Function order: mwccarm 2.0 writes one `.text` section per function, in reverse
+  source order (a file with `f` then `g` links as `g`, `f`). Every library unit
+  built from merged reference sources needed the sources in reverse address order
+  (`tools/lib_unit_gen.py` tries that order first).
+
 ## Linker
 
-- `-proc arm946e -interworking -dead -nostdlib -m Entry` (from ts2-castaway). The
+- `-proc arm946e -interworking -dead -nostdlib -m Entry` (from ts2-castaway).
+  `-dead` drops a function that nothing calls, while the ROM holds such functions
+  (`OS_DisableProtectionUnit`); `#pragma force_active on` does not keep an `asm`
+  function, so `tools/lcf_keep.py` lists every function of the units with a source
+  in a `FORCE_ACTIVE` block of the link script. The
   all-assembly build links and matches with it; whether the original link stripped
   dead code (C1/C2, D1/D2 variants) is to be checked when the first C++ unit links.

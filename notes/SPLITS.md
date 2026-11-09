@@ -90,6 +90,18 @@ before `DGTi_Hash2ProcessBlock` (0x0200D644), to hold the five SHA-1 constant wo
 (0x00FF00FF, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC, 0xCA62C1D6) that it reads
 pc-relative; without them the link moved every later function by 0x14 bytes.
 
+Sources (2026-11-09, `tools/lib_unit_gen.py`): each library unit's source is the
+merge of the reference sources of its functions, checked against the delinked
+original (bytes with relocated words masked, relocation types, symbols and addends)
+before it is written. A unit whose merged sources do not build or match is split
+into one unit per reference file (each built alone in the sweep), which is why most
+library units hold one to three functions: a finer cut than the real files, still a
+hypothesis. 590 library units (586 main, 4 ITCM; 778 functions, 92676 bytes) are
+`complete`; 69 have no source yet (the merge fails: conflicting declarations
+between reference files, twewy files needing twewy's own headers, addends that
+point inside another symbol, bytes that differ once merged). Units without a source
+stay delinked from the original.
+
 ### Not assigned yet
 
 - Library functions between the library units (no hit: not compiled by a reference,

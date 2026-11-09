@@ -1,0 +1,30 @@
+/* NitroSDK; built from khdays-decomp (CC0) per-function sources of the functions
+ * found byte-identical (tools/lib_unit_gen.py). File bounds are a hypothesis. */
+#pragma force_active on
+
+extern void func_020094ec(void);
+
+extern void func_02009500(void);
+
+extern void DC_StoreRange(void *p, unsigned int len);
+
+void SND_DestroyWaveArc(int **owner) {
+    int *node;
+    int zero;
+    int len;
+    int *next;
+    func_020094ec();
+    node = (int *)owner[6];
+    if (node != 0) {
+        zero = 0;
+        len = 8;
+        do {
+            next = (int *)node[1];
+            node[0] = zero;
+            node[1] = zero;
+            DC_StoreRange(node, len);
+            node = next;
+        } while (next != 0);
+    }
+    func_02009500();
+}

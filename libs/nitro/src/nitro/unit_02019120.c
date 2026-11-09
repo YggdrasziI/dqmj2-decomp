@@ -1,0 +1,11 @@
+/* NitroSDK; built from khdays-decomp (CC0) per-function sources of the functions
+ * found byte-identical (tools/lib_unit_gen.py). File bounds are a hypothesis. */
+#pragma force_active on
+
+void CTRDGi_ChangeLatestAccessCycle(int *saved) {
+    volatile unsigned short *exmemcnt = (volatile unsigned short *)0x4000204;
+    saved[0] = (*exmemcnt & 0xc) >> 2;
+    saved[1] = (*exmemcnt & 0x10) >> 4;
+    *exmemcnt = (unsigned short)((*exmemcnt & ~0xc) | 0xc);
+    *exmemcnt = (unsigned short)(*exmemcnt & ~0x10);
+}

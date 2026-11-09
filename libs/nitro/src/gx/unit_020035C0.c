@@ -1,0 +1,52 @@
+/* NitroSDK; built from khdays-decomp (CC0) per-function sources of the functions
+ * found byte-identical (tools/lib_unit_gen.py). File bounds are a hypothesis. */
+#pragma force_active on
+
+#include "nitro/types.h"
+
+struct VRAMState {
+    u16 field0;
+    u16 pad2;
+    u16 pad4;
+    u16 pad6;
+    u16 pad8;
+    u16 fieldA;
+};
+
+extern void GX_VRAMCNT_SetLCDC_(u32 bankBits);
+
+extern struct VRAMState data_020cbc04;
+
+static inline void writeE(u8 v) { *(volatile u8 *)0x04000244 = v; }
+
+static inline void writeF(u8 v) { *(volatile u8 *)0x04000245 = v; }
+
+static inline void writeG(u8 v) { *(volatile u8 *)0x04000246 = v; }
+
+void GX_SetBankForTexPltt(int bank) {
+    data_020cbc04.field0 = (u16)(((data_020cbc04.field0 | data_020cbc04.fieldA)) & ~bank);
+    data_020cbc04.fieldA = (u16)bank;
+    switch (bank) {
+    case 0x00:
+        break;
+    case 0x60:
+        writeG(0x8b);
+        
+    case 0x20:
+        writeF(0x83);
+        break;
+    case 0x40:
+        writeG(0x83);
+        break;
+    case 0x70:
+        writeG(0x9b);
+        
+    case 0x30:
+        writeF(0x93);
+        
+    case 0x10:
+        writeE(0x83);
+        break;
+    }
+    GX_VRAMCNT_SetLCDC_(data_020cbc04.field0);
+}

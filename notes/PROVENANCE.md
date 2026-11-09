@@ -31,7 +31,20 @@ commit), rewritten for this ROM.
 
 ## Library and game code
 
-No code taken yet.
+Library sources `libs/{nitro,nns,msl}/src/**/unit_*.c` (2026-11-09, written by
+`tools/lib_unit_gen.py`): khdays-decomp (CC0, commit
+`93535afd7ca082f3d856bbf1cadae65be16d44ba`) per-function sources of
+`libs/{msl,nitro,nns}`, and twewy (CC0, commit
+`3f916f1a2d31f29bd7ec6fd89f3a87b696e79b9b`) `libs/nitro/src` where khdays has no
+match, merged per unit: declarations written once, functions of other units turned
+into declarations, variable definitions into `extern` declarations, `static`
+removed from the unit's functions, the reference's names of callees, data and the
+unit's own functions replaced by this ROM's (read from the relocations). Each
+file's header names its references.
+
+Headers `libs/nitro/include/{nitro,nnsys}/*.h`: khdays-decomp (CC0, same commit)
+`include/{nitro,nnsys}`, copied unchanged.
+
 
 Library function names (`config/jpn/arm9/symbols.txt`, `itcm/symbols.txt`, written
 by `tools/sweep_names.py` on 2026-11-09): names of functions compiled from

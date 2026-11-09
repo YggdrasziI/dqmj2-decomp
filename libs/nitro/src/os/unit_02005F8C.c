@@ -1,0 +1,36 @@
+/* NitroSDK; built from khdays-decomp (CC0) per-function sources of the functions
+ * found byte-identical (tools/lib_unit_gen.py). File bounds are a hypothesis. */
+#pragma force_active on
+
+extern int OS_DisableInterrupts(void);
+
+extern void OS_RestoreInterrupts(int state);
+
+extern int OS_DisableInterrupts_IrqAndFiq(void);
+
+extern void OS_RestoreInterrupts_IrqAndFiq(int state);
+
+extern int func_02008f4c(unsigned short id, void *lock);
+
+int OSi_DoTryLockByWord(unsigned short id, char *lock, void (*onLock)(void), int fiq) {
+    int enabled;
+    int prev;
+    if (fiq != 0) {
+        enabled = OS_DisableInterrupts_IrqAndFiq();
+    } else {
+        enabled = OS_DisableInterrupts();
+    }
+    prev = func_02008f4c(id, lock);
+    if (prev == 0) {
+        if (onLock != 0) {
+            onLock();
+        }
+        *(unsigned short *)(lock + 4) = id;
+    }
+    if (fiq != 0) {
+        OS_RestoreInterrupts_IrqAndFiq(enabled);
+    } else {
+        OS_RestoreInterrupts(enabled);
+    }
+    return prev;
+}
