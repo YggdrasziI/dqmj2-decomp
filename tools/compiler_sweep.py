@@ -2,8 +2,9 @@
 """Compile C/C++ files with several mwccarm versions and look for their functions in
 this ROM's code.
 
-Every function of each compiled object is searched in the extracted ARM9 main, ITCM
-and DTCM modules, with the words touched by a relocation masked (calls, pointers),
+Every function of each compiled object is searched in the extracted ARM9 main, ITCM,
+DTCM and overlay modules (overlay hits are written `ovNNN:0x...`, since overlays share
+one address range), with the words touched by a relocation masked (calls, pointers),
 so a hit means the same instructions were generated: it gives the function's address
 (a library signature) and which compilers produce it. A function found at one address
 only is reported with that address; several addresses mean the bytes are not
@@ -36,6 +37,7 @@ import tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MWCC_ROOT = os.path.join(ROOT, "tools", "mwccarm")
 EXTRACT = os.path.join(ROOT, "extract", "jpn", "arm9")
+OVERLAYS = os.path.join(ROOT, "extract", "jpn", "arm9_overlays")
 
 # Options that a compiler family rejects ("Unknown option"): dropped for that family.
 UNSUPPORTED = {"1.2": ["-ipa file"]}
@@ -71,15 +73,32 @@ def flags_for(flags, version):
 
 
 def modules():
-    """[(name, base address, bytes)] of the extracted ARM9 modules."""
+    """[(name, base address, bytes)] of the extracted ARM9 modules; name is None for
+    main, ITCM and DTCM (plain addresses) and "ovNNN" for an overlay."""
     out = []
     for name, yaml_name in (("main", "arm9.yaml"), ("itcm", "itcm.yaml"), ("dtcm", "dtcm.yaml")):
         bin_path = os.path.join(EXTRACT, yaml_name.replace(".yaml", ".bin"))
         with open(os.path.join(EXTRACT, yaml_name), encoding="utf-8") as f:
             base = next(int(line.split(":")[1]) for line in f if line.startswith("base_address"))
         with open(bin_path, "rb") as f:
-            out.append((name, base, f.read()))
+            out.append((None, base, f.read()))
+    # overlays.yaml: a list of "- id: N" entries with base_address and file_name
+    overlay = None
+    for line in open(os.path.join(OVERLAYS, "overlays.yaml"), encoding="utf-8"):
+        key, _, value = line.strip().lstrip("- ").partition(": ")
+        if key == "id":
+            overlay = {"id": int(value)}
+        elif key in ("base_address", "file_name") and overlay is not None:
+            overlay[key] = value
+            if "base_address" in overlay and "file_name" in overlay:
+                with open(os.path.join(OVERLAYS, overlay["file_name"]), "rb") as f:
+                    out.append((f"ov{overlay['id']:03d}", int(overlay["base_address"]), f.read()))
+                overlay = None
     return out
+
+
+def fmt(hit):
+    return hit if isinstance(hit, str) else f"0x{hit:08X}"
 
 
 def read_elf(path):
@@ -109,9 +128,11 @@ def read_elf(path):
                 if info & 0xF == 2 and shndx in contents:  # STT_FUNC
                     symbols.append((name_at(s[6], st_name), shndx, value, size))
     for s in sections:
-        if s[1] == 9 and s[7] in masks:  # SHT_REL, applies to section sh_info
+        # SHT_REL (8-byte entries) or SHT_RELA (12 bytes, what mwccarm writes),
+        # applying to section sh_info
+        if s[1] in (9, 4) and s[7] in masks:
             mask = masks[s[7]]
-            for off in range(s[4], s[4] + s[5], 8):
+            for off in range(s[4], s[4] + s[5], 8 if s[1] == 9 else 12):
                 r_off, r_info = struct.unpack_from("<II", data, off)
                 if r_info & 0xFF in MASKED_RELOCS:
                     mask[r_off:r_off + 4] = b"\0" * 4
@@ -142,16 +163,16 @@ def find(code, mask, align, mods):
         return []
     anchor = code[a:b]
     hits = []
-    for _, base, blob in mods:
+    for name, base, blob in mods:
         pos = blob.find(anchor)
         while pos != -1:
             start = pos - a
             if start >= 0 and start + len(code) <= len(blob) and start % align == 0:
                 window = blob[start:start + len(code)]
                 if all(m == 0 or x == y for x, y, m in zip(window, code, mask)):
-                    hits.append(base + start)
+                    hits.append(base + start if name is None else f"{name}:0x{base + start:08X}")
             pos = blob.find(anchor, pos + 1)
-    return sorted(set(hits))
+    return sorted(set(hits), key=fmt)
 
 
 def compilers(arg):
@@ -229,8 +250,8 @@ def main():
             for v in unique:
                 totals[v] += 1
             if unique:
-                addrs = sorted(set(unique.values()))
-                print(f"   {name}: {', '.join(f'0x{a:08X}' for a in addrs)} "
+                addrs = sorted(set(unique.values()), key=fmt)
+                print(f"   {name}: {', '.join(fmt(a) for a in addrs)} "
                       f"with {', '.join(sorted(unique))}")
             elif multi:
                 print(f"   {name}: several addresses with {', '.join(sorted(multi))}")
