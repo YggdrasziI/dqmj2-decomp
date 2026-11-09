@@ -6364,9 +6364,9 @@ data_020c6a14 kind:data(any) addr:0x020c6a14
 @19 kind:data(byte[13]) addr:0x020c6a50 local
 @34 kind:data(byte[14]) addr:0x020c6a60 local
 data_020c6a70 kind:data(any) addr:0x020c6a70
-data_020c6a74 kind:data(any) addr:0x020c6a74
-data_020c6a7c kind:data(any) addr:0x020c6a7c
-data_020c6a88 kind:data(any) addr:0x020c6a88
+@58 kind:data(byte[7]) addr:0x020c6a74 local
+@59 kind:data(byte[12]) addr:0x020c6a7c local
+@60 kind:data(byte[7]) addr:0x020c6a88 local
 data_020c6a90 kind:data(any) addr:0x020c6a90
 data_020c6b04 kind:data(any) addr:0x020c6b04
 data_020c6b14 kind:data(any) addr:0x020c6b14
