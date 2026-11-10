@@ -3,10 +3,9 @@
 ## Tools
 
 - [AetiasHax/ds-decomp](https://github.com/AetiasHax/ds-decomp) (`dsd`, MIT): ROM
-  extract, analysis, delink, linker script, ROM rebuild, checks, objdiff config. Local
-  clone: `E:\Projets\Github\Decomp\Tools\NDS\ds-decomp` (docs: `README.md`,
-  `docs/delinks.md`, `docs/symbols.md`, `docs/relocs.md`). Undocumented commands worth
-  knowing: `fix {thumb-nop, ctor-symbols, ctor-zero, ...}`, `dump {elf-symbols,
+  extract, analysis, delink, linker script, ROM rebuild, checks, objdiff config. Docs:
+  `README.md`, `docs/delinks.md`, `docs/symbols.md`, `docs/relocs.md`. Undocumented
+  commands worth knowing: `fix {thumb-nop, ctor-symbols, ctor-zero, ...}`, `dump {elf-symbols,
   ambig-relocs, elf-function}`, `sig {list, apply, new}`.
 - [AetiasHax/ds-rom](https://github.com/AetiasHax/ds-rom): ROM extract / build library
   used by dsd.
@@ -21,11 +20,8 @@
 - [decompals/wibo](https://github.com/decompals/wibo): runs mwccarm on Linux (CI).
 - [PrimeDecomp/mwcc-tools](https://github.com/PrimeDecomp/mwcc-tools) (CC0): a
   decompilation of the GameCube CodeWarrior compilers. Read to locate mwccarm's back
-  end (`CodeGen.c`, `Coloring.c`, `Scheduler.c`); no code taken. Not cloned in the
-  project (a scratch clone was used on 2026-11-06).
-- [decomp.me](https://decomp.me): compiler tests (`mwcc_30_131` = 2.0/sp1p5); not used
-  for sharing, the project is private.
-- [decomp.dev](https://decomp.dev): not used (private project).
+  end (`CodeGen.c`, `Coloring.c`, `Scheduler.c`); no code taken.
+- [decomp.me](https://decomp.me): compiler tests (`mwcc_30_131` = 2.0/sp1p5).
 
 ## Hardware documentation
 
@@ -35,35 +31,32 @@
   Context only, never evidence for a name or a structure. Used for: autoload and
   memory map bounds (`notes/SPLITS.md`), `-proc arm946e` and ARM/Thumb interworking
   (`notes/COMPILER.md`), recognising I/O register accesses (0x04000000...) in game
-  code. A local copy (e.g. under `E:\Projets\Github\Decomp\Docs\`) only with the
-  owner's agreement.
+  code.
 - GBATEK (problemkaputt.de/gbatek.htm): register-level reference for the same
   purposes.
 
-## Emulators (local clones, source only)
+## Emulators (source only)
 
-`E:\Projets\Github\Emulateur\NDS\`. **GPL: read only, no code taken** into this
-repository, not even adapted. Not needed for matching (the ROM checksum already proves
+**GPL: read only, no code taken** into this repository, not even adapted. Not needed for matching (the ROM checksum already proves
 the build); used for dynamic analysis: which code runs on which screen, who writes a
 field, the size and lifetime of an object. What a trace shows is evidence of behaviour,
 not of a name (names still need the proofs of `SPEC.md`). BIOS and firmware dumps they
 need stay outside git, like `arm7_bios.bin`.
 
-| Clone | Upstream | License | Commit | Debug features |
+| Folder | Upstream | License | Commit | Debug features |
 |---|---|---|---|---|
 | `melonDS` | [melonDS-emu/melonDS](https://github.com/melonDS-emu/melonDS) | GPLv3 | 497aa6cd (2026-11-06) | GDB stub (`src/debug/`, CMake option `ENABLE_GDBSTUB`, on by default); free BIOS replacement in `freebios/` |
 | `desmume` | [TASEmulators/desmume](https://github.com/TASEmulators/desmume) | GPLv2 | fc504ee0 (2026-11-06) | GDB stub (`desmume/src/gdbstub/`), Lua scripting (`lua-engine.cpp`), debugger and memory viewer in the Windows front end |
 
-Neither is built here yet: this machine has MSYS2 (UCRT64 gcc) but no CMake, Qt or SDL,
-and no Visual Studio (the DeSmuME Windows front end is a Visual Studio project).
+Neither is built for this project yet (the DeSmuME Windows front end is a Visual Studio
+project).
 
-## Reference projects (local clones)
+## Reference projects
 
-Search the local clones (Grep/Glob) before GitHub. A clone may be behind GitHub: ask
-the owner before `git pull`. When reusing code, record the clone's commit
-(`git -C <path> rev-parse HEAD`) and the license in `notes/PROVENANCE.md`.
+When reusing code, record the commit it was taken from and the license in
+`notes/PROVENANCE.md`.
 
-DS, `E:\Projets\Github\Decomp\DS\`, split by what may be done with the code (see "Reuse permissions").
+DS projects, split by what may be done with the code (see "Reuse permissions").
 
 ### Reusable: code may be taken
 
@@ -102,12 +95,11 @@ to confirm in this ROM, never evidence.
 
 Sibling projects of the owner:
 
-- `E:\Projets\Dev\ts2-castaway`: template of this project (tools, documents,
-  skills, matching techniques in its `notes/MATCHING.md`).
-- `E:\Projets\Dev\Decomp\NDS\DQMJ2P-decomp` (DQMJ2 Professional, Japan),
-  `DQMJ-decomp` (DQM Joker, Europe): ROMs only so far.
-- `E:\Projets\Dev\mlab-decomp`, `E:\Projets\Dev\spyro-dotd-decomp` (Wii,
-  methodology).
+- `ts2-castaway-decomp` (The Sims 2: Castaway, DS): template of this project (tools,
+  documents, matching techniques in its `notes/MATCHING.md`).
+- `DQMJ2P-decomp` (DQMJ2 Professional, Japan), `DQMJ-decomp` (DQM Joker, Europe):
+  ROMs only so far.
+- `mlab-decomp`, `spyro-dotd-decomp` (Wii, methodology).
 
 ## Reuse permissions
 

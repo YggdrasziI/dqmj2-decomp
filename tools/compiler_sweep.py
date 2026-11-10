@@ -22,8 +22,8 @@ Usage:
                                                   "<size>" -> function -> compiler -> bytes)
 
 Example (NitroSDK OS sources of twewy, every compiler):
-  python tools/compiler_sweep.py --ref E:/Projets/Github/Decomp/DS/twewy \\
-      E:/Projets/Github/Decomp/DS/twewy/libs/nitro/src/os/*.c
+  python tools/compiler_sweep.py --ref path/to/twewy \\
+      path/to/twewy/libs/nitro/src/os/*.c
 """
 
 import argparse

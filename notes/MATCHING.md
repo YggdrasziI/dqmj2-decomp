@@ -128,8 +128,8 @@ function it worked on and the compiler (2.0/sp2p2 unless stated otherwise).
 - A symbol defined this way is not seen by dsd's `check symbols` (it is in no module
   section): it cannot stand for a `symbols.txt` entry.
 
-Beyond these, read the sibling project's notes,
-`E:\Projets\Dev\ts2-castaway\notes\MATCHING.md` (mwccarm 2.0, ARM code). A technique
+Beyond these, read the notes of the sibling project ts2-castaway-decomp, its
+`notes/MATCHING.md` (mwccarm 2.0, ARM code). A technique
 from there is recorded here only once it has worked on a function of this ROM, with
 the function and the compiler it was tried with: this game may use another compiler,
 other flags and much more Thumb code.

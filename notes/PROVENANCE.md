@@ -6,7 +6,7 @@ approval, see `notes/REFERENCES.md`) and the changes made.
 
 ## Build system and scripts (`tools/`)
 
-Source: `E:\Projets\Dev\ts2-castaway` (sibling project, same owner), commit
+Source: ts2-castaway-decomp (sibling project, same owner), commit
 `1984fd46992d809b66cf83f64c134900d19b1806`, copied on 2026-11-08. Its build files
 come from [Yotona/twewy](https://github.com/Yotona/twewy) (**CC0-1.0**; ts2-castaway
 took them at twewy commit `0026d7347107415cbfbf2cd218f5859ae00b69a7`, see its own
