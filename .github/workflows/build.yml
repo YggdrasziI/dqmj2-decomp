@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    # This is a *private* build container (<owner>/dqmj2-decomp-build, to be created):
+    # This is a *private* build container (YggdrasziI/dqmj2-decomp-build):
     # it holds the ROM in /extract and the mwccarm compilers. No BIOS: the ROM is
     # checked against build_nobios.sha1 (see SPEC.md).
     container: ghcr.io/yggdraszii/dqmj2-decomp-build:main

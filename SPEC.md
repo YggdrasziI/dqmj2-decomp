@@ -151,7 +151,7 @@ src/  include/  libs/     sources and headers (game, SDK, MSL), when added
 tools/                    configure.py and scripts
 progress/jpn/             progress badges and history
 notes/                    reference documentation
-.github/workflows/        CI (prepared, inactive until a repository exists)
+.github/workflows/        CI: delink, link, rebuild and check the ROM in a private image
 ```
 
 ## Build
